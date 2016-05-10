@@ -1,0 +1,240 @@
+//
+//  CoreDataHandler.swift
+//  TimeTracker
+//
+
+
+import UIKit
+import CoreData
+
+class CoreDataHandler: NSObject {
+
+    /**
+    Creates a singleton object to be used across the whole app easier
+
+    - returns: CoreDataHandler
+    */
+    class var sharedInstance: CoreDataHandler {
+        struct Static {
+            static var onceToken: dispatch_once_t = 0
+            static var instance: CoreDataHandler? = nil
+        }
+        dispatch_once(&Static.onceToken) {
+            Static.instance = CoreDataHandler()
+        }
+        return Static.instance!
+    }
+
+    lazy var backgroundManagedObjectContext: NSManagedObjectContext = {
+        let backgroundManagedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        let coordinator = self.persistentStoreCoordinator
+        backgroundManagedObjectContext.persistentStoreCoordinator = coordinator
+        return backgroundManagedObjectContext
+    }()
+
+    lazy var objectModel: NSManagedObjectModel = {
+        let modelPath = NSBundle.mainBundle().URLForResource("Model", withExtension: "momd")
+        let objectModel = NSManagedObjectModel(contentsOfURL: modelPath!)
+        return objectModel!
+    }()
+
+    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.objectModel)
+
+        // Get the paths to the SQLite file
+        let storeURL = self.applicationDocumentsDirectory().URLByAppendingPathComponent("Model.sqlite")
+
+        // Define the Core Data version migration options
+        let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
+
+        // Attempt to load the persistent store
+        var error: NSError?
+
+        var failureReason = "There was an error creating or loading the application's saved data."
+        do {
+            try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: options)
+        } catch {
+            // Report any error we got.
+            var dict = [String: AnyObject]()
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+
+            dict[NSUnderlyingErrorKey] = error as NSError
+            let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+            // Replace this with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
+            abort()
+        }
+        return persistentStoreCoordinator
+    }()
+
+    func applicationDocumentsDirectory() -> NSURL {
+        return NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last!
+    }
+
+    func saveContext() {
+        do {
+            try backgroundManagedObjectContext.save()
+        } catch {
+            // Error occured while deleting objects
+        }
+    }
+
+    /**
+    Tells whether the passed in activity's name is already saved or not.
+
+    - parameter activityName: activityName activity to be saved.
+
+    - returns: BOOL boolean value determining whether the activity is already in core data or not.
+    */
+    func isDuplicate(activityName: String) -> Bool {
+        let entityDescription = NSEntityDescription.entityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext)
+        let request = NSFetchRequest()
+        request.entity = entityDescription
+        let predicate = NSPredicate(format: "name = %@", activityName)
+        request.predicate = predicate
+        do {
+            let objects = try self.backgroundManagedObjectContext.executeFetchRequest(request)
+            return objects.count != 0
+        } catch {
+            // Error occured
+            return false
+        }
+    }
+
+    /**
+    Creates a NSDateFormatter to format the dates of the Route object
+
+    - returns: NSDateFormatter the dateFormatter object
+    */
+    lazy var dateFormatter: NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        return dateFormatter
+    }()
+
+    /**
+     Adds new activity to core data.
+
+    - parameter name: name activity name to be saved.
+    */
+    func addNewActivityName(name: String) {
+        let newActivity = NSEntityDescription.insertNewObjectForEntityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext) as! Activity
+        newActivity.name = name
+        saveContext()
+    }
+
+    /**
+    Save new history object to core data.
+
+    - parameter name:      name of the activity
+    - parameter startDate: when the activity started
+    - parameter endDate:   when it was finished
+    - parameter duration:  duration of the activity
+    */
+    func saveHistory(name: String, startDate: NSDate, endDate: NSDate, duration: NSInteger) {
+        let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
+        history.name = name
+        history.startDate = startDate
+        history.endDate = endDate
+        history.duration = duration
+
+        history.saveTime = dateFormatter.stringFromDate(endDate)
+        saveContext()
+    }
+
+    /**
+    Fetch core data to get all history objects.
+
+    - returns: array of history objects
+    */
+    func allHistoryItems() -> [History]? {
+        let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
+        fetchRequest.entity = entityDescription
+
+        let dateDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
+        fetchRequest.sortDescriptors = [dateDescriptor]
+
+        return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
+    }
+
+    /**
+    Fetch core data for activities for today
+
+    - returns: array of History objects
+    */
+    func fetchCoreDataForTodayActivities() -> [History] {
+        let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
+        fetchRequest.entity = entityDescription
+
+        let dateDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
+        fetchRequest.sortDescriptors = [dateDescriptor]
+
+        let startDate = NSDate.dateByMovingToBeginningOfDay()
+        let endDate = NSDate.dateByMovingToEndOfDay()
+        let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@)", startDate, endDate)
+        fetchRequest.predicate = predicate
+
+        return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
+    }
+
+    /**
+    Fetch core data for all the activities
+
+    - returns: array of Activity objects
+    */
+    func fetchCoreDataAllActivities() -> [Activity] {
+        let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext)
+        fetchRequest.entity = entityDescription
+
+        let nameDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [nameDescriptor]
+
+        return (fetchCoreDataWithFetchRequest(fetchRequest) as! [Activity])
+    }
+
+    /**
+    Fetches Core Data with the given fetch request and returns an array with the results if it was successful.
+
+    - parameter fetchRequest: request to make
+
+    - returns: array of objects
+    */
+    func fetchCoreDataWithFetchRequest(fetchRequest: NSFetchRequest) -> [AnyObject]? {
+        do {
+            let fetchResults = try backgroundManagedObjectContext.executeFetchRequest(fetchRequest)
+            return fetchResults
+        } catch {
+            // error occured
+        }
+
+        return nil
+    }
+
+    /**
+    Delete a single Core Data object
+
+    - parameter object: object to delete
+    */
+    func deleteObject(object: NSManagedObject) {
+        backgroundManagedObjectContext.deleteObject(object)
+        saveContext()
+    }
+
+    /**
+    Delete multiple objects
+
+    - parameter objectsToDelete: objects to delete
+    */
+    func deleteObjects(objectsToDelete: [NSManagedObject]) {
+        for object in objectsToDelete {
+            backgroundManagedObjectContext.deleteObject(object)
+        }
+        saveContext()
+    }
+
+}
