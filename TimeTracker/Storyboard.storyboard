@@ -321,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yTC-tx-5Vl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="835" y="1142"/>
+            <point key="canvasLocation" x="887" y="1096"/>
         </scene>
         <!--Activity List View Controller-->
         <scene sceneID="BMx-ZK-fHn">
@@ -479,8 +479,6 @@
                                             <outlet property="durationLabel" destination="Ntj-h9-RPd" id="Xyz-CO-Cif"/>
                                             <outlet property="nameLabel" destination="fWv-wU-aDT" id="X0P-JZ-hOO"/>
                                             <outlet property="timeLabel" destination="Zb1-r2-S4U" id="u7u-4b-zlc"/>
-                                            <outletCollection property="gestureRecognizers" destination="TkC-za-sRO" appends="YES" id="xor-oH-1Zz"/>
-                                            <outletCollection property="gestureRecognizers" destination="dWK-UD-uuH" appends="YES" id="Zkr-Hb-yWy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -499,6 +497,7 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="lT4-TL-FQ3" secondAttribute="trailing" id="5t9-6b-Wiq"/>
                             <constraint firstAttribute="centerY" secondItem="p3t-aS-p0a" secondAttribute="centerY" id="LXD-if-KLO"/>
@@ -507,6 +506,9 @@
                             <constraint firstAttribute="centerX" secondItem="p3t-aS-p0a" secondAttribute="centerX" id="Ylr-UC-OeP"/>
                             <constraint firstItem="lT4-TL-FQ3" firstAttribute="top" secondItem="r4m-GI-Qcx" secondAttribute="bottom" id="tvz-Wt-lnP"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="dl0-61-nAI" appends="YES" id="BYC-Az-gCf"/>
+                        </connections>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="q77-65-MxV"/>
@@ -518,8 +520,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vij-QJ-WRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="TkC-za-sRO"/>
-                <swipeGestureRecognizer direction="right" id="dWK-UD-uuH"/>
+                <tapGestureRecognizer id="dl0-61-nAI">
+                    <connections>
+                        <segue destination="JgR-CG-CGu" kind="show" id="icQ-tK-4su"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1372.5" y="1057.394366197183"/>
         </scene>
