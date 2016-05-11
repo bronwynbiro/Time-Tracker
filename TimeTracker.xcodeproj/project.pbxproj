@@ -20,7 +20,6 @@
 		56A6DAA61BCF6F8600A80680 /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DAA51BCF6F8600A80680 /* StringHelper.swift */; };
 		56A6DAA81BCF6FCA00A80680 /* GlobalColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DAA71BCF6FCA00A80680 /* GlobalColors.swift */; };
 		56A6DAAA1BCF705F00A80680 /* ActivityTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DAA91BCF705F00A80680 /* ActivityTextfield.swift */; };
-		56A6DAAC1BCF719F00A80680 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DAAB1BCF719F00A80680 /* HeaderView.swift */; };
 		56A6DAAE1BCF727700A80680 /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DAAD1BCF727700A80680 /* HistoryCell.swift */; };
 		56A6DAB01BCF733F00A80680 /* NewActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DAAF1BCF733F00A80680 /* NewActivityView.swift */; };
 		56A6DAB21BCF76F800A80680 /* DefaultNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DAB11BCF76F800A80680 /* DefaultNavigationController.swift */; };
@@ -29,6 +28,7 @@
 		56A6DAB81BCF8B3700A80680 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DAB71BCF8B3700A80680 /* MainViewController.swift */; };
 		56A6DABA1BCF8BD000A80680 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A6DAB91BCF8BD000A80680 /* Images.xcassets */; };
 		56A6DABF1BCFDE2C00A80680 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DABE1BCFDE2C00A80680 /* HistoryViewController.swift */; };
+		95B56B891CE37D3800D6B89E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B56B881CE37D3800D6B89E /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +47,6 @@
 		56A6DAA51BCF6F8600A80680 /* StringHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
 		56A6DAA71BCF6FCA00A80680 /* GlobalColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalColors.swift; sourceTree = "<group>"; };
 		56A6DAA91BCF705F00A80680 /* ActivityTextfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTextfield.swift; sourceTree = "<group>"; };
-		56A6DAAB1BCF719F00A80680 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		56A6DAAD1BCF727700A80680 /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		56A6DAAF1BCF733F00A80680 /* NewActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewActivityView.swift; sourceTree = "<group>"; };
 		56A6DAB11BCF76F800A80680 /* DefaultNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultNavigationController.swift; sourceTree = "<group>"; };
@@ -56,6 +55,7 @@
 		56A6DAB71BCF8B3700A80680 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		56A6DAB91BCF8BD000A80680 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		56A6DABE1BCFDE2C00A80680 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		95B56B881CE37D3800D6B89E /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderView.swift; path = ../viewcontrollers/HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				56A6DAA91BCF705F00A80680 /* ActivityTextfield.swift */,
-				56A6DAAB1BCF719F00A80680 /* HeaderView.swift */,
+				95B56B881CE37D3800D6B89E /* HeaderView.swift */,
 				56A6DAAD1BCF727700A80680 /* HistoryCell.swift */,
 				56A6DAAF1BCF733F00A80680 /* NewActivityView.swift */,
 			);
@@ -239,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56A6DAB01BCF733F00A80680 /* NewActivityView.swift in Sources */,
+				95B56B891CE37D3800D6B89E /* HeaderView.swift in Sources */,
 				56A6DAB21BCF76F800A80680 /* DefaultNavigationController.swift in Sources */,
 				56A6DA9F1BCF691300A80680 /* Activity.swift in Sources */,
 				56A6DA9E1BCF691300A80680 /* Activity+CoreDataProperties.swift in Sources */,
@@ -250,7 +251,6 @@
 				56A6DAA11BCF691300A80680 /* History.swift in Sources */,
 				56A6DAA61BCF6F8600A80680 /* StringHelper.swift in Sources */,
 				56A6DAA01BCF691300A80680 /* History+CoreDataProperties.swift in Sources */,
-				56A6DAAC1BCF719F00A80680 /* HeaderView.swift in Sources */,
 				56A6DAA31BCF6C2F00A80680 /* NSDateHelper.swift in Sources */,
 				56A6DA801BCF655B00A80680 /* AppDelegate.swift in Sources */,
 				56A6DABF1BCFDE2C00A80680 /* HistoryViewController.swift in Sources */,

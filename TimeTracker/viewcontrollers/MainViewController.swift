@@ -324,11 +324,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     - returns: headerView
     */
+    
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let title = self.tableView(tableView, titleForHeaderInSection: section)
         let heightForRow = self.tableView(tableView, heightForHeaderInSection: section)
-        let headerView = HeaderView(frame: CGRectMake(0.0, 0.0, CGRectGetWidth(tableView.frame), heightForRow), title: title!)
-        return headerView
+      let headerView = HeaderView(frame: CGRectMake(0.0, 0.0, CGRectGetWidth(tableView.frame), heightForRow), title: title!)
+       return headerView
     }
 
     /**
@@ -340,7 +341,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     - returns: title
     */
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        //MARK: Wrong: changes MM:SS instead of H:m,
         return String(format: "Total time spent today: \(NSString.createDurationStringFromDuration(Double(totalduration)))")
     }
 

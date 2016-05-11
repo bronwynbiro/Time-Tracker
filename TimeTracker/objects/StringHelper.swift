@@ -13,7 +13,7 @@ import Foundation
 extension NSString {
 
     /**
-    Creates a duration string from the passed in duration value. Format is 00:00:00
+    Creates a duration string from the passed in duration value. Format is 00:00
 
     - parameter duration: duration to value to use for displaying the duration
 

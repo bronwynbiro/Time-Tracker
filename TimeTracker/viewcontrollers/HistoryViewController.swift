@@ -342,8 +342,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.nameLabel.text = history.name
         }
     // MARK: add sidecolor based on selected user color
-    // timeLabel doesnt work!
-      cell.timeLabel.text = "\(dateFormatter.stringFromDate(history.startDate!)) -  \(dateFormatter.stringFromDate(history.endDate!))"
         cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
         cell.backgroundColor = UIColor.whiteColor()
        // cell.sideColor =

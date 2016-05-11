@@ -29,7 +29,7 @@ class DefaultNavigationController: UINavigationController {
         super.awakeFromNib()
         navigationBar.tintColor = UIColor.whiteColor()
         navigationBar.barTintColor = UIColor.whiteColor()
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         view.backgroundColor = color.pink()
     }
 
