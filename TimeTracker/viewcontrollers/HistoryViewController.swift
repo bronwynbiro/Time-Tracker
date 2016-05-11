@@ -48,7 +48,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
 
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.separatorColor = color.pink()
-        tableView.backgroundColor = color.purple()
+        tableView.backgroundColor = UIColor.whiteColor()
 
         refreshView()
         loadNormalState()
@@ -338,22 +338,15 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     */
     func configureCell(cell: HistoryCell, indexPath: NSIndexPath) {
         let history = fetchController.objectAtIndexPath(indexPath) as! History
-       /// cell.nameLabel.text = history.name!.startIndex.advancedBy(10)..<history.name!.endIndex.advancedBy(-1)
-      //  cell.nameLabel.text = history.name!.startIndex.advancedBy(10)
         if let str = history.name {
             cell.nameLabel.text = history.name
         }
-        /*
-        if history.name != nil {
-            cell.nameLabel.text = history.name!
-        } else {
-                cell.nameLabel.text = "Error!"
-        }
-*/
-        cell.timeLabel.text = "\(dateFormatter.stringFromDate(history.startDate!)) -  \(dateFormatter.stringFromDate(history.endDate!))"
+    // MARK: add sidecolor based on selected user color
+    // timeLabel doesnt work!
+      cell.timeLabel.text = "\(dateFormatter.stringFromDate(history.startDate!)) -  \(dateFormatter.stringFromDate(history.endDate!))"
         cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
-
-        cell.backgroundColor = color.blue()
+        cell.backgroundColor = UIColor.whiteColor()
+       // cell.sideColor =
     }
 
     /**

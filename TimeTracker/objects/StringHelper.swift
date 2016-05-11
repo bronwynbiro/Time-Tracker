@@ -23,15 +23,13 @@ extension NSString {
         let formatter = NSNumberFormatter()
         formatter.minimumIntegerDigits = 2
 
-        let seconds = UInt8(duration % 60)
         let minutes = UInt8((duration / 60) % 60)
         let hours = UInt8((duration / 3600))
 
-        let secondString = seconds > 9 ? String(seconds) : "0" + String(seconds)
         let minuteString = minutes > 9 ? String(minutes) : "0" + String(minutes)
         let hoursString = hours > 9 ? String(hours) : "0" + String(hours)
 
-        let durationString = "\(hoursString):\(minuteString):\(secondString)"
+        let durationString = "\(hoursString):\(minuteString)"
         return durationString
     }
 

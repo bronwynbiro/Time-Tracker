@@ -49,10 +49,72 @@
                                 <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Screen Shot 2016-05-08 at 4.19.26 PM" translatesAutoresizingMaskIntoConstraints="NO" id="xWi-F4-8Qm">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="284"/>
+                                <animations/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4aI-Fi-b0a">
+                                <rect key="frame" x="0.0" y="228" width="207" height="56"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.50980392156862742" green="0.62352941176470589" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="207" id="VTE-Cx-Tf6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="28"/>
+                                <state key="normal" title="START"/>
+                                <state key="selected" backgroundImage="start_button_pressed_state"/>
+                                <state key="highlighted" backgroundImage="start_button_pressed_state"/>
+                                <connections>
+                                    <action selector="startPauseActivity" destination="DDr-IG-ZBL" eventType="touchUpInside" id="RIW-aA-BlP"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMP-q0-IdO">
+                                <rect key="frame" x="93" y="69" width="53" height="79"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="96"/>
+                                <color key="textColor" red="0.36078431370000003" green="0.4549019608" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XxL-WR-oez">
+                                <rect key="frame" x="174" y="68" width="108" height="80"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="96"/>
+                                <color key="textColor" red="0.36078431370000003" green="0.4549019608" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dU-Nf-sjn">
+                                <rect key="frame" x="148" y="73" width="25" height="69"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="90"/>
+                                <color key="textColor" red="0.36078431370000003" green="0.4549019608" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czF-f6-Lje">
+                                <rect key="frame" x="207" y="228" width="207" height="56"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.74509803919999995" green="0.50196078430000002" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="207" id="INS-pU-2Xk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="28"/>
+                                <state key="normal" title="STOP">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.74509803921568629" green="0.50196078431372548" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected" backgroundImage="start_button_pressed_state"/>
+                                <state key="highlighted" backgroundImage="stop_buttonpressed_state">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopActivity" destination="DDr-IG-ZBL" eventType="touchUpInside" id="eFB-0r-R29"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9C2-dq-ZzC">
-                                <rect key="frame" x="0.0" y="283" width="414" height="221"/>
+                                <rect key="frame" x="0.0" y="348" width="414" height="324"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="72" id="gB4-Hc-Rsc" customClass="HistoryCell" customModule="TimeTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="414" height="72"/>
@@ -98,6 +160,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="durationLabel" destination="2DK-c2-ufk" id="GGx-b3-nt7"/>
                                             <outlet property="nameLabel" destination="jke-Zx-TNW" id="xOh-IR-bI7"/>
@@ -110,69 +173,8 @@
                                     <outlet property="delegate" destination="DDr-IG-ZBL" id="BWW-nM-IY5"/>
                                 </connections>
                             </tableView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Screen Shot 2016-05-08 at 4.19.26 PM" translatesAutoresizingMaskIntoConstraints="NO" id="xWi-F4-8Qm">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="284"/>
-                                <animations/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4aI-Fi-b0a">
-                                <rect key="frame" x="0.0" y="228" width="207" height="56"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.50980392156862742" green="0.62352941176470589" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="207" id="VTE-Cx-Tf6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="28"/>
-                                <state key="normal" title="START"/>
-                                <state key="selected" backgroundImage="start_button_pressed_state"/>
-                                <state key="highlighted" backgroundImage="start_button_pressed_state"/>
-                                <connections>
-                                    <action selector="startPauseActivity" destination="DDr-IG-ZBL" eventType="touchUpInside" id="RIW-aA-BlP"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMP-q0-IdO">
-                                <rect key="frame" x="120" y="68" width="53" height="79"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="96"/>
-                                <color key="textColor" red="0.36078431370000003" green="0.4549019608" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XxL-WR-oez">
-                                <rect key="frame" x="220" y="68" width="108" height="80"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="96"/>
-                                <color key="textColor" red="0.36078431370000003" green="0.4549019608" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dU-Nf-sjn">
-                                <rect key="frame" x="181" y="73" width="25" height="69"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="90"/>
-                                <color key="textColor" red="0.36078431370000003" green="0.4549019608" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czF-f6-Lje">
-                                <rect key="frame" x="207" y="228" width="207" height="56"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.74509803919999995" green="0.50196078430000002" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="207" id="INS-pU-2Xk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="28"/>
-                                <state key="normal" title="STOP">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" red="0.74509803921568629" green="0.50196078431372548" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <state key="selected" backgroundImage="start_button_pressed_state"/>
-                                <state key="highlighted" backgroundImage="stop_buttonpressed_state">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="stopActivity" destination="DDr-IG-ZBL" eventType="touchUpInside" id="eFB-0r-R29"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" red="0.49411764705882355" green="0.96862745098039216" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="9C2-dq-ZzC" firstAttribute="leading" secondItem="S8Y-T9-4ha" secondAttribute="leading" id="DgW-zV-tRK"/>
                             <constraint firstItem="4aI-Fi-b0a" firstAttribute="leading" secondItem="S8Y-T9-4ha" secondAttribute="leadingMargin" constant="-20" id="ETZ-rS-CTd"/>
@@ -184,12 +186,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zoc-r4-kZA">
-                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="history_icon" id="Dkf-xd-SPu">
-                            <color key="tintColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.50980392159999999" green="0.62352941179999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="list_icon" id="LJb-mr-zW0">
-                            <color key="tintColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.36078431370000003" green="0.4549019608" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
@@ -227,18 +228,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" misplaced="YES" image="Screen Shot 2016-05-08 at 4.19.26 PM" translatesAutoresizingMaskIntoConstraints="NO" id="bgj-wr-acY">
-                                <rect key="frame" x="-188" y="-24" width="964" height="275"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="964" id="8vf-Jc-ilv"/>
-                                    <constraint firstAttribute="height" constant="278" id="TY6-to-Xac"/>
-                                </constraints>
-                            </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="HK4-tN-5Og">
-                                <rect key="frame" x="132" y="41" width="150" height="146"/>
-                                <animations/>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="38L-uC-Koh">
                                 <rect key="frame" x="0.0" y="248" width="414" height="424"/>
                                 <animations/>
@@ -280,6 +269,18 @@
                                     <outlet property="delegate" destination="Ofj-Y0-Fxh" id="VA8-wy-h0U"/>
                                 </connections>
                             </tableView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" misplaced="YES" image="Screen Shot 2016-05-08 at 4.19.26 PM" translatesAutoresizingMaskIntoConstraints="NO" id="bgj-wr-acY">
+                                <rect key="frame" x="-188" y="-24" width="964" height="275"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="964" id="8vf-Jc-ilv"/>
+                                    <constraint firstAttribute="height" constant="278" id="TY6-to-Xac"/>
+                                </constraints>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="HK4-tN-5Og">
+                                <rect key="frame" x="132" y="41" width="150" height="146"/>
+                                <animations/>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -297,25 +298,6 @@
             </objects>
             <point key="canvasLocation" x="1614" y="880"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="3m4-9w-YEk">
-            <objects>
-                <viewController id="Q94-mi-QQ9" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hGL-du-Q1E"/>
-                        <viewControllerLayoutGuide type="bottom" id="EQJ-NT-FXA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="BcY-qF-wbx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b4b-UL-Hrz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2059" y="796"/>
-        </scene>
         <!--History View Controller-->
         <scene sceneID="PVc-Ia-p4u">
             <objects>
@@ -332,6 +314,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoryCell" rowHeight="72" id="noh-WV-dYx" customClass="HistoryCell" customModule="TimeTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="414" height="72"/>

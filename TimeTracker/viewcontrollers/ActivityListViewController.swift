@@ -40,7 +40,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
         super.viewDidLoad()
         title = "My activities"
         showNormalNavigationBar()
-        view.backgroundColor = color.purple()
+        view.backgroundColor = UIColor.whiteColor()
 
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.separatorColor = UIColor.whiteColor()

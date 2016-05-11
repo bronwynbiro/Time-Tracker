@@ -34,7 +34,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// today's date formatter
     lazy var todayDateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MM-dd"
+        dateFormatter.dateFormat = "hh:mm"
         return dateFormatter
     }()
 
@@ -205,7 +205,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         view.backgroundColor = color.pink()
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.separatorColor = color.pink()
-        tableView.backgroundColor = color.purple()
+        tableView.backgroundColor = UIColor.whiteColor()
 
         addObservers()
     }
@@ -273,7 +273,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! HistoryCell
 
         let history = todaysActivitiesArray[indexPath.row]
-        //EDIT HERE
         cell.nameLabel.text = "\(history.name!)"
         cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) -  \(todayDateFormatter.stringFromDate(history.endDate!))"
         cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
@@ -341,6 +340,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     - returns: title
     */
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        //MARK: Wrong: changes MM:SS instead of H:m,
         return String(format: "Total time spent today: \(NSString.createDurationStringFromDuration(Double(totalduration)))")
     }
 
