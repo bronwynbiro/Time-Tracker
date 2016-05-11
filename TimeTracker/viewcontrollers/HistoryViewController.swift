@@ -6,17 +6,22 @@
 
 import UIKit
 import CoreData
+import Foundation
 
 /**
     History view controller to display the history objects from core data.
 */
 
 class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+    
 
     /// table view to display items
     @IBOutlet weak var tableView: UITableView!
     /// A label to display when there are no items in the view
     @IBOutlet weak var noItemsLabel: UILabel!
+    @IBOutlet weak var StartDatePicker: UIDatePicker!
+    @IBOutlet weak var EndDatePicker: UIDatePicker!
+    
 
     /// fetch controller
     lazy var fetchController: NSFetchedResultsController = {
@@ -358,6 +363,27 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    //MARK: trying to fix start dates and allow editing
+    /*
+    func updateCellTimes(cell: HistoryCell, indexPath: NSIndexPath) {
+    let history = fetchController.objectAtIndexPath(indexPath) as! History
+    if let str = history.name {
+    cell.nameLabel.text = history.name
+        
+        let dateformatter = NSDateFormatter()
+        
+        dateformatter.dateStyle = NSDateFormatterStyle.MediumStyle
+        dateformatter.timeStyle = NSDateFormatterStyle.NoStyle
+        var datePickerMode: UIDatePickerMode
+        var startDateNew = dateformatter.stringFromDate(StartDatePicker.date)
+        cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
+
+        cell.backgroundColor = UIColor.whiteColor()
+        // cell.sideColor =
+        }
+
+    }
+*/
 
     /**
     Called when an editing happened to the cell, in this case: delete. So delete the object from core data.

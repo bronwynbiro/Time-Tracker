@@ -19,6 +19,8 @@ class HistoryCell: UITableViewCell {
     /// display the end date of the history item
     @IBOutlet weak var timeLabel: UILabel!
 
+    
+    
     /**
         Customize the look of the cell
     */
