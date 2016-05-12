@@ -30,7 +30,7 @@ class HistoryCell: UITableViewCell {
         nameLabel.textColor = UIColor.blackColor()
         durationLabel.textColor = UIColor.blackColor()
         timeLabel.textColor = UIColor.blackColor()
-        backgroundColor = color.blue()
+        backgroundColor = UIColor.whiteColor()
     }
 
     /**

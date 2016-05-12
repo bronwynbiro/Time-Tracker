@@ -44,7 +44,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         return dateFormatter
         }()
 
-    // MARK: view methods
+    // View methods
     /**
     Called after the view was loaded, do some initial setup and refresh the view
     */
@@ -66,18 +66,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         navigationItem.leftBarButtonItem = nil
         navigationItem.backBarButtonItem?.action = Selector("backButtonPressed")
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("editButtonPressed"))
-    }
-
-    /**
-        Load the editing state of the navigation bar
-    */
-    func loadEditState() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Delete", style: .Plain, target: self, action: Selector("deleteButtonPressed"))
-
-        if numberOfItemsToDelete() == 0 {
-            navigationItem.leftBarButtonItem?.enabled = false
-        }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("doneButtonPressed"))
     }
 
     /**
@@ -105,62 +93,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         } catch {
             // error occured while fetching
         }
-    }
-
-    /**
-        Update the Delete barbutton according to the number of selected objects.
-    */
-    func updateDeleteButtonTitle() {
-        let itemsCountToDelete = numberOfItemsToDelete()
-        navigationItem.leftBarButtonItem?.enabled = itemsCountToDelete != 0
-        navigationItem.leftBarButtonItem?.title = "Delete (\(itemsCountToDelete))"
-    }
-
-    /**
-        Put the tableView into an editing mode and load the editing state
-    */
-    func editButtonPressed() {
-        tableView.setEditing(true, animated: true)
-        loadEditState()
-    }
-
-    /**
-        Called when in edit mode the delete is pressed. Delete all the selected rows, if there are any.
-    */
-    func deleteButtonPressed() {
-        let itemsCountToDelete = numberOfItemsToDelete()
-        if itemsCountToDelete != 0 {
-            var objectsToDelete: [History] = []
-            let selectedIndexPaths = tableView.indexPathsForSelectedRows
-            for indexPath in selectedIndexPaths! {
-                let history = fetchController.objectAtIndexPath(indexPath)
-                objectsToDelete.append(history as! History)
-            }
-
-            CoreDataHandler.sharedInstance.deleteObjects(objectsToDelete)
-            checkToShowEmptyLabel()
-            updateDeleteButtonTitle()
-
-            if fetchController.fetchedObjects?.count == 0 {
-                loadNormalState()
-//                loadCoreDataEntities()
-            }
-        }
-    }
-
-    /**
-        Stop editing of the tableView, and load the normal state
-    */
-    func doneButtonPressed() {
-        tableView.setEditing(false, animated: true)
-        loadNormalState()
-    }
-
-    /**
-        Pop the viewController
-    */
-    func backButtonPressed() {
-        navigationController?.popViewControllerAnimated(true)
     }
 
     // MARK: tableView methods
@@ -350,6 +282,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
         cell.backgroundColor = UIColor.whiteColor()
        // cell.sideColor =
+        
     }
 
     /**
@@ -364,7 +297,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         return true
     }
     //MARK: trying to fix start dates and allow editing
-    /*
+    
     func updateCellTimes(cell: HistoryCell, indexPath: NSIndexPath) {
     let history = fetchController.objectAtIndexPath(indexPath) as! History
     if let str = history.name {
@@ -376,14 +309,16 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         dateformatter.timeStyle = NSDateFormatterStyle.NoStyle
         var datePickerMode: UIDatePickerMode
         var startDateNew = dateformatter.stringFromDate(StartDatePicker.date)
-        cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
-
+        cell.durationLabel.text = "\(StartDatePicker) - \(EndDatePicker)"
+        cell.timeLabel.text = "\(dateFormatter.stringFromDate(history.startDate!))"
+       // -  \(dateFormatter.stringFromDate(history.endDate!))"
+       // cell.timeLabel.text = "\(StartDatePicker) + \(EndDatePicker)"
         cell.backgroundColor = UIColor.whiteColor()
         // cell.sideColor =
         }
 
     }
-*/
+
 
     /**
     Called when an editing happened to the cell, in this case: delete. So delete the object from core data.
@@ -397,48 +332,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             let historyToDelete = fetchController.objectAtIndexPath(indexPath)
             CoreDataHandler.sharedInstance.deleteObject(historyToDelete as! NSManagedObject)
         }
+       // if editingStyle == .ChangeTime {
     }
-
-    /**
-    Called when user selected a cell, if in editing mode, mark the cell as selected
-
-    - parameter tableView: tableView
-    - parameter indexPath: indexPath that was selected
-    */
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.editing == true {
-            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
-            updateDeleteButtonTitle()
-        } else {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        }
-    }
-
-    /**
-    Called when user deselects a cell. If editing, update the delete button's title
-
-    - parameter tableView: tableView
-    - parameter indexPath: cell at the indexPath that was deselected
-    */
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.editing == true {
-            updateDeleteButtonTitle()
-        }
-    }
-
-    /**
-    Returns the number of selected items.
-
-    - returns: number of selected rows.
-    */
-    func numberOfItemsToDelete() -> NSInteger {
-        if let selectedRows = tableView.indexPathsForSelectedRows {
-            return selectedRows.count
-        } else {
-            return 0
-        }
-    }
-
 }
-
-

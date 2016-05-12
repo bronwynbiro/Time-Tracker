@@ -310,13 +310,6 @@
                                 <rect key="frame" x="-2" y="-6" width="426" height="269"/>
                                 <animations/>
                             </imageView>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dbk-QO-GTN" userLabel="StartDatePicker">
-                                <rect key="frame" x="0.0" y="440" width="414" height="47"/>
-                                <animations/>
-                                <date key="date" timeIntervalSinceReferenceDate="484675064.58569598">
-                                    <!--2016-05-11 15:57:44 +0000-->
-                                </date>
-                            </datePicker>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Oval 105" translatesAutoresizingMaskIntoConstraints="NO" id="Vu6-Qd-k5X">
                                 <rect key="frame" x="159" y="76" width="104" height="106"/>
                                 <animations/>
@@ -325,6 +318,13 @@
                                 <rect key="frame" x="180" y="98" width="63" height="62"/>
                                 <animations/>
                             </imageView>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dbk-QO-GTN" userLabel="StartDatePicker">
+                                <rect key="frame" x="0.0" y="440" width="414" height="47"/>
+                                <animations/>
+                                <date key="date" timeIntervalSinceReferenceDate="484675064.58569598">
+                                    <!--2016-05-11 15:57:44 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -534,7 +534,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vij-QJ-WRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="dl0-61-nAI">
                     <connections>
-                        <segue destination="JgR-CG-CGu" kind="show" id="icQ-tK-4su"/>
+                        <segue destination="JgR-CG-CGu" kind="show" identifier="showDetail" id="icQ-tK-4su"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
