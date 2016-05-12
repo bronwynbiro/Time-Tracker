@@ -38,11 +38,11 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     }()
 
     /// date formatter
-    lazy var dateFormatter: NSDateFormatter = {
+    lazy var todayDateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.dateFormat = "hh:mm"
         return dateFormatter
-        }()
+    }()
 
     // View methods
     /**
@@ -279,8 +279,18 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.nameLabel.text = history.name
         }
     // MARK: add sidecolor based on selected user color
-        cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
+    /**
+        Asks the data source for a cell to insert in a particular location of the table view.
+        
+        - parameter tableView: tableView
+        - parameter indexPath: indexPath
+        
+        - returns: created cell
+            
+*/
+        //cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
         cell.backgroundColor = UIColor.whiteColor()
+        cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
        // cell.sideColor =
         
     }
@@ -303,14 +313,20 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     if let str = history.name {
     cell.nameLabel.text = history.name
         
-        let dateformatter = NSDateFormatter()
-        
+        var historyDateFormatter: NSDateFormatter = {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "hh:mm"
+            return dateFormatter
+        }()
+        /*
         dateformatter.dateStyle = NSDateFormatterStyle.MediumStyle
         dateformatter.timeStyle = NSDateFormatterStyle.NoStyle
         var datePickerMode: UIDatePickerMode
         var startDateNew = dateformatter.stringFromDate(StartDatePicker.date)
         cell.durationLabel.text = "\(StartDatePicker) - \(EndDatePicker)"
         cell.timeLabel.text = "\(dateFormatter.stringFromDate(history.startDate!))"
+*/
+        
        // -  \(dateFormatter.stringFromDate(history.endDate!))"
        // cell.timeLabel.text = "\(StartDatePicker) + \(EndDatePicker)"
         cell.backgroundColor = UIColor.whiteColor()

@@ -274,7 +274,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         let history = todaysActivitiesArray[indexPath.row]
         cell.nameLabel.text = "\(history.name!)"
-        cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) -  \(todayDateFormatter.stringFromDate(history.endDate!))"
+        cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
         cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
 
         return cell
