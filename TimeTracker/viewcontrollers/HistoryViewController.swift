@@ -288,10 +288,10 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         - returns: created cell
             
 */
-        //cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
+        cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
         cell.backgroundColor = UIColor.whiteColor()
         cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
-       // cell.sideColor =
+       // MARK: cell.sideColor =
         
     }
 
@@ -318,20 +318,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             dateFormatter.dateFormat = "hh:mm"
             return dateFormatter
         }()
-        /*
-        dateformatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        dateformatter.timeStyle = NSDateFormatterStyle.NoStyle
-        var datePickerMode: UIDatePickerMode
-        var startDateNew = dateformatter.stringFromDate(StartDatePicker.date)
-        cell.durationLabel.text = "\(StartDatePicker) - \(EndDatePicker)"
-        cell.timeLabel.text = "\(dateFormatter.stringFromDate(history.startDate!))"
-*/
-        
-       // -  \(dateFormatter.stringFromDate(history.endDate!))"
-       // cell.timeLabel.text = "\(StartDatePicker) + \(EndDatePicker)"
-        cell.backgroundColor = UIColor.whiteColor()
-        // cell.sideColor =
-        }
+          }
 
     }
 
