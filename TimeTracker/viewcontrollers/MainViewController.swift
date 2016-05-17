@@ -31,13 +31,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     /// array of all the activities (history objects) that happened today
     var todaysActivitiesArray: [History] = []
 
-    /// today's date formatter
-    lazy var todayDateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
-        return dateFormatter
-    }()
-
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var startPauseButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
