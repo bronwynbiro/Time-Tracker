@@ -11,6 +11,26 @@ import Foundation
 /**
     History view controller to display the history objects from core data.
 */
+/// fetch controller
+var fetchController: NSFetchedResultsController = {
+    let entity = NSEntityDescription.entityForName("History", inManagedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext)
+    let fetchRequest = NSFetchRequest()
+    fetchRequest.entity = entity
+    
+    let nameDescriptor = NSSortDescriptor(key: "name", ascending: false)
+    fetchRequest.sortDescriptors = [nameDescriptor]
+    
+    let fetchedController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext, sectionNameKeyPath: "saveTime", cacheName: nil)
+   // fetchedController.delegate = self
+    return fetchedController
+}()
+
+/// date formatter
+var todayDateFormatter: NSDateFormatter = {
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "hh:mm"
+    return dateFormatter
+}()
 
 class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
@@ -19,30 +39,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     /// A label to display when there are no items in the view
     @IBOutlet weak var noItemsLabel: UILabel!
-    @IBOutlet weak var StartDatePicker: UIDatePicker!
-    @IBOutlet weak var EndDatePicker: UIDatePicker!
-    
-
-    /// fetch controller
-    lazy var fetchController: NSFetchedResultsController = {
-        let entity = NSEntityDescription.entityForName("History", inManagedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext)
-        let fetchRequest = NSFetchRequest()
-        fetchRequest.entity = entity
-
-        let nameDescriptor = NSSortDescriptor(key: "name", ascending: false)
-        fetchRequest.sortDescriptors = [nameDescriptor]
-
-        let fetchedController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext, sectionNameKeyPath: "saveTime", cacheName: nil)
-        fetchedController.delegate = self
-        return fetchedController
-    }()
-
-    /// date formatter
-    lazy var todayDateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
-        return dateFormatter
-    }()
 
     // View methods
     /**
@@ -307,7 +303,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         return true
     }
     //MARK: trying to fix start dates and allow editing
-    
+    /*
     func updateCellTimes(cell: HistoryCell, indexPath: NSIndexPath) {
     let history = fetchController.objectAtIndexPath(indexPath) as! History
     if let str = history.name {
@@ -321,6 +317,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
           }
 
     }
+ */
 
 
     /**
@@ -337,4 +334,14 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         }
        // if editingStyle == .ChangeTime {
     }
+    /*
+ //MARK: segue for editview 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let EditViewController = segue.destinationViewController as! EditViewController
+        if let selectedHistoryCell = sender as? HistoryCell {
+            let indexPath = tableView.indexPathForCell(HistoryCell)!
+            let selectedCell = history[indexPath.row]
+            mealDetailViewController.meal = selectedMeal
+        }
+}\*/
 }
