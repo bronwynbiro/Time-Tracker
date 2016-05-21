@@ -51,14 +51,18 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
     }
     
     @IBAction func btnSetDate(sender: UIButton) {
-       // dateStringFormatter = NSDateFormatter()
-        let newDate = NSDate(dateString: "10:33")
+       let dateFormatter = NSDateFormatter()
+         dateFormatter.dateFormat = "hh:mm"
+         let strDate = dateFormatter.stringFromDate(StartDatePicker.date)
+        //MARK: below works as string literal
+       // let newDate = NSDate(dateString: "10:30")
+        let newDate = NSDate(dateString: strDate)
         StartDatePicker.date = newDate
 }
 }
 
 
- func updateCellTimes(cell: HistoryCell, indexPath: NSIndexPath) {
+func updateCellTimes(cell: HistoryCell, indexPath: NSIndexPath) {
  let history = fetchController.objectAtIndexPath(indexPath) as! History
  if let str = history.name {
  cell.nameLabel.text = history.name

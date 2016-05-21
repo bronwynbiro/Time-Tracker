@@ -206,7 +206,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dQg-Y8-Nve" userLabel="EndDatePicker">
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dQg-Y8-Nve" userLabel="EndDatePicker">
                                 <rect key="frame" x="-1" y="518" width="414" height="45"/>
                                 <date key="date" timeIntervalSinceReferenceDate="484675064.58569598">
                                     <!--2016-05-11 15:57:44 +0000-->
@@ -287,7 +287,7 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="edit" translatesAutoresizingMaskIntoConstraints="NO" id="hrj-Jv-CKn">
                                 <rect key="frame" x="180" y="98" width="63" height="62"/>
                             </imageView>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dbk-QO-GTN" userLabel="StartDatePicker">
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dbk-QO-GTN" userLabel="StartDatePicker">
                                 <rect key="frame" x="0.0" y="440" width="414" height="47"/>
                                 <date key="date" timeIntervalSinceReferenceDate="484675064.58569598">
                                     <!--2016-05-11 15:57:44 +0000-->

@@ -334,14 +334,15 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         }
        // if editingStyle == .ChangeTime {
     }
-    /*
+    
+    
  //MARK: segue for editview 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let EditViewController = segue.destinationViewController as! EditViewController
+        //let EditViewController = segue.destinationViewController as! EditViewController
         if let selectedHistoryCell = sender as? HistoryCell {
-            let indexPath = tableView.indexPathForCell(HistoryCell)!
-            let selectedCell = history[indexPath.row]
-            mealDetailViewController.meal = selectedMeal
+            let selectedCell = tableView.indexPathForCell(selectedHistoryCell)!
+            //let selectedCell = tableView[indexPath.row]
+          //  EditViewController.cell = selectedCell
         }
-}\*/
+}
 }
