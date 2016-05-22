@@ -46,11 +46,12 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     */
     override func viewDidLoad() {
         title = "History"
-
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.separatorColor = color.pink()
         tableView.backgroundColor = UIColor.whiteColor()
-
+        super.viewDidLoad()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         refreshView()
         loadNormalState()
     }
@@ -337,6 +338,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
  //MARK: segue for editview 
+    /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //let EditViewController = segue.destinationViewController as! EditViewController
         if let selectedHistoryCell = sender as? HistoryCell {
@@ -344,5 +346,20 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             //let selectedCell = tableView[indexPath.row]
           //  EditViewController.cell = selectedCell
         }
-}
+    }
+ */
+    
+func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+      let indexPath = tableView.indexPathForSelectedRow
+       // let currentCell = tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
+       // let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell") as! HistoryCell
+       let cell = tableView.cellForRowAtIndexPath(indexPath!) as! HistoryCell
+        var alert = UIAlertView()
+        alert.delegate = self
+        alert.title = "Selected Row"
+      //  alert.message = "You selected row \(indexPath!.row)"
+        alert.message = "\(cell.nameLabel.text)"
+        alert.addButtonWithTitle("OK")
+        alert.show()
+    }
 }

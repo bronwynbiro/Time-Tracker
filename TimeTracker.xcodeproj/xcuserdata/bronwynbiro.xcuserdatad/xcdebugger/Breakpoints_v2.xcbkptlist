@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTracker/viewcontrollers/HistoryViewController.swift"
-            timestampString = "485488774.891052"
+            timestampString = "485623441.666309"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "281"
-            endingLineNumber = "281"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
             landmarkName = "configureCell(_:indexPath:)"
             landmarkType = "5">
          </BreakpointContent>

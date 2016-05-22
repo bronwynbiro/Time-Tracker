@@ -2,9 +2,6 @@
 //  AppDelegate.swift
 //  TimeTracker
 //
-//  Created by Sztanyi Szabolcs on 15/10/15.
-//  Copyright © 2015 Zappdesigntemplates. All rights reserved.
-//
 
 import UIKit
 
@@ -35,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     func applicationDidEnterBackground(application: UIApplication) {
         NSNotificationCenter.defaultCenter().postNotificationName("AppDidEnterBackground", object: nil)
+        //MARK: save coredata too
+         CoreDataHandler.sharedInstance.saveContext()
     }
 
     /**

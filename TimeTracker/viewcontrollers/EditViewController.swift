@@ -64,10 +64,32 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
 
 func updateCellTimes(cell: HistoryCell, indexPath: NSIndexPath) {
  let history = fetchController.objectAtIndexPath(indexPath) as! History
+    let userCalendar = NSCalendar.currentCalendar()
+    let testComponents = NSDateComponents()
+    testComponents.year = 2016
+    testComponents.month = 5
+    testComponents.day = 21
+    let test = userCalendar.dateFromComponents(testComponents)!
  if let str = history.name {
  cell.nameLabel.text = history.name
     //placeholder
-    cell.timeLabel.text = "10:44"
+    history.startDate = test
+    cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(test))"
 }
 }
+func loadCoreDataEntities() {
+    do {
+        try fetchController.performFetch()
+    } catch {
+        // error occured while fetching
+    }
+}
+
+func refreshView() {
+    loadCoreDataEntities()
+   // tableView.reloadData()
+}
+
+
+
 
