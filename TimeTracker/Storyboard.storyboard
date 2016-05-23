@@ -32,7 +32,7 @@
                         <viewControllerLayoutGuide type="bottom" id="cHf-ZL-UdW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="S8Y-T9-4ha">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="Start your activity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KtI-vp-khh">
@@ -203,7 +203,7 @@
                         <viewControllerLayoutGuide type="bottom" id="QmC-eV-aFj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pq6-ep-KC6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dQg-Y8-Nve" userLabel="EndDatePicker">
@@ -462,6 +462,7 @@
                                             <outlet property="durationLabel" destination="Ntj-h9-RPd" id="Xyz-CO-Cif"/>
                                             <outlet property="nameLabel" destination="fWv-wU-aDT" id="X0P-JZ-hOO"/>
                                             <outlet property="timeLabel" destination="Zb1-r2-S4U" id="u7u-4b-zlc"/>
+                                            <segue destination="JgR-CG-CGu" kind="show" id="tBn-8V-Mgq"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -499,7 +500,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vij-QJ-WRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1372.5" y="1057.394366197183"/>
+            <point key="canvasLocation" x="1299" y="975"/>
         </scene>
     </scenes>
     <resources>

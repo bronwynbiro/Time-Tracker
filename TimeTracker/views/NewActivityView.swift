@@ -38,7 +38,7 @@ class NewActivityView: UIView, UITextFieldDelegate {
         let label = UILabel()
         label.frame = CGRectMake(10.0, 10.0, CGRectGetWidth(frame)-20.0, 40.0)
         label.text = "Enter the name of your activity"
-        label.textColor = color.blue()
+        label.textColor = UIColor.blackColor()
         label.textAlignment = .Center
         label.backgroundColor = UIColor.clearColor()
         label.font = UIFont.boldSystemFontOfSize(14.0)

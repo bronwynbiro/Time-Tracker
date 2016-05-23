@@ -337,23 +337,28 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     
- //MARK: segue for editview 
-    /*
+ //MARK: segue for editview
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //let EditViewController = segue.destinationViewController as! EditViewController
-        if let selectedHistoryCell = sender as? HistoryCell {
-            let selectedCell = tableView.indexPathForCell(selectedHistoryCell)!
-            //let selectedCell = tableView[indexPath.row]
-          //  EditViewController.cell = selectedCell
+        if segue.identifier == "ShowDetail" {
+            let EditViewController = segue.destinationViewController as! UIViewController
+            // Get the cell that generated this segue.
+            let indexPath = tableView.indexPathForSelectedRow
+            if let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! HistoryCell? {
+                let indexPath = tableView.indexPathForCell(currentCell)!
+              //  let selectedCell = historyView[indexPath.row]
+                let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
+                //EditViewController.cell = currentCell
+            }
         }
     }
- */
+ 
     
 func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
       let indexPath = tableView.indexPathForSelectedRow
        // let currentCell = tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
        // let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell") as! HistoryCell
        let cell = tableView.cellForRowAtIndexPath(indexPath!) as! HistoryCell
+        let history = fetchController.objectAtIndexPath(indexPath!) as! History
         var alert = UIAlertView()
         alert.delegate = self
         alert.title = "Selected Row"
@@ -361,5 +366,13 @@ func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSInde
         alert.message = "\(cell.nameLabel.text)"
         alert.addButtonWithTitle("OK")
         alert.show()
+       // self.updateEntity(indexPath.row, newName:cell.nameLabel.text)
+ //   if let sourceViewController = sender.sourceViewController as? MealViewController, meal = sourceViewController.meal {
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            // Update an existing meal.
+          //  history[selectedIndexPath.row] = cell
+            tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
+        }
+        self.tableView.reloadData()
     }
 }
