@@ -21,11 +21,17 @@ extension NSDate
 }
 
 class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResultsControllerDelegate {
-    
     @IBOutlet weak var EndDatePicker: UIDatePicker!
     @IBOutlet weak var StartDatePicker: UIDatePicker!
     @IBOutlet weak var showButton: UIButton!
     @IBOutlet weak var labelDisplay: UITextField!
+    var PassDate: String!
+    var PassCell: UITableViewCell!
+    var PassPath: NSIndexPath!
+    var tableView: UITableView!
+    var PassStart: NSDate!
+    var PassEnd: NSDate!
+    var PassDuration: NSNumber!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,25 +63,26 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
        // let newDate = NSDate(dateString: "10:30")
         let newDate = NSDate(dateString: strDate)
         StartDatePicker.date = newDate
+    }
+
+//}
+    
+//func updateCellTimes(cell: HistoryCell, indexPath: NSIndexPath) {
+@IBAction func updateCellTime(sender: UIButton) {
+let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell") as! HistoryCell
+    let indexPath = PassPath
+    let history = fetchController.objectAtIndexPath(indexPath!) as! History
+    history.startDate = StartDatePicker.date
+    history.endDate = EndDatePicker.date
+    cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
+    //EDIT: fix durationLabel and use persistence for saving to core data, allow it to update on front page 
+    cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
+    
 }
 }
 
 
-func updateCellTimes(cell: HistoryCell, indexPath: NSIndexPath) {
- let history = fetchController.objectAtIndexPath(indexPath) as! History
-    let userCalendar = NSCalendar.currentCalendar()
-    let testComponents = NSDateComponents()
-    testComponents.year = 2016
-    testComponents.month = 5
-    testComponents.day = 21
-    let test = userCalendar.dateFromComponents(testComponents)!
- if let str = history.name {
- cell.nameLabel.text = history.name
-    //placeholder
-    history.startDate = test
-    cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(test))"
-}
-}
+
 func loadCoreDataEntities() {
     do {
         try fetchController.performFetch()
@@ -88,7 +95,3 @@ func refreshView() {
     loadCoreDataEntities()
    // tableView.reloadData()
 }
-
-
-
-

@@ -299,6 +299,7 @@
                                 <connections>
                                     <action selector="btnGetDate:" destination="JgR-CG-CGu" eventType="touchUpInside" id="T2F-wR-UxM"/>
                                     <action selector="btnSetDate:" destination="JgR-CG-CGu" eventType="touchUpInside" id="DCK-Bd-cJ1"/>
+                                    <action selector="updateCellTime:" destination="JgR-CG-CGu" eventType="touchUpInside" id="KUt-8Z-y2W"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NVh-2l-8x0">

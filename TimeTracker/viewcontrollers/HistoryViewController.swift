@@ -336,21 +336,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
        // if editingStyle == .ChangeTime {
     }
     
-    
- //MARK: segue for editview
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ShowDetail" {
-            let EditViewController = segue.destinationViewController as! UIViewController
-            // Get the cell that generated this segue.
-            let indexPath = tableView.indexPathForSelectedRow
-            if let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! HistoryCell? {
-                let indexPath = tableView.indexPathForCell(currentCell)!
-              //  let selectedCell = historyView[indexPath.row]
-                let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
-                //EditViewController.cell = currentCell
-            }
-        }
-    }
  
     
 func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -362,17 +347,41 @@ func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSInde
         var alert = UIAlertView()
         alert.delegate = self
         alert.title = "Selected Row"
-      //  alert.message = "You selected row \(indexPath!.row)"
         alert.message = "\(cell.nameLabel.text)"
         alert.addButtonWithTitle("OK")
         alert.show()
-       // self.updateEntity(indexPath.row, newName:cell.nameLabel.text)
- //   if let sourceViewController = sender.sourceViewController as? MealViewController, meal = sourceViewController.meal {
         if let selectedIndexPath = tableView.indexPathForSelectedRow {
             // Update an existing meal.
           //  history[selectedIndexPath.row] = cell
             tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
         }
         self.tableView.reloadData()
+    }
+    
+//MARK: segue for editview : 23
+override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+   // if segue.identifier == "EditViewController" {
+     //   if segue.identifier == "show" {
+            let nextView = (segue.destinationViewController as! EditViewController)
+          //  let nextView : UIViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("EditViewController"))! as! EditViewController
+            //  let EditViewController = segue.destinationViewController as! UIViewController
+            // Get the cell that generated this segue.
+            let indexPath = tableView.indexPathForSelectedRow
+            let history = fetchController.objectAtIndexPath(indexPath!) as! History
+            if let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! HistoryCell? {
+                let indexPath = tableView.indexPathForCell(currentCell)!
+                //  let selectedCell = historyView[indexPath.row]
+                let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
+                //EditViewController.cell = currentCell
+                nextView.PassDate = "10:30"
+                nextView.PassCell = selectedCell
+                nextView.PassPath = indexPath
+                nextView.tableView = tableView
+                nextView.PassStart = history.startDate
+                nextView.PassEnd = history.endDate
+                nextView.PassDuration = history.duration
+                
+
+            }
     }
 }
