@@ -25,13 +25,16 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
     @IBOutlet weak var StartDatePicker: UIDatePicker!
     @IBOutlet weak var showButton: UIButton!
     @IBOutlet weak var labelDisplay: UITextField!
-    var PassDate: String!
+   // var PassDate: String!
     var PassCell: UITableViewCell!
     var PassPath: NSIndexPath!
     var tableView: UITableView!
-    var PassStart: NSDate!
-    var PassEnd: NSDate!
+    var startDate: NSDate!
+    var endDate: NSDate!
     var PassDuration: NSNumber!
+    var history: History!
+    var choosenActivity: Activity?
+    var passedSeconds: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +56,7 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
         if StartDatePicker != nil {
             labelDisplay.text = strDate
         }
+
     }
     
     @IBAction func btnSetDate(sender: UIButton) {
@@ -60,13 +64,11 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
          dateFormatter.dateFormat = "hh:mm"
          let strDate = dateFormatter.stringFromDate(StartDatePicker.date)
         //MARK: below works as string literal
-       // let newDate = NSDate(dateString: "10:30")
         let newDate = NSDate(dateString: strDate)
         StartDatePicker.date = newDate
     }
-
-//}
     
+    //EDIT: fix durationLabel and edit existing coredata instead of adding new, and allow it to update on front page
 //func updateCellTimes(cell: HistoryCell, indexPath: NSIndexPath) {
 @IBAction func updateCellTime(sender: UIButton) {
 let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell") as! HistoryCell
@@ -75,23 +77,39 @@ let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell") as! Histor
     history.startDate = StartDatePicker.date
     history.endDate = EndDatePicker.date
     cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
-    //EDIT: fix durationLabel and use persistence for saving to core data, allow it to update on front page 
-    cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
-    
-}
-}
-
-
-
-func loadCoreDataEntities() {
-    do {
-        try fetchController.performFetch()
-    } catch {
-        // error occured while fetching
+   //cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
+    cell.durationLabel.text = "00:10"
+   // cell.durationLabel.text = timeStringWithTimeToDisplay(10)
+    //below creates new instance. then delete current???
+    CoreDataHandler.sharedInstance.updateHistory(history.name!, startDate: history.startDate!, endDate: history.endDate!, duration: 0, PassPath: PassPath)
+    let historyToDelete = fetchController.objectAtIndexPath(indexPath)
+    CoreDataHandler.sharedInstance.deleteObject(historyToDelete as! NSManagedObject)
+        tableView.reloadData()
     }
 }
 
-func refreshView() {
-    loadCoreDataEntities()
-   // tableView.reloadData()
-}
+        //EDIT: below just adds new instance. could delete old and below should work, so long as update front page?
+      // CoreDataHandler.sharedInstance.saveHistory(choosenActivity!.name!, startDate: startDate!, endDate: NSDate(), duration: 90)
+
+
+        /*
+    let predicate = NSPredicate(format: "%activity, %hh:mm - %hh:mm, ", "gym", "10:00", "03:33")
+   // let predicate = NSPredicate(format: "objectID == %@", Activity)
+    let fetchRequest = NSFetchRequest(entityName: "\(choosenActivity)")
+    fetchRequest.predicate = predicate
+    do {
+        let fetchedEntities = try history.managedObjectContext!.executeFetchRequest(fetchRequest) as! [NSManagedObject]
+        fetchedEntities.first?.startDate = history.startDate
+        fetchedEntities.first?.endDate = history.endDate
+        // ... Update additional properties with new values
+    } catch {
+        // Do something in response to error condition
+    }
+    
+    do {
+        try history.managedObjectContext!.save()
+    } catch {
+        // Do something in response to error condition
+    }
+    }
+ */

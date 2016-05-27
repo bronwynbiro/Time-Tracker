@@ -24,6 +24,17 @@ class CoreDataHandler: NSObject {
         }
         return Static.instance!
     }
+    //EDIT: added below func
+    lazy var managedObjectContext: NSManagedObjectContext? = {
+        // Returns the managed object context for the application (which is already bound to the persistent store
+        // coordinator for the application.) This property is optional since there are legitimate error
+        // conditions that could cause the creation of the context to fail.
+        let coordinator = self.persistentStoreCoordinator
+        var managedObjectContext = NSManagedObjectContext()
+        managedObjectContext.persistentStoreCoordinator = coordinator
+        return managedObjectContext
+    }()
+    
 
     lazy var backgroundManagedObjectContext: NSManagedObjectContext = {
         let backgroundManagedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
@@ -139,11 +150,68 @@ class CoreDataHandler: NSObject {
         history.startDate = startDate
         history.endDate = endDate
         history.duration = duration
-
         history.saveTime = dateFormatter.stringFromDate(endDate)
         saveContext()
     }
-
+    
+    /**
+     Save updated history object to core data.
+     
+     - parameter name:      name of the activity
+     - parameter startDate: when the activity started
+     - parameter endDate:   when it was finished
+     - parameter duration:  duration of the activity
+     */
+    /*
+    func updateHistory(object: NSManagedObject, name: String, startDate: NSDate, endDate: NSDate) {
+        let history: History =  NSEntityDescription.entityForName(name, inManagedObjectContext: self.backgroundManagedObjectContext) as! History
+        history.name = name
+        history.startDate = startDate
+        history.endDate = endDate
+        //calculate new duration
+        let calendar = NSCalendar.currentCalendar()
+        let dateMakerFormatter = NSDateFormatter()
+        dateMakerFormatter.dateFormat = "hh:mm a"
+        let startTime = startDate
+        let endTime = endDate
+        let hourMinuteComponents: NSCalendarUnit = [.Hour, .Minute]
+        let timeDifference = calendar.components(
+            hourMinuteComponents,
+            fromDate: startTime,
+            toDate: endTime,
+            options: [])
+        let durationString = "\(timeDifference)"
+        let interval = endDate.timeIntervalSinceDate(startDate)
+        history.duration = interval
+        history.saveTime = dateFormatter.stringFromDate(endDate)
+        saveContext()
+    }
+ */
+    func updateHistory(name: String, startDate: NSDate, endDate: NSDate, duration: NSInteger, PassPath: NSIndexPath) {
+            let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
+            history.name = name
+            history.startDate = startDate
+            history.endDate = endDate
+            //calculate new duration
+            let calendar = NSCalendar.currentCalendar()
+            let dateMakerFormatter = NSDateFormatter()
+            dateMakerFormatter.dateFormat = "hh:mm a"
+            let startTime = startDate
+            let endTime = endDate
+            let hourMinuteComponents: NSCalendarUnit = [.Hour, .Minute]
+            let timeDifference = calendar.components(
+                hourMinuteComponents,
+                fromDate: startTime,
+                toDate: endTime,
+                options: [])
+            let durationString = "\(timeDifference)"
+            let interval = endDate.timeIntervalSinceDate(startDate)
+            history.duration = interval
+            history.saveTime = dateFormatter.stringFromDate(endDate)
+            saveContext()
+        }
+        
+    
     /**
     Fetch core data to get all history objects.
 

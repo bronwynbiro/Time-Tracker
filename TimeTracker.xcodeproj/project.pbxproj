@@ -102,7 +102,6 @@
 			children = (
 				56A6DA7F1BCF655B00A80680 /* AppDelegate.swift */,
 				56A6DA941BCF65E100A80680 /* Viewcontrollers */,
-				56A6DA931BCF65DD00A80680 /* Views */,
 				56A6DA921BCF65D800A80680 /* Objects */,
 				56A6DA911BCF65CC00A80680 /* Supporting files */,
 			);
@@ -141,7 +140,7 @@
 				56A6DAAF1BCF733F00A80680 /* NewActivityView.swift */,
 			);
 			name = Views;
-			path = views;
+			path = ../views;
 			sourceTree = "<group>";
 		};
 		56A6DA941BCF65E100A80680 /* Viewcontrollers */ = {
@@ -152,6 +151,7 @@
 				56A6DAB51BCF875200A80680 /* ActivityListViewController.swift */,
 				56A6DABE1BCFDE2C00A80680 /* HistoryViewController.swift */,
 				955118FD1CEFE334009E004D /* EditViewController.swift */,
+				56A6DA931BCF65DD00A80680 /* Views */,
 			);
 			name = Viewcontrollers;
 			path = viewcontrollers;

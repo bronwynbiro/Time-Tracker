@@ -198,7 +198,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "TimeTracker"
-
+//MARK": change items to be different colors
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "history_icon"), style: .Plain, target: self, action: Selector("openHistoryView"))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "list_icon"), style: .Plain, target: self, action: Selector("openActivityView"))
 
@@ -218,7 +218,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidAppear(animated)
         loadCoreDataEntities()
     }
-
+    
     /**
         Opens history view
     */
