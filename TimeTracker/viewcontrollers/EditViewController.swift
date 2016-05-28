@@ -31,7 +31,7 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
     var tableView: UITableView!
     var startDate: NSDate!
     var endDate: NSDate!
-    var PassDuration: NSNumber!
+    var PassDuration: Int!
     var history: History!
     var choosenActivity: Activity?
     var passedSeconds: Int = 0
@@ -76,13 +76,28 @@ let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell") as! Histor
     let history = fetchController.objectAtIndexPath(indexPath!) as! History
     history.startDate = StartDatePicker.date
     history.endDate = EndDatePicker.date
-    cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
+    cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \( todayDateFormatter.stringFromDate(history.endDate!))"
    //cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
-    cell.durationLabel.text = "00:10"
-   // cell.durationLabel.text = timeStringWithTimeToDisplay(10)
-    //below creates new instance. then delete current???
-    CoreDataHandler.sharedInstance.updateHistory(history.name!, startDate: history.startDate!, endDate: history.endDate!, duration: 0, PassPath: PassPath)
-    let historyToDelete = fetchController.objectAtIndexPath(indexPath)
+    
+    
+    ////EDIT MARK: new duration way?
+    let calendar = NSCalendar.currentCalendar()
+    let dateMakerFormatter = NSDateFormatter()
+    dateMakerFormatter.dateFormat = "hh:mm a"
+    let startTime = startDate
+    let endTime = endDate
+    let hourMinuteComponents: NSCalendarUnit = [.Hour, .Minute]
+    let timeDifference = calendar.components(
+        hourMinuteComponents,
+        fromDate: startTime,
+        toDate: endTime,
+        options: [])
+    let durationString = "\(timeDifference)"
+    let interval = Int(endDate.timeIntervalSinceDate(startDate))
+    history.duration = interval
+    CoreDataHandler.sharedInstance.updateHistory(history.name!, startDate: history.startDate!, endDate: history.endDate!, duration: interval, PassPath: PassPath)
+   //EDIT: sigabrt touching first item sometimes.
+   let historyToDelete = fetchController.objectAtIndexPath(indexPath)
     CoreDataHandler.sharedInstance.deleteObject(historyToDelete as! NSManagedObject)
         tableView.reloadData()
     }

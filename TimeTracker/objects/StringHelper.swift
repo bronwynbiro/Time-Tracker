@@ -21,14 +21,13 @@ extension NSString {
     */
     class func createDurationStringFromDuration(duration: Double) -> String {
         let formatter = NSNumberFormatter()
-        //changed from 2
-        if duration < 0 {
-            let durationString = "placeholder: neg duration"
+        if duration < 2 {
+            print("Error")
         }
         formatter.minimumIntegerDigits = 1
 
-        let minutes = UInt32((duration / 60) % 60)
-        let hours = UInt32((duration / 3600))
+        let minutes = UInt8((duration / 60) % 60)
+        let hours = UInt8((duration / 3600))
 
         let minuteString = minutes > 9 ? String(minutes) : "0" + String(minutes)
         let hoursString = hours > 9 ? String(hours) : "0" + String(hours)
