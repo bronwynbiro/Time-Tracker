@@ -12,27 +12,6 @@ import Foundation
  History view controller to display the history objects from core data.
  */
 
-/// fetch controller
-var fetchController: NSFetchedResultsController = {
-    let entity = NSEntityDescription.entityForName("History", inManagedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext)
-    let fetchRequest = NSFetchRequest()
-    fetchRequest.entity = entity
-    
-    let nameDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
-    fetchRequest.sortDescriptors = [nameDescriptor]
-    
-    let fetchedController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext, sectionNameKeyPath: "saveTime", cacheName: nil)
-   // fetchedController.delegate = self
-    return fetchedController
-}()
-
-/// date formatter
-var todayDateFormatter: NSDateFormatter = {
-    let dateFormatter = NSDateFormatter()
-    dateFormatter.dateFormat = "HH:mm"
-    return dateFormatter
-}()
-
 class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     
@@ -44,6 +23,27 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var EndDatePicker: UIDatePicker!
     
     
+    /// fetch controller
+    lazy var fetchController: NSFetchedResultsController = {
+        let entity = NSEntityDescription.entityForName("History", inManagedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext)
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = entity
+        
+        let nameDescriptor = NSSortDescriptor(key: "name", ascending: false)
+        fetchRequest.sortDescriptors = [nameDescriptor]
+        
+        let fetchedController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext, sectionNameKeyPath: "saveTime", cacheName: nil)
+        fetchedController.delegate = self
+        return fetchedController
+    }()
+    
+    /// date formatter
+    lazy var dateFormatter: NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter
+    }()
+    
     // MARK: view methods
     /**
      Called after the view was loaded, do some initial setup and refresh the view
@@ -54,9 +54,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.separatorColor = color.pink()
         tableView.backgroundColor = UIColor.whiteColor()
-        super.viewDidLoad()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        
         refreshView()
         loadNormalState()
     }
@@ -331,10 +329,9 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.nameLabel.text = history.name
         }
         // MARK: add sidecolor based on selected user color
-       // cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
+        cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
         cell.backgroundColor = UIColor.whiteColor()
-        //cell.durationLabel.text = "olaceholder"
-        cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
+        // cell.sideColor =
     }
     
     /**
@@ -346,6 +343,25 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    //MARK: trying to fix start dates and allow editing
+    /*
+     func updateCellTimes(cell: HistoryCell, indexPath: NSIndexPath) {
+     let history = fetchController.objectAtIndexPath(indexPath) as! History
+     if let str = history.name {
+     cell.nameLabel.text = history.name
+     
+     let dateformatter = NSDateFormatter()
+     
+     dateformatter.dateStyle = NSDateFormatterStyle.MediumStyle
+     dateformatter.timeStyle = NSDateFormatterStyle.NoStyle
+     var datePickerMode: UIDatePickerMode
+     var startDateNew = dateformatter.stringFromDate(StartDatePicker.date)
+     cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
+     cell.backgroundColor = UIColor.whiteColor()
+     // cell.sideColor =
+     }
+     }
+     */
     
     /**
      Called when an editing happened to the cell, in this case: delete. So delete the object from core data.
@@ -396,7 +412,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             return 0
         }
     }
-    
+
+
     /*
  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
  /*
@@ -451,6 +468,6 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
                 nextView.PassDuration = Int(history.duration!)
                 nextView.choosenActivity = selectedActivity()
 
-}
-}
+        }
+    }
 }

@@ -19,6 +19,25 @@ extension NSDate
         self.init(timeInterval:0, sinceDate:d)
     }
 }
+var fetchController: NSFetchedResultsController = {
+    let entity = NSEntityDescription.entityForName("History", inManagedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext)
+    let fetchRequest = NSFetchRequest()
+    fetchRequest.entity = entity
+    
+    let nameDescriptor = NSSortDescriptor(key: "name", ascending: false)
+    fetchRequest.sortDescriptors = [nameDescriptor]
+    
+    let fetchedController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext, sectionNameKeyPath: "saveTime", cacheName: nil)
+    //fetchedController.delegate = self
+    return fetchedController
+}()
+
+/// date formatter
+var todayDateFormatter: NSDateFormatter = {
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "HH:mm"
+    return dateFormatter
+}()
 
 class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var EndDatePicker: UIDatePicker!
