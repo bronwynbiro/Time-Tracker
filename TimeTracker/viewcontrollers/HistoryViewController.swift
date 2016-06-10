@@ -5,8 +5,8 @@
 
 
 import UIKit
-import CoreData
 import Foundation
+import CoreData
 
 /**
  History view controller to display the history objects from core data.
@@ -19,9 +19,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     /// A label to display when there are no items in the view
     @IBOutlet weak var noItemsLabel: UILabel!
-    @IBOutlet weak var StartDatePicker: UIDatePicker!
-    @IBOutlet weak var EndDatePicker: UIDatePicker!
-    
     
     /// fetch controller
     lazy var fetchController: NSFetchedResultsController = {
@@ -38,7 +35,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     }()
     
     /// date formatter
-    lazy var dateFormatter: NSDateFormatter = {
+    lazy var todayDateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter
@@ -54,7 +51,9 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.separatorColor = color.pink()
         tableView.backgroundColor = UIColor.whiteColor()
-        
+        //  suvar.viewDidLoad()
+        //self.tableView.delegate = self
+        // self.tableView.dataSource = self
         refreshView()
         loadNormalState()
     }
@@ -136,14 +135,12 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
                 let history = fetchController.objectAtIndexPath(indexPath)
                 objectsToDelete.append(history as! History)
             }
-            
-            CoreDataHandler.sharedInstance.deleteObjects(objectsToDelete)
             checkToShowEmptyLabel()
             updateDeleteButtonTitle()
             
             if fetchController.fetchedObjects?.count == 0 {
                 loadNormalState()
-                //                loadCoreDataEntities()
+                loadCoreDataEntities()
             }
         }
     }
@@ -323,15 +320,15 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter cell:      cell to configure
      - parameter indexPath: indexPath
      */
-    func configureCell(cell: HistoryCell, indexPath: NSIndexPath) {
-        let history = fetchController.objectAtIndexPath(indexPath) as! History
+    
+    func configureCell(cell: HistoryCell, indexPath: NSIndexPath) -> History {
+       let history = fetchController.objectAtIndexPath(indexPath) as! History
         if let str = history.name {
             cell.nameLabel.text = history.name
         }
-        // MARK: add sidecolor based on selected user color
-        cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
         cell.backgroundColor = UIColor.whiteColor()
-        // cell.sideColor =
+        cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
+        return history
     }
     
     /**
@@ -343,25 +340,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
-    //MARK: trying to fix start dates and allow editing
-    /*
-     func updateCellTimes(cell: HistoryCell, indexPath: NSIndexPath) {
-     let history = fetchController.objectAtIndexPath(indexPath) as! History
-     if let str = history.name {
-     cell.nameLabel.text = history.name
-     
-     let dateformatter = NSDateFormatter()
-     
-     dateformatter.dateStyle = NSDateFormatterStyle.MediumStyle
-     dateformatter.timeStyle = NSDateFormatterStyle.NoStyle
-     var datePickerMode: UIDatePickerMode
-     var startDateNew = dateformatter.stringFromDate(StartDatePicker.date)
-     cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
-     cell.backgroundColor = UIColor.whiteColor()
-     // cell.sideColor =
-     }
-     }
-     */
     
     /**
      Called when an editing happened to the cell, in this case: delete. So delete the object from core data.
@@ -412,62 +390,37 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             return 0
         }
     }
-
-
-    /*
- func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
- /*
- if tableView.editing == true {
- tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
- updateDeleteButtonTitle()
- } else {
- tableView.deselectRowAtIndexPath(indexPath, animated: true)
- }
- */
- let indexPath = tableView.indexPathForSelectedRow
- // let currentCell = tableView.cellForRowAtIndexPath(indexPath!)! as UITableViewCell
- // let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell") as! HistoryCell
- let cell = tableView.cellForRowAtIndexPath(indexPath!) as! HistoryCell
- _ = fetchController.objectAtIndexPath(indexPath!) as! History
- let alert = UIAlertView()
- //  alert.delegate = self
- alert.title = "Selected Row"
- alert.message = "\(cell.nameLabel.text)"
- alert.addButtonWithTitle("OK")
- alert.show()
- if let selectedIndexPath = tableView.indexPathForSelectedRow {
- tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .None)
- }
- tableView.reloadData()
- }
- */
+    
     func selectedActivity() -> Activity {
         let activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
         let selectedIndexPath = tableView.indexPathForSelectedRow!
         return activitiesArray[selectedIndexPath.row]
     }
- 
-
     
-//MARK: segue for editview
-override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-            let nextView = (segue.destinationViewController as! EditViewController)
-            // Get the cell that generated this segue.
-            let indexPath = tableView.indexPathForSelectedRow
-            let cell = tableView.cellForRowAtIndexPath(indexPath!) as! HistoryCell
-            let history = fetchController.objectAtIndexPath(indexPath!) as! History
-            if let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! HistoryCell! {
-                let indexPath = tableView.indexPathForCell(currentCell)!
-                let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
-                nextView.PassCell = selectedCell
-                nextView.PassPath = indexPath
-                nextView.tableView = tableView
-                nextView.history = history
-                nextView.startDate = history.startDate
-                nextView.endDate = history.endDate
-                nextView.PassDuration = Int(history.duration!)
-                nextView.choosenActivity = selectedActivity()
-
+    
+    
+    //MARK: segue for editview
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let nextView = (segue.destinationViewController as! EditViewController)
+        // Get the cell that generated this segue.
+        let indexPath = tableView.indexPathForSelectedRow
+        if let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! HistoryCell! {
+            //let indexPath = tableView.indexPathForCell(currentCell)!
+            // let history = configureCell(currentCell, indexPath: indexPath!)
+            let history = fetchController.objectAtIndexPath(indexPath!)
+            let selectedCell = tableView.cellForRowAtIndexPath(indexPath!)
+            nextView.PassCell = selectedCell
+            nextView.PassPath = indexPath
+            nextView.PassHistory = fetchController.objectAtIndexPath(indexPath!) as! History
+            nextView.tableView = tableView
+            //  nextView.history = history
+            nextView.startDate = history.startDate
+            nextView.endDate = history.endDate
+            //EDIT: hard coded
+            // nextView.PassDuration = Int(history.duration!)
+            nextView.PassDuration = 60
+            nextView.choosenActivity = selectedActivity()
+            
         }
     }
 }
