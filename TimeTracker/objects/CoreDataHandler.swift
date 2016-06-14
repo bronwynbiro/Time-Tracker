@@ -8,12 +8,11 @@ import UIKit
 import CoreData
 
 class CoreDataHandler: NSObject {
-
+    
     /**
-    Creates a singleton object to be used across the whole app easier
-
-    - returns: CoreDataHandler
-    */
+     Creates a singleton object to be used across the whole app easier
+     - returns: CoreDataHandler
+     */
     class var sharedInstance: CoreDataHandler {
         struct Static {
             static var onceToken: dispatch_once_t = 0
@@ -26,41 +25,38 @@ class CoreDataHandler: NSObject {
     }
     //EDIT: added below func
     lazy var managedObjectContext: NSManagedObjectContext? = {
-        // Returns the managed object context for the application (which is already bound to the persistent store
-        // coordinator for the application.) This property is optional since there are legitimate error
-        // conditions that could cause the creation of the context to fail.
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext()
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
     
-
+    
     lazy var backgroundManagedObjectContext: NSManagedObjectContext = {
         let backgroundManagedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         let coordinator = self.persistentStoreCoordinator
         backgroundManagedObjectContext.persistentStoreCoordinator = coordinator
         return backgroundManagedObjectContext
     }()
-
+    
     lazy var objectModel: NSManagedObjectModel = {
         let modelPath = NSBundle.mainBundle().URLForResource("Model", withExtension: "momd")
         let objectModel = NSManagedObjectModel(contentsOfURL: modelPath!)
         return objectModel!
     }()
-
+    
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.objectModel)
-
+        
         // Get the paths to the SQLite file
         let storeURL = self.applicationDocumentsDirectory().URLByAppendingPathComponent("Model.sqlite")
-
+        
         // Define the Core Data version migration options
         let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
-
+        
         // Attempt to load the persistent store
         var error: NSError?
-
+        
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
             try persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: options)
@@ -69,7 +65,7 @@ class CoreDataHandler: NSObject {
             var dict = [String: AnyObject]()
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
-
+            
             dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
             // Replace this with code to handle the error appropriately.
@@ -79,11 +75,11 @@ class CoreDataHandler: NSObject {
         }
         return persistentStoreCoordinator
     }()
-
+    
     func applicationDocumentsDirectory() -> NSURL {
         return NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last!
     }
-
+    
     func saveContext() {
         do {
             try backgroundManagedObjectContext.save()
@@ -91,14 +87,12 @@ class CoreDataHandler: NSObject {
             // Error occured while deleting objects
         }
     }
-
+    
     /**
-    Tells whether the passed in activity's name is already saved or not.
-
-    - parameter activityName: activityName activity to be saved.
-
-    - returns: BOOL boolean value determining whether the activity is already in core data or not.
-    */
+     Tells whether the passed in activity's name is already saved or not.
+     - parameter activityName: activityName activity to be saved.
+     - returns: BOOL boolean value determining whether the activity is already in core data or not.
+     */
     func isDuplicate(activityName: String) -> Bool {
         let entityDescription = NSEntityDescription.entityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext)
         let request = NSFetchRequest()
@@ -113,37 +107,34 @@ class CoreDataHandler: NSObject {
             return false
         }
     }
-
+    
     /**
-    Creates a NSDateFormatter to format the dates of the Route object
-
-    - returns: NSDateFormatter the dateFormatter object
-    */
+     Creates a NSDateFormatter to format the dates of the Route object
+     - returns: NSDateFormatter the dateFormatter object
+     */
     lazy var dateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
         return dateFormatter
     }()
-
+    
     /**
      Adds new activity to core data.
-
-    - parameter name: name activity name to be saved.
-    */
+     - parameter name: name activity name to be saved.
+     */
     func addNewActivityName(name: String) {
         let newActivity = NSEntityDescription.insertNewObjectForEntityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext) as! Activity
         newActivity.name = name
         saveContext()
     }
-
+    
     /**
-    Save new history object to core data.
-
-    - parameter name:      name of the activity
-    - parameter startDate: when the activity started
-    - parameter endDate:   when it was finished
-    - parameter duration:  duration of the activity
-    */
+     Save new history object to core data.
+     - parameter name:      name of the activity
+     - parameter startDate: when the activity started
+     - parameter endDate:   when it was finished
+     - parameter duration:  duration of the activity
+     */
     func saveHistory(name: String, startDate: NSDate, endDate: NSDate, duration: NSInteger) {
         let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
         history.name = name
@@ -162,9 +153,10 @@ class CoreDataHandler: NSObject {
      - parameter endDate:   when it was finished
      - parameter duration:  duration of the activity
      */
-    /*
-    func updateHistory(object: NSManagedObject, name: String, startDate: NSDate, endDate: NSDate) {
-        let history: History =  NSEntityDescription.entityForName(name, inManagedObjectContext: self.backgroundManagedObjectContext) as! History
+
+    func updateHistory(name: String, startDate: NSDate, endDate: NSDate, duration: NSInteger, PassPath: NSIndexPath, PassHistory: History) {
+        //    let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
+        let history = PassHistory
         history.name = name
         history.startDate = startDate
         history.endDate = endDate
@@ -186,93 +178,63 @@ class CoreDataHandler: NSObject {
         history.saveTime = dateFormatter.stringFromDate(endDate)
         saveContext()
     }
- */
-    func updateHistory(name: String, startDate: NSDate, endDate: NSDate, duration: NSInteger, PassPath: NSIndexPath, PassHistory: History) {
-        //    let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
-            let history = PassHistory
-            history.name = name
-            history.startDate = startDate
-            history.endDate = endDate
-            //calculate new duration
-            let calendar = NSCalendar.currentCalendar()
-            let dateMakerFormatter = NSDateFormatter()
-            dateMakerFormatter.dateFormat = "hh:mm a"
-            let startTime = startDate
-            let endTime = endDate
-            let hourMinuteComponents: NSCalendarUnit = [.Hour, .Minute]
-            let timeDifference = calendar.components(
-                hourMinuteComponents,
-                fromDate: startTime,
-                toDate: endTime,
-                options: [])
-            let durationString = "\(timeDifference)"
-            let interval = endDate.timeIntervalSinceDate(startDate)
-            history.duration = interval
-            history.saveTime = dateFormatter.stringFromDate(endDate)
-            saveContext()
-        }
-        
+    
     
     /**
-    Fetch core data to get all history objects.
-
-    - returns: array of history objects
-    */
+     Fetch core data to get all history objects.
+     - returns: array of history objects
+     */
     func allHistoryItems() -> [History]? {
         let fetchRequest = NSFetchRequest()
         let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
         fetchRequest.entity = entityDescription
-
+        
         let dateDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
         fetchRequest.sortDescriptors = [dateDescriptor]
-
+        
         return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
     }
-
+    
     /**
-    Fetch core data for activities for today
-
-    - returns: array of History objects
-    */
+     Fetch core data for activities for today
+     - returns: array of History objects
+     */
     func fetchCoreDataForTodayActivities() -> [History] {
         let fetchRequest = NSFetchRequest()
         let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
         fetchRequest.entity = entityDescription
-
+        
         let dateDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
         fetchRequest.sortDescriptors = [dateDescriptor]
-
+        
         let startDate = NSDate.dateByMovingToBeginningOfDay()
         let endDate = NSDate.dateByMovingToEndOfDay()
         let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@)", startDate, endDate)
         fetchRequest.predicate = predicate
-
+        
         return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
     }
-
+    
     /**
-    Fetch core data for all the activities
-
-    - returns: array of Activity objects
-    */
+     Fetch core data for all the activities
+     - returns: array of Activity objects
+     */
     func fetchCoreDataAllActivities() -> [Activity] {
         let fetchRequest = NSFetchRequest()
         let entityDescription = NSEntityDescription.entityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext)
         fetchRequest.entity = entityDescription
-
+        
         let nameDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [nameDescriptor]
-
+        
         return (fetchCoreDataWithFetchRequest(fetchRequest) as! [Activity])
     }
-
+    
     /**
-    Fetches Core Data with the given fetch request and returns an array with the results if it was successful.
-
-    - parameter fetchRequest: request to make
-
-    - returns: array of objects
-    */
+     Fetches Core Data with the given fetch request and returns an array with the results if it was successful.
+     - parameter fetchRequest: request to make
+     - returns: array of objects
+     */
     func fetchCoreDataWithFetchRequest(fetchRequest: NSFetchRequest) -> [AnyObject]? {
         do {
             let fetchResults = try backgroundManagedObjectContext.executeFetchRequest(fetchRequest)
@@ -280,30 +242,28 @@ class CoreDataHandler: NSObject {
         } catch {
             // error occured
         }
-
+        
         return nil
     }
-
+    
     /**
-    Delete a single Core Data object
-
-    - parameter object: object to delete
-    */
+     Delete a single Core Data object
+     - parameter object: object to delete
+     */
     func deleteObject(object: NSManagedObject) {
         backgroundManagedObjectContext.deleteObject(object)
         saveContext()
     }
-
+    
     /**
-    Delete multiple objects
-
-    - parameter objectsToDelete: objects to delete
-    */
+     Delete multiple objects
+     - parameter objectsToDelete: objects to delete
+     */
     func deleteObjects(objectsToDelete: [NSManagedObject]) {
         for object in objectsToDelete {
             backgroundManagedObjectContext.deleteObject(object)
         }
         saveContext()
     }
-
+    
 }

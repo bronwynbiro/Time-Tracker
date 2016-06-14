@@ -30,7 +30,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         fetchRequest.sortDescriptors = [nameDescriptor]
         
         let fetchedController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext, sectionNameKeyPath: "saveTime", cacheName: nil)
-        fetchedController.delegate = self
+       fetchedController.delegate = self
         return fetchedController
     }()
     
@@ -39,7 +39,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         dateFormatter.dateFormat = "hh:mm"
         return dateFormatter
     }()
-
+    
     
     // MARK: view methods
     /**
@@ -52,8 +52,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.separatorColor = color.pink()
         tableView.backgroundColor = UIColor.whiteColor()
         //  suvar.viewDidLoad()
-        //self.tableView.delegate = self
-        // self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         refreshView()
         loadNormalState()
     }
@@ -132,7 +132,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             var objectsToDelete: [History] = []
             let selectedIndexPaths = tableView.indexPathsForSelectedRows
             for indexPath in selectedIndexPaths! {
-                let history = fetchController.objectAtIndexPath(indexPath)
+                var history = fetchController.objectAtIndexPath(indexPath)
                 objectsToDelete.append(history as! History)
             }
             checkToShowEmptyLabel()
@@ -322,7 +322,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      */
     
     func configureCell(cell: HistoryCell, indexPath: NSIndexPath) -> History {
-       let history = fetchController.objectAtIndexPath(indexPath) as! History
+        let history = fetchController.objectAtIndexPath(indexPath) as! History
         if let str = history.name {
             cell.nameLabel.text = history.name
         }
@@ -344,15 +344,29 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     /**
-     Called when an editing happened to the cell, in this case: delete. So delete the object from core data.
+     Delete the object from core data.
      - parameter tableView:    tableView
-     - parameter editingStyle: the editing style, in this case Delete is important
+     - parameter editingStyle: the editing style, in this case Delete
      - parameter indexPath:    at which indexpath
      */
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let historyToDelete = fetchController.objectAtIndexPath(indexPath)
+            var historyToDelete = fetchController.objectAtIndexPath(indexPath)
+            var todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
+            var totalDuration = MainViewController().calculateTotalDurationForToday()
+            var historyDel = fetchController.objectAtIndexPath(indexPath) as! History
+            if todaysActivitiesArray.count < 1 {
+                totalDuration = 0
+            }
+            else {
+            totalDuration = totalDuration - Int(historyDel.duration!)
+            }
+            print(todaysActivitiesArray)
+            print(totalDuration)
             CoreDataHandler.sharedInstance.deleteObject(historyToDelete as! NSManagedObject)
+           // MainViewController.totalDuration = totalDuration
+            CoreDataHandler.sharedInstance.saveContext()
+            
         }
     }
     
@@ -407,8 +421,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         // Get the cell that generated this segue.
         let indexPath = tableView.indexPathForSelectedRow
         if let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! HistoryCell! {
-            //let indexPath = tableView.indexPathForCell(currentCell)!
-            // let history = configureCell(currentCell, indexPath: indexPath!)
             let history = fetchController.objectAtIndexPath(indexPath!)
             let selectedCell = tableView.cellForRowAtIndexPath(indexPath!)
             nextView.PassCell = selectedCell
@@ -417,21 +429,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             nextView.tableView = tableView
             nextView.startDate = history.startDate
             nextView.endDate = history.endDate
-            //EDIT: hard coded
-            //   nextView.PassDuration = history.startDate!.timeIntervalSinceDate(history.endDate!!)
             nextView.choosenActivity = selectedActivity()
             
         }
-    }
-/*
-    func editHistoryView (name: String, startDate: NSDate?, endDate: NSDate?, duration: Double, indexPath: NSIndexPath, history: History){
-    //let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell") as! HistoryCell
-    let cell = tableView.cellForRowAtIndexPath(indexPath) as! HistoryCell
-    cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
-    var PassDuration = history.endDate!.timeIntervalSinceDate(history.startDate!)
-    cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration))
-      //  CoreDataHandler.sharedInstance.updateHistory(history.name!, startDate: history.startDate!, endDate: history.endDate!, duration: Int(PassDuration), indexPath: PassPath, PassHistory: PassHistory)
-    tableView.reloadData()
 }
- */
 }

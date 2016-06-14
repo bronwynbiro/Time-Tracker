@@ -44,7 +44,7 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
     @IBOutlet weak var StartDatePicker: UIDatePicker!
     @IBOutlet weak var showButton: UIButton!
     @IBOutlet weak var labelDisplay: UITextField!
-
+    
     var PassCell: UITableViewCell!
     var PassPath: NSIndexPath!
     var tableView: UITableView!
@@ -66,19 +66,17 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
         // Dispose of any resources that can be recreated.
     }
     
-@IBAction func updateCellTime(sender: UIButton) {
-let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell") as! HistoryCell
-    let indexPath = PassPath
-    let history = PassHistory
-    history.startDate = StartDatePicker.date
-    history.endDate = EndDatePicker.date
-    cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
-    var PassDuration = history.endDate!.timeIntervalSinceDate(history.startDate!)
-   cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration))
-    CoreDataHandler.sharedInstance.updateHistory(history.name!, startDate: history.startDate!, endDate: history.endDate!, duration: Int(PassDuration), PassPath: PassPath, PassHistory: PassHistory)
-    let historyView = HistoryViewController()
-   // historyView.editHistoryView (history.name!, startDate: history.startDate!, endDate: history.endDate!, duration: Double(history.duration!), indexPath: PassPath, history: history)
-            
+    @IBAction func updateCellTime(sender: UIButton) {
+        let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell") as! HistoryCell
+        let indexPath = PassPath
+        let history = PassHistory
+        history.startDate = StartDatePicker.date
+        history.endDate = EndDatePicker.date
+        cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
+        var PassDuration = history.endDate!.timeIntervalSinceDate(history.startDate!)
+        cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration))
+        CoreDataHandler.sharedInstance.updateHistory(history.name!, startDate: history.startDate!, endDate: history.endDate!, duration: Int(PassDuration), PassPath: PassPath, PassHistory: PassHistory)
+        
         tableView.reloadData()
     }
 }
