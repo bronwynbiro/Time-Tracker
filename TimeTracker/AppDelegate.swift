@@ -12,18 +12,15 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    
     var window: UIWindow?
-
-    /**
-    Initializes the app.
-    - parameter application: The delegating application object.
-    - parameter launchOptions: A dictionary indicating the reason the application was launched (if any). The contents of this dictionary may be empty in situations where the user launched the application directly. For information about the possible keys in this dictionary and how to handle them, see “Launch Options Keys”.
-    - returns: NO if the application cannot handle the URL resource, otherwise return YES. The return value is ignored if the application is launched as a result of a remote notification.
-    */
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+    class AppDelegate: UIResponder, UIApplicationDelegate {
+        
+        var window: UIWindow?
+        func application(application: UIApplication,
+                         didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         return true
-    }
+        }
 
     /**
         Save app's state to load it back when the user comes back.
@@ -56,3 +53,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+}
