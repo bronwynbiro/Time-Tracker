@@ -5,10 +5,6 @@
 
 import Foundation
 
-/**
-    Custom category to handle NSDate related methods
-*/
-
 extension NSDate {
 
     /**
@@ -35,6 +31,26 @@ extension NSDate {
         components.minute = 59
         components.second = 59
         return NSCalendar.currentCalendar().dateFromComponents(components)!
+    }
+    //EDIT: may have to change NSDate() as toDate to specifc date
+    class func dateSevenDaysAgo () -> NSDate {
+        let periodComponents = NSDateComponents()
+        periodComponents.day = -7
+        let then = NSCalendar.currentCalendar().dateByAddingComponents(
+            periodComponents,
+            toDate: NSDate(),
+            options: [])!
+        return then
+    }
+    
+    class func dateMonthAgo () -> NSDate {
+        let periodComponents = NSDateComponents()
+        periodComponents.month = -1
+        let then = NSCalendar.currentCalendar().dateByAddingComponents(
+            periodComponents,
+            toDate: NSDate(),
+            options: [])!
+        return then
     }
 
 }

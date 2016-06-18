@@ -12,6 +12,12 @@ import CoreData
  History view controller to display the history objects from core data.
  */
 
+extension MainViewController {
+    var appDelegate:AppDelegate {
+        return UIApplication.sharedApplication().delegate as! AppDelegate
+    }
+}
+
 class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     
@@ -351,6 +357,11 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      */
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
+            var historyToSubtract = fetchController.objectAtIndexPath(indexPath) as! History
+           MainViewController().calculateDeletedDurationForToday(historyToSubtract)
+           
+            
+            /*
             var historyToDelete = fetchController.objectAtIndexPath(indexPath)
             var todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
             var totalDuration = MainViewController().calculateTotalDurationForToday()
@@ -366,6 +377,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             CoreDataHandler.sharedInstance.deleteObject(historyToDelete as! NSManagedObject)
            // MainViewController.totalDuration = totalDuration
             CoreDataHandler.sharedInstance.saveContext()
+ */
             
         }
     }

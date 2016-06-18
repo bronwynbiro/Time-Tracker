@@ -66,7 +66,7 @@ class CoreDataHandler: NSObject {
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             
-            dict[NSUnderlyingErrorKey] = error as NSError
+            dict[NSUnderlyingErrorKey] = error as! NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -213,6 +213,40 @@ class CoreDataHandler: NSObject {
         fetchRequest.predicate = predicate
         
         return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
+    }
+    
+    
+    func fetchCoreDataForWeekActivities() -> [History] {
+        let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
+        fetchRequest.entity = entityDescription
+        
+        let dateDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
+        fetchRequest.sortDescriptors = [dateDescriptor]
+        
+        let startDate = NSDate.dateSevenDaysAgo()
+        let endDate = NSDate.dateByMovingToEndOfDay()
+        let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@)", startDate, endDate)
+        fetchRequest.predicate = predicate
+        
+        return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
+        print(fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
+    }
+    func fetchCoreDataForMonthActivities() -> [History] {
+        let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
+        fetchRequest.entity = entityDescription
+        
+        let dateDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
+        fetchRequest.sortDescriptors = [dateDescriptor]
+        
+        let startDate = NSDate.dateMonthAgo()
+        let endDate = NSDate.dateByMovingToEndOfDay()
+        let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@)", startDate, endDate)
+        fetchRequest.predicate = predicate
+        
+        return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
+        print(fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
     }
     
     /**

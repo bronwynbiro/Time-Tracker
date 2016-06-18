@@ -185,7 +185,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      */
     func calculateTotalDurationForToday() -> NSInteger {
         var sumOfDuration = 0
-        if todaysActivitiesArray.count >= 1 {
+        if todaysActivitiesArray.count > 0 {
         for history in todaysActivitiesArray {
             sumOfDuration += (history.duration?.integerValue)!
             }
@@ -194,6 +194,24 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             sumOfDuration = 0
         }
         return sumOfDuration
+    }
+    
+    func calculateDeletedDurationForToday(historyToSubtract: History?) -> NSInteger {
+        var todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
+        var totalDuration = calculateTotalDurationForToday()
+        if todaysActivitiesArray.count < 1 {
+            totalDuration = 0
+        }
+        else {
+            totalDuration = totalDuration - Int(historyToSubtract!.duration!)
+        }
+        print(todaysActivitiesArray)
+        print(totalDuration)
+        CoreDataHandler.sharedInstance.deleteObject(historyToSubtract as! NSManagedObject)
+        CoreDataHandler.sharedInstance.saveContext()
+        
+        return totalDuration
+        
     }
     
     /**
@@ -257,7 +275,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      */
     func loadCoreDataEntities() {
         todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
-        if todaysActivitiesArray.count >= 1 {
+        if todaysActivitiesArray.count > 0 {
             totalduration = calculateTotalDurationForToday()
         }
         tableView.reloadData()
@@ -287,7 +305,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      */
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! HistoryCell
-        if todaysActivitiesArray.count >= 1 {
+        if todaysActivitiesArray.count > 0 {
         var history = todaysActivitiesArray[indexPath.row]
         print(todaysActivitiesArray)
             print(history)
