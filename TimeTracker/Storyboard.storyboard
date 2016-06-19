@@ -45,6 +45,7 @@
                                 <state key="highlighted" backgroundImage="start_button_pressed_state"/>
                                 <connections>
                                     <action selector="startPauseActivity" destination="DDr-IG-ZBL" eventType="touchUpInside" id="RIW-aA-BlP"/>
+                                    <segue destination="Ofj-Y0-Fxh" kind="show" identifier="showActivities" id="0s2-gO-TfC"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMP-q0-IdO">
@@ -369,7 +370,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OBw-bS-S88" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="P60-5H-jlZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2870" y="1041"/>
+            <point key="canvasLocation" x="1682" y="-243"/>
         </scene>
         <!--History View Controller-->
         <scene sceneID="PVc-Ia-p4u">
@@ -380,19 +381,19 @@
                         <viewControllerLayoutGuide type="bottom" id="m2I-Ra-Z5X"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oM2-u7-FH2">
-                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lT4-TL-FQ3">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="HistoryCell" rowHeight="72" id="noh-WV-dYx" customClass="HistoryCell" customModule="TimeTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="22" width="414" height="72"/>
+                                        <rect key="frame" x="0.0" y="22" width="600" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="noh-WV-dYx" id="jol-Yd-GrM">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="71"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="71"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Placeholder" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="fWv-wU-aDT">
@@ -442,7 +443,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You have no history items" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="p3t-aS-p0a">
-                                <rect key="frame" x="116" y="327" width="184" height="19"/>
+                                <rect key="frame" x="116" y="259" width="184" height="19"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -473,6 +474,64 @@
             </objects>
             <point key="canvasLocation" x="727" y="1215"/>
         </scene>
+        <!--Progress-->
+        <scene sceneID="sXe-qh-G1g">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wVo-Cj-lLT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="22o-dN-ldG" customClass="ProgressViewController" customModule="TimeTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="umd-gH-cVc"/>
+                        <viewControllerLayoutGuide type="bottom" id="JB9-ve-XgM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="itq-m2-Hig">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixW-Gx-sBJ">
+                                <rect key="frame" x="13" y="20" width="124" height="32"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <state key="normal" title="Daily "/>
+                                <connections>
+                                    <action selector="calculateTodaysActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="9d7-Su-j3y"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9m-d5-QVV">
+                                <rect key="frame" x="145" y="20" width="124" height="32"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <state key="normal" title="Weekly"/>
+                                <connections>
+                                    <action selector="calculateWeeklyActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="r30-SD-L3s"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-ch-QhI">
+                                <rect key="frame" x="277" y="20" width="124" height="32"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <state key="normal" title="Monthly"/>
+                                <connections>
+                                    <action selector="calculateMonthlyActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="rac-oC-8I6"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuW-g3-Lum" customClass="ProgressViewController">
+                                <rect key="frame" x="20" y="69" width="374" height="605"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Progress" id="oFI-BV-3Hc"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="dailyButton" destination="ixW-Gx-sBJ" id="Rqs-hC-fBn"/>
+                        <outlet property="monthlyButton" destination="Nye-ch-QhI" id="zhv-A4-qJj"/>
+                        <outlet property="testLabel" destination="kuW-g3-Lum" id="Lv3-GB-iAK"/>
+                        <outlet property="weeklyButton" destination="P9m-d5-QVV" id="6mj-c3-OhO"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1409" y="1534"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="zLG-tR-YMw">
             <objects>
@@ -486,6 +545,7 @@
                         <segue destination="DDr-IG-ZBL" kind="relationship" relationship="viewControllers" id="f9P-fw-8yd"/>
                         <segue destination="Ofj-Y0-Fxh" kind="relationship" relationship="viewControllers" id="zJk-CH-Vzd"/>
                         <segue destination="CsW-RX-veS" kind="relationship" relationship="viewControllers" id="0Eq-cS-ZeE"/>
+                        <segue destination="22o-dN-ldG" kind="relationship" relationship="viewControllers" id="U6G-sC-Pbu"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F29-ao-yxN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -504,6 +564,7 @@
         <image name="stop_buttonpressed_state" width="72" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sWe-Rv-Bzb"/>
+        <segue reference="zJk-CH-Vzd"/>
+        <segue reference="0Eq-cS-ZeE"/>
     </inferredMetricsTieBreakers>
 </document>

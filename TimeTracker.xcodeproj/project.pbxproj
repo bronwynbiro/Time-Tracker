@@ -29,6 +29,7 @@
 		56A6DABA1BCF8BD000A80680 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A6DAB91BCF8BD000A80680 /* Images.xcassets */; };
 		56A6DABF1BCFDE2C00A80680 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DABE1BCFDE2C00A80680 /* HistoryViewController.swift */; };
 		955118FE1CEFE334009E004D /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955118FD1CEFE334009E004D /* EditViewController.swift */; };
+		958012C11D165EF9000946F6 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958012C01D165EF9000946F6 /* ProgressViewController.swift */; };
 		95B56B891CE37D3800D6B89E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B56B881CE37D3800D6B89E /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		56A6DAB91BCF8BD000A80680 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		56A6DABE1BCFDE2C00A80680 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		955118FD1CEFE334009E004D /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		958012C01D165EF9000946F6 /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		95B56B881CE37D3800D6B89E /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderView.swift; path = ../viewcontrollers/HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +151,7 @@
 				56A6DAB11BCF76F800A80680 /* DefaultNavigationController.swift */,
 				56A6DAB71BCF8B3700A80680 /* MainViewController.swift */,
 				56A6DAB51BCF875200A80680 /* ActivityListViewController.swift */,
+				958012C01D165EF9000946F6 /* ProgressViewController.swift */,
 				56A6DABE1BCFDE2C00A80680 /* HistoryViewController.swift */,
 				955118FD1CEFE334009E004D /* EditViewController.swift */,
 				56A6DA931BCF65DD00A80680 /* Views */,
@@ -256,6 +259,7 @@
 				56A6DAA61BCF6F8600A80680 /* StringHelper.swift in Sources */,
 				56A6DAA01BCF691300A80680 /* History+CoreDataProperties.swift in Sources */,
 				56A6DAA31BCF6C2F00A80680 /* NSDateHelper.swift in Sources */,
+				958012C11D165EF9000946F6 /* ProgressViewController.swift in Sources */,
 				56A6DA801BCF655B00A80680 /* AppDelegate.swift in Sources */,
 				56A6DABF1BCFDE2C00A80680 /* HistoryViewController.swift in Sources */,
 				56A6DA961BCF65FF00A80680 /* CoreDataHandler.swift in Sources */,
@@ -368,7 +372,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bronwynbiro.TimeTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -382,7 +386,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bronwynbiro.TimeTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
