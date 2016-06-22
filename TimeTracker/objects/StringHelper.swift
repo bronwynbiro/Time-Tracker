@@ -21,9 +21,7 @@ extension NSString {
     */
     class func createDurationStringFromDuration(duration: Double) -> String {
         let formatter = NSNumberFormatter()
-        if duration < 2 {
-        formatter.minimumIntegerDigits = 1
-        }
+        formatter.minimumIntegerDigits = 2
 
         let minutes = UInt32((duration / 60) % 60)
         let hours = UInt32((duration / 3600))
