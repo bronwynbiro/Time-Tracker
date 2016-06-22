@@ -255,6 +255,7 @@
                                 </state>
                                 <connections>
                                     <action selector="updateCellTime:" destination="JgR-CG-CGu" eventType="touchUpInside" id="EJE-B2-u0X"/>
+                                    <segue destination="4ji-3K-meo" kind="presentation" id="Sei-f1-Bnl"/>
                                 </connections>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Screen Shot 2016-05-08 at 4.19.26 PM" translatesAutoresizingMaskIntoConstraints="NO" id="ayr-fo-Cc1">
@@ -510,9 +511,9 @@
                                     <action selector="calculateMonthlyActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="rac-oC-8I6"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuW-g3-Lum" customClass="ProgressViewController">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="none" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="kuW-g3-Lum" customClass="ProgressViewController">
                                 <rect key="frame" x="20" y="69" width="374" height="605"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -564,7 +565,7 @@
         <image name="stop_buttonpressed_state" width="72" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zJk-CH-Vzd"/>
         <segue reference="0Eq-cS-ZeE"/>
+        <segue reference="zJk-CH-Vzd"/>
     </inferredMetricsTieBreakers>
 </document>
