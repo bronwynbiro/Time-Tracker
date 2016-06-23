@@ -477,7 +477,6 @@
         <!--Progress-->
         <scene sceneID="sXe-qh-G1g">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wVo-Cj-lLT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="22o-dN-ldG" customClass="ProgressViewController" customModule="TimeTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="umd-gH-cVc"/>
@@ -529,6 +528,7 @@
                         <outlet property="weeklyButton" destination="P9m-d5-QVV" id="6mj-c3-OhO"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wVo-Cj-lLT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1409" y="1534"/>
         </scene>
