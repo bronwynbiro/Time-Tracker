@@ -153,7 +153,7 @@ class CoreDataHandler: NSObject {
      - parameter endDate:   when it was finished
      - parameter duration:  duration of the activity
      */
-
+    
     func updateHistory(name: String, startDate: NSDate, endDate: NSDate, duration: NSInteger, PassPath: NSIndexPath, PassHistory: History) {
         //    let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
         let history = PassHistory
@@ -245,8 +245,9 @@ class CoreDataHandler: NSObject {
         let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@)", startDate, endDate)
         fetchRequest.predicate = predicate
         
+        filterResults("lift")
+        
         return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
-        print(fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
     }
     
     /**
@@ -260,7 +261,6 @@ class CoreDataHandler: NSObject {
         
         let nameDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [nameDescriptor]
-        
         return (fetchCoreDataWithFetchRequest(fetchRequest) as! [Activity])
     }
     
@@ -278,6 +278,21 @@ class CoreDataHandler: NSObject {
         }
         
         return nil
+    }
+    
+    func filterResults(i: String)-> [History] {
+        var activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
+        // for activity in activitiesArray {
+        let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
+        fetchRequest.entity = entityDescription
+        
+        let startDate = NSDate.dateMonthAgo()
+        let endDate = NSDate.dateByMovingToEndOfDay()
+        let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@) AND (name = %@)", startDate, endDate, i)
+        fetchRequest.predicate = predicate
+      //  fetchRequest.resultType = .DictionaryResultType
+        return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
     }
     
     /**
