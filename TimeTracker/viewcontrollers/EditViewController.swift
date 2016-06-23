@@ -14,7 +14,6 @@ extension NSDate
         let dateStringFormatter = NSDateFormatter()
         dateStringFormatter.dateFormat = "hh:mm"
         dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        //MARK: switch to date from old??
         let d = dateStringFormatter.dateFromString(dateString)!
         self.init(timeInterval:0, sinceDate:d)
     }
@@ -28,7 +27,6 @@ var fetchController: NSFetchedResultsController = {
     fetchRequest.sortDescriptors = [nameDescriptor]
     
     let fetchedController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext, sectionNameKeyPath: "saveTime", cacheName: nil)
-    //fetchedController.delegate = self
     return fetchedController
 }()
 

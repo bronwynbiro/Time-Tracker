@@ -511,12 +511,21 @@
                                     <action selector="calculateMonthlyActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="rac-oC-8I6"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="none" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="kuW-g3-Lum" customClass="ProgressViewController">
-                                <rect key="frame" x="20" y="69" width="374" height="605"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jkf-JL-vog">
+                                <rect key="frame" x="87" y="183" width="241" height="119"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NwB-f0-Fte">
+                                <rect key="frame" x="122" y="103" width="171" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ITw-Tk-Ttx">
+                                <rect key="frame" x="87" y="336" width="241" height="119"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -524,9 +533,11 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="dailyButton" destination="ixW-Gx-sBJ" id="Rqs-hC-fBn"/>
+                        <outlet property="liftText" destination="Jkf-JL-vog" id="5dU-ZY-GzH"/>
                         <outlet property="monthlyButton" destination="Nye-ch-QhI" id="zhv-A4-qJj"/>
-                        <outlet property="testLabel" destination="kuW-g3-Lum" id="Lv3-GB-iAK"/>
+                        <outlet property="testLabel" destination="NwB-f0-Fte" id="MUC-Ci-Rg0"/>
                         <outlet property="weeklyButton" destination="P9m-d5-QVV" id="6mj-c3-OhO"/>
+                        <outlet property="workText" destination="ITw-Tk-Ttx" id="0za-cm-r2K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVo-Cj-lLT" userLabel="First Responder" sceneMemberID="firstResponder"/>

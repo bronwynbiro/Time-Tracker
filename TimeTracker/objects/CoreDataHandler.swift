@@ -291,7 +291,7 @@ class CoreDataHandler: NSObject {
         let endDate = NSDate.dateByMovingToEndOfDay()
         let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@) AND (name = %@)", startDate, endDate, i)
         fetchRequest.predicate = predicate
-        fetchRequest.resultType = .DictionaryResultType
+      //  fetchRequest.resultType = .DictionaryResultType
         return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
     }
     

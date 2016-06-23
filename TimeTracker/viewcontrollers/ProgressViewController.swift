@@ -14,10 +14,12 @@ import CoreData
 
 //class ProgressViewController: UIViewController, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 class ProgressViewController: UIViewController {
+    @IBOutlet weak var testLabel: UITextField!
     @IBOutlet weak var dailyButton: UIButton!
     @IBOutlet weak var weeklyButton: UIButton!
     @IBOutlet weak var monthlyButton: UIButton!
-    @IBOutlet weak var testLabel: UITextField!
+    @IBOutlet weak var workText: UITextField!
+    @IBOutlet weak var liftText: UITextField!
     
     @IBAction func calculateTodaysActivities(sender: UIButton) {
         var todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
@@ -43,12 +45,48 @@ class ProgressViewController: UIViewController {
     
     @IBAction func calculateMonthlyActivities(sender: UIButton) {
         var monthActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForMonthActivities()
-        var sumOfMonth = 0
+        var sumOfMonth: Double = 0
         if monthActivitiesArray.count > 0 {
             for history in monthActivitiesArray {
-                sumOfMonth += (history.duration?.integerValue)!
+                sumOfMonth += (history.duration?.doubleValue)!
+            }
+            
+        }
+        testLabel.text = "\(NSString.createDurationStringFromDuration(Double(sumOfMonth)))"
+        var namesArray = [String]()
+        for histname in monthActivitiesArray{
+            namesArray.insert(histname.name!, atIndex: 0)
+        }
+        var percentArray = [String]()
+    
+        let unique = Array(Set(namesArray))
+       
+        var sum: Double = 0
+        var percentage: Double = 0
+        
+        for i in unique.indices{
+            var activArr = CoreDataHandler.sharedInstance.filterResults(unique[i])
+            var uniqueActivArr = Array(Set(activArr))
+            sum = 0
+        for myObj in uniqueActivArr {
+            if myObj.name == "lift" {
+                sum += (myObj.duration?.doubleValue)!
+                percentage = (sum / Double(sumOfMonth))*100
+                print("\(unique[i]): percent \(percentage)")
+                liftText.text = "Percentage of \(unique[i]): \(round(percentage))%)"
+            }
+            else {
+                sum += (myObj.duration?.doubleValue)!
+                percentage = (sum / Double(sumOfMonth))*100
+                print("\(unique[i]): percent \(percentage)")
+                workText.text = "Percentage of \(unique[i]): \(round(percentage))%)"
+                
+            }
             }
         }
+    }
+    
+        /*
         var sumLift: Double = 0
         for myObj in monthActivitiesArray where myObj.name! == "lift" {
             sumLift += (myObj.duration?.doubleValue)!
@@ -66,7 +104,7 @@ class ProgressViewController: UIViewController {
         
         print("lift", sumLift)
         print("Month", sumOfMonth)
-    }
+ */
     
     
     
