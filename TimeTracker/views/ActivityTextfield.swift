@@ -50,10 +50,10 @@ class ActivityTextfield: UITextField {
         contentVerticalAlignment = .Center
         leftViewMode = .Always
         leftView = self.leftViewForTextField()
-        layer.borderColor = UIColor.blackColor().CGColor
+        layer.borderColor = color.purple().CGColor
         layer.borderWidth = 1.0
         layer.cornerRadius = 2.0
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = color.pink()
     }
 
     /**

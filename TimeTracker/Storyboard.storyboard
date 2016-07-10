@@ -255,7 +255,6 @@
                                 </state>
                                 <connections>
                                     <action selector="updateCellTime:" destination="JgR-CG-CGu" eventType="touchUpInside" id="EJE-B2-u0X"/>
-                                    <segue destination="4ji-3K-meo" kind="presentation" id="Sei-f1-Bnl"/>
                                 </connections>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Screen Shot 2016-05-08 at 4.19.26 PM" translatesAutoresizingMaskIntoConstraints="NO" id="ayr-fo-Cc1">
@@ -489,7 +488,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixW-Gx-sBJ">
                                 <rect key="frame" x="13" y="20" width="124" height="32"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <state key="normal" title="Daily "/>
                                 <connections>
                                     <action selector="calculateTodaysActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="9d7-Su-j3y"/>
@@ -497,7 +496,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9m-d5-QVV">
                                 <rect key="frame" x="145" y="20" width="124" height="32"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <state key="normal" title="Weekly"/>
                                 <connections>
                                     <action selector="calculateWeeklyActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="r30-SD-L3s"/>
@@ -505,27 +504,18 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-ch-QhI">
                                 <rect key="frame" x="277" y="20" width="124" height="32"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <state key="normal" title="Monthly"/>
                                 <connections>
                                     <action selector="calculateMonthlyActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="rac-oC-8I6"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jkf-JL-vog">
-                                <rect key="frame" x="87" y="183" width="241" height="119"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NwB-f0-Fte">
-                                <rect key="frame" x="122" y="103" width="171" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ITw-Tk-Ttx">
-                                <rect key="frame" x="87" y="336" width="241" height="119"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuW-g3-Lum" customClass="ProgressViewController">
+                                <rect key="frame" x="20" y="69" width="374" height="605"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -533,11 +523,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="dailyButton" destination="ixW-Gx-sBJ" id="Rqs-hC-fBn"/>
-                        <outlet property="liftText" destination="Jkf-JL-vog" id="5dU-ZY-GzH"/>
                         <outlet property="monthlyButton" destination="Nye-ch-QhI" id="zhv-A4-qJj"/>
-                        <outlet property="testLabel" destination="NwB-f0-Fte" id="MUC-Ci-Rg0"/>
+                        <outlet property="testLabel" destination="kuW-g3-Lum" id="Lv3-GB-iAK"/>
                         <outlet property="weeklyButton" destination="P9m-d5-QVV" id="6mj-c3-OhO"/>
-                        <outlet property="workText" destination="ITw-Tk-Ttx" id="0za-cm-r2K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVo-Cj-lLT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -576,7 +564,7 @@
         <image name="stop_buttonpressed_state" width="72" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0Eq-cS-ZeE"/>
         <segue reference="zJk-CH-Vzd"/>
+        <segue reference="0Eq-cS-ZeE"/>
     </inferredMetricsTieBreakers>
 </document>

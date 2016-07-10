@@ -6,12 +6,12 @@
 import Foundation
 
 extension NSDate {
-    
+
     /**
-     Returns an NSDate object which represents the start of the day. (like: 0:00:00 hour)
-     
-     - returns: converted date
-     */
+    Returns an NSDate object which represents the start of the day. (like: 0:00:00 hour)
+
+    - returns: converted date
+    */
     class func dateByMovingToBeginningOfDay() -> NSDate {
         let components: NSDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: NSDate())
         components.hour = 0
@@ -19,12 +19,12 @@ extension NSDate {
         components.second = 0
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
-    
+
     /**
-     Returns an NSDate object which represents the end of the day. (like: 23:59:59 hour)
-     
-     - returns: converted date
-     */
+    Returns an NSDate object which represents the end of the day. (like: 23:59:59 hour)
+
+    - returns: converted date
+    */
     class func dateByMovingToEndOfDay() -> NSDate {
         let components: NSDateComponents = NSCalendar.currentCalendar().components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second], fromDate: NSDate())
         components.hour = 23
@@ -52,5 +52,5 @@ extension NSDate {
             options: [])!
         return then
     }
-    
+
 }

@@ -36,7 +36,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         fetchRequest.sortDescriptors = [nameDescriptor]
         
         let fetchedController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext, sectionNameKeyPath: "saveTime", cacheName: nil)
-        fetchedController.delegate = self
+       fetchedController.delegate = self
         return fetchedController
     }()
     
@@ -358,26 +358,26 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             var historyToSubtract = fetchController.objectAtIndexPath(indexPath) as! History
-            MainViewController().calculateDeletedDurationForToday(historyToSubtract)
-            
+           MainViewController().calculateDeletedDurationForToday(historyToSubtract)
+           
             
             /*
-             var historyToDelete = fetchController.objectAtIndexPath(indexPath)
-             var todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
-             var totalDuration = MainViewController().calculateTotalDurationForToday()
-             var historyDel = fetchController.objectAtIndexPath(indexPath) as! History
-             if todaysActivitiesArray.count < 1 {
-             totalDuration = 0
-             }
-             else {
-             totalDuration = totalDuration - Int(historyDel.duration!)
-             }
-             print(todaysActivitiesArray)
-             print(totalDuration)
-             CoreDataHandler.sharedInstance.deleteObject(historyToDelete as! NSManagedObject)
-             // MainViewController.totalDuration = totalDuration
-             CoreDataHandler.sharedInstance.saveContext()
-             */
+            var historyToDelete = fetchController.objectAtIndexPath(indexPath)
+            var todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
+            var totalDuration = MainViewController().calculateTotalDurationForToday()
+            var historyDel = fetchController.objectAtIndexPath(indexPath) as! History
+            if todaysActivitiesArray.count < 1 {
+                totalDuration = 0
+            }
+            else {
+            totalDuration = totalDuration - Int(historyDel.duration!)
+            }
+            print(todaysActivitiesArray)
+            print(totalDuration)
+            CoreDataHandler.sharedInstance.deleteObject(historyToDelete as! NSManagedObject)
+           // MainViewController.totalDuration = totalDuration
+            CoreDataHandler.sharedInstance.saveContext()
+ */
             
         }
     }
@@ -444,5 +444,5 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             nextView.choosenActivity = selectedActivity()
             
         }
-    }
+}
 }

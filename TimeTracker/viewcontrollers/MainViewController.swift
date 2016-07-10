@@ -186,8 +186,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func calculateTotalDurationForToday() -> NSInteger {
         var sumOfDuration = 0
         if todaysActivitiesArray.count > 0 {
-            for history in todaysActivitiesArray {
-                sumOfDuration += (history.duration?.integerValue)!
+        for history in todaysActivitiesArray {
+            sumOfDuration += (history.duration?.integerValue)!
             }
         }
         else {
@@ -293,7 +293,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let fetchedController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext, sectionNameKeyPath: "saveTime", cacheName: nil)
         return fetchedController
     }()
-    
+
     
     
     // MARK: tableView methods
@@ -306,14 +306,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! HistoryCell
         if todaysActivitiesArray.count > 0 {
-            var history = todaysActivitiesArray[indexPath.row]
-            print(todaysActivitiesArray)
+        var history = todaysActivitiesArray[indexPath.row]
+        print(todaysActivitiesArray)
             print(history)
-            cell.nameLabel.text = "\(history.name!)"
-            cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
-            cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
-            // history.nsmanagedobjectcontextobjectsdidchangenotification
-            // NSObject.didchange
+        cell.nameLabel.text = "\(history.name!)"
+        cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
+        cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
+       // history.nsmanagedobjectcontextobjectsdidchangenotification
+       // NSObject.didchange
         }
         return cell
     }
