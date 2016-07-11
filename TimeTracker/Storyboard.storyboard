@@ -475,15 +475,15 @@
             </objects>
             <point key="canvasLocation" x="727" y="1215"/>
         </scene>
-        <!--Progress View Controller-->
+        <!--Bar Chart View-->
         <scene sceneID="sXe-qh-G1g">
             <objects>
-                <viewController id="22o-dN-ldG" userLabel="Progress View Controller" customClass="ProgressViewController" customModule="TimeTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="22o-dN-ldG" userLabel="Bar Chart View" customClass="progressViewController" customModule="TimeTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="umd-gH-cVc"/>
                         <viewControllerLayoutGuide type="bottom" id="JB9-ve-XgM"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="itq-m2-Hig">
+                    <view key="view" contentMode="scaleToFill" id="itq-m2-Hig" customClass="BarChartView" customModule="Charts">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -496,7 +496,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="umB-gF-NVF">
-                                <rect key="frame" x="0.0" y="324" width="414" height="522"/>
+                                <rect key="frame" x="0.0" y="456" width="414" height="390"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -552,9 +552,6 @@
                                     <action selector="calculateMonthlyActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="rac-oC-8I6"/>
                                 </connections>
                             </button>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Screen Shot 2016-05-08 at 4.19.26 PM" translatesAutoresizingMaskIntoConstraints="NO" id="EL0-z6-kjw">
-                                <rect key="frame" x="-7" y="60" width="421" height="256"/>
-                            </imageView>
                             <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9m-d5-QVV">
                                 <rect key="frame" x="145" y="20" width="124" height="32"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -569,6 +566,7 @@
                     <tabBarItem key="tabBarItem" title="Progress " id="oFI-BV-3Hc"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="barChartView" destination="itq-m2-Hig" id="abl-tQ-Th8"/>
                         <outlet property="dailyButton" destination="ixW-Gx-sBJ" id="Rqs-hC-fBn"/>
                         <outlet property="monthlyButton" destination="Nye-ch-QhI" id="zhv-A4-qJj"/>
                         <outlet property="tableView" destination="umB-gF-NVF" id="TOp-7k-ED9"/>
@@ -577,7 +575,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVo-Cj-lLT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1403" y="1506"/>
+            <point key="canvasLocation" x="1429" y="1426"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="zLG-tR-YMw">

@@ -1,24 +1,18 @@
-//
-//  ProgressViewController.swift
-//  TimeTracker
-
-//
-//  ActivityListViewController.swift
-//  TimeTracker
-//
-
-
 import UIKit
 import Foundation
 import CoreData
+import Charts
 
-class ProgressViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class progressViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 //class ProgressViewController: UIViewController {
     @IBOutlet weak var dailyButton: UIButton!
     @IBOutlet weak var weeklyButton: UIButton!
     @IBOutlet weak var monthlyButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     var numberOfRows = ["test1"]
+    var percentArray = [Double]()
+    var orderedNamesArray = [String]()
+    @IBOutlet var pieChartView: PieChartView!
     
     override func viewDidLoad() {
         title = "Progress"
@@ -42,6 +36,8 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
 
     
     @IBAction func calculateTodaysActivities(sender: UIButton) {
+        percentArray.removeAll()
+        orderedNamesArray.removeAll()
         let todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
         numberOfRows.removeAll()
         calculateRows(todaysActivitiesArray)
@@ -56,12 +52,12 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
         for histname in todaysActivitiesArray{
             namesArray.insert(histname.name!, atIndex: 0)
         }
-        let percentArray = [String]()
         
         let unique = Array(Set(namesArray))
         
         var sum: Double = 0
         var percentage: Double = 0
+        var nameString: String = " "
         
         for i in unique.indices{
             let activArr = CoreDataHandler.sharedInstance.filterResultsDay(unique[i])
@@ -74,15 +70,24 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
                 var timeString = "\(NSString.createDurationStringFromDuration(Double(sum)))"
                 percentage = (sum / Double(sumOfDay))*100
                 var percentString = "\(round(percentage))%"
-                var nameString = "\(unique[i])"
+                nameString = "\(unique[i])"
                 cell.percentLabel.text = "\(round(percentage))%"
                 configureCell(cell as! ProgressCell, percentage: percentString, time: timeString, name: nameString)
             }
+            percentArray.insert(percentage, atIndex: 0)
+            orderedNamesArray.insert(nameString, atIndex: 0)
         }
+        print("names array ordered", orderedNamesArray)
+        print("percentArr", percentArray)
+        calculateRows(todaysActivitiesArray)
         self.tableView.reloadData()
+        setChart(orderedNamesArray, values: percentArray)
     }
-    
+ 
+
     @IBAction func calculateWeeklyActivities(sender: UIButton) {
+        percentArray.removeAll()
+        orderedNamesArray.removeAll()
         var weekActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForWeekActivities()
         numberOfRows.removeAll()
         calculateRows(weekActivitiesArray)
@@ -102,12 +107,13 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
         
         var sum: Double = 0
         var percentage: Double = 0
+        var nameString: String = ""
+        
         if unique.count > 0 {
             for i in unique.indices{
                 let activArr = CoreDataHandler.sharedInstance.filterResultsWeek(unique[i])
                 let uniqueActivArr = Array(Set(activArr))
                 sum = 0
-                if uniqueActivArr.count > 0 {
             for myObj in uniqueActivArr {
                 self.tableView.reloadData()
                 let testPath = NSIndexPath(forRow: i, inSection: 0)
@@ -116,18 +122,26 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
                 var timeString = "\(NSString.createDurationStringFromDuration(Double(sum)))"
                 percentage = (sum / Double(sumOfWeek))*100
                 let percentString = "\(round(percentage))%"
-                let nameString = "\(unique[i])"
+                nameString = "\(unique[i])"
                 cell.percentLabel.text = "\(round(percentage))%"
                 configureCell(cell as! ProgressCell, percentage: percentString, time: timeString, name: nameString)
-                    }
                 }
+                percentArray.insert(percentage, atIndex: 0)
+                orderedNamesArray.insert(nameString, atIndex: 0)
             }
-        }
+            print("names array ordered", orderedNamesArray)
+            print("percentArr", percentArray)
         calculateRows(weekActivitiesArray)
         self.tableView.reloadData()
+        setChart(orderedNamesArray, values: percentArray)
+
+        }
     }
+    
 
     @IBAction func calculateMonthlyActivities(sender: UIButton) {
+        percentArray.removeAll()
+        orderedNamesArray.removeAll()
         var monthActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForMonthActivities()
         numberOfRows.removeAll()
         calculateRows(monthActivitiesArray)
@@ -144,12 +158,12 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
         for histname in monthActivitiesArray{
             namesArray.insert(histname.name!, atIndex: 0)
         }
-        var percentArray = [String]()
         
         let unique = Array(Set(namesArray))
         
         var sum: Double = 0
         var percentage: Double = 0
+        var nameString: String = ""
         
         for i in unique.indices{
             var activArr = CoreDataHandler.sharedInstance.filterResultsMonth(unique[i])
@@ -164,15 +178,20 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
                     var timeString = "\(NSString.createDurationStringFromDuration(Double(sum)))"
                     percentage = (sum / Double(sumOfMonth))*100
                     var percentString = "\(round(percentage))%"
-                    var nameString = "\(unique[i])"
+                    nameString = "\(unique[i])"
                     cell.percentLabel.text = "\(round(percentage))%"
                 self.tableView.reloadData()
                 configureCell(cell as! ProgressCell, percentage: percentString, time: timeString, name: nameString)
-                }
             }
+            percentArray.insert(percentage, atIndex: 0)
+            orderedNamesArray.insert(nameString, atIndex: 0)
+        }
+        print("names array ordered", orderedNamesArray)
+        print("percentArr", percentArray)
         calculateRows(monthActivitiesArray)
         self.tableView.reloadData()
-    }
+        setChart(orderedNamesArray, values: percentArray)
+        }
     
     func calculateRows(activitiesArray: [History]) -> Int {
         var sum = 0
@@ -207,6 +226,35 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.percentLabel.text = "\(percentage)"
         cell.timeLabel.text = "\(time)"
        /// cell.percentLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
-}
+    }
+
+    func setChart(dataPoints: [String], values: [Double]) {
+            var dataEntries: [ChartDataEntry] = []
+            
+            for i in 0..<dataPoints.count {
+                let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
+                dataEntries.append(dataEntry)
+            }
+            
+            let pieChartDataSet = PieChartDataSet(yVals: dataEntries, label: "Units Sold")
+            let pieChartData = PieChartData(xVals: dataPoints, dataSet: pieChartDataSet)
+            pieChartView.data = pieChartData
+        
+        var colors: [UIColor] = []
+        for i in 0..<dataPoints.count {
+            let purple = UIColor(red: 144/255, green: 19/255, blue: 254/255, alpha: 1)
+            colors.append(purple)
+            let lpurple = UIColor(red: 210/255, green: 128/255, blue: 240/255, alpha: 1)
+            colors.append(lpurple)
+            let green1 =  UIColor(red: 80/255, green: 227/255, blue: 194/255, alpha: 1)
+            colors.append(green1)
+            let blue = UIColor(red: 164/255, green: 249/255, blue: 242/255, alpha: 1)
+            colors.append(blue)
+            let blue2 = UIColor(red: 131/255, green: 222/255, blue: 252/255, alpha: 1)
+            colors.append(blue2)
+        }
+        
+        pieChartDataSet.colors = colors
+    }
 
 }
