@@ -10,12 +10,9 @@ import UIKit
 
 class ActivityListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NewActivityDelegate {
 
-    /// /// table view to display cells
     @IBOutlet weak var tableView: UITableView!
-    /// /// a label to display if there are no activities
     @IBOutlet weak var noActivitiesLabel: UILabel!
-
-    /// activity array to hold all activities
+    @IBOutlet weak var addButton: UIButton!
     var activitiesArray: [Activity] = []
 
     /// custom fadeview to make unavailable to hit an activity while adding new one
@@ -91,7 +88,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     /**
         Slide down new activity view and change the barbutton item
     */
-    func addNewActivity() {
+    @IBAction func addNewActivity() {
         view.addSubview(newActivityView)
         newActivityView.slideViewDown()
         view.insertSubview(fadeView, belowSubview: newActivityView)

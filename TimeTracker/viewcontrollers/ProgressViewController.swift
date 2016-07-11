@@ -13,6 +13,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     var percentArray = [Double]()
     var orderedNamesArray = [String]()
     @IBOutlet var pieChartView: PieChartView!
+
     
     override func viewDidLoad() {
         title = "Progress"
@@ -82,6 +83,8 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         calculateRows(todaysActivitiesArray)
         self.tableView.reloadData()
         setChart(orderedNamesArray, values: percentArray)
+        let dayString = "\(NSString.createDurationStringFromDuration(Double(sumOfDay)))"
+        pieChartView.centerText = ("Total time: \(dayString)")
     }
  
 
@@ -134,6 +137,8 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         calculateRows(weekActivitiesArray)
         self.tableView.reloadData()
         setChart(orderedNamesArray, values: percentArray)
+        let weekString = "\(NSString.createDurationStringFromDuration(Double(sumOfWeek)))"
+        pieChartView.centerText = ("Total time: \(weekString)")
 
         }
     }
@@ -191,6 +196,8 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         calculateRows(monthActivitiesArray)
         self.tableView.reloadData()
         setChart(orderedNamesArray, values: percentArray)
+        let monthString = "\(NSString.createDurationStringFromDuration(Double(sumOfMonth)))"
+        pieChartView.centerText = ("Total time: \(monthString)")
         }
     
     func calculateRows(activitiesArray: [History]) -> Int {
@@ -227,34 +234,25 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.timeLabel.text = "\(time)"
        /// cell.percentLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
     }
-
-    func setChart(dataPoints: [String], values: [Double]) {
-            var dataEntries: [ChartDataEntry] = []
-            
-            for i in 0..<dataPoints.count {
-                let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
-                dataEntries.append(dataEntry)
-            }
-            
-            let pieChartDataSet = PieChartDataSet(yVals: dataEntries, label: "Units Sold")
-            let pieChartData = PieChartData(xVals: dataPoints, dataSet: pieChartDataSet)
-            pieChartView.data = pieChartData
+    
+func setChart(dataPoints: [String], values: [Double]) {
         
-        var colors: [UIColor] = []
+        var dataEntries: [ChartDataEntry] = []
+       // let pieChart = PieChart
         for i in 0..<dataPoints.count {
-            let purple = UIColor(red: 144/255, green: 19/255, blue: 254/255, alpha: 1)
-            colors.append(purple)
-            let lpurple = UIColor(red: 210/255, green: 128/255, blue: 240/255, alpha: 1)
-            colors.append(lpurple)
-            let green1 =  UIColor(red: 80/255, green: 227/255, blue: 194/255, alpha: 1)
-            colors.append(green1)
-            let blue = UIColor(red: 164/255, green: 249/255, blue: 242/255, alpha: 1)
-            colors.append(blue)
-            let blue2 = UIColor(red: 131/255, green: 222/255, blue: 252/255, alpha: 1)
-            colors.append(blue2)
+            let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
+            dataEntries.append(dataEntry)
         }
         
-        pieChartDataSet.colors = colors
-    }
+        let pieChartDataSet = PieChartDataSet(yVals: dataEntries, label: "")
+        let pieChartData = PieChartData(xVals: dataPoints, dataSet: pieChartDataSet)
+        pieChartView.data = pieChartData
 
+    pieChartView.drawSliceTextEnabled = true
+    
+        let colors = [UIColor(red: 80/255, green: 227/255, blue: 194/255, alpha: 1), UIColor(red: 164/255, green: 249/255, blue: 242/255, alpha: 1), UIColor(red: 210/255, green: 128/255, blue: 240/255, alpha: 1), UIColor(red: 131/255, green: 222/255, blue: 252/255, alpha: 1), UIColor(red: 144/255, green: 19/255, blue: 254/255, alpha: 1)]
+        
+        pieChartDataSet.colors = colors
+        
+    }
 }
