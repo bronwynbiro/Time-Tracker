@@ -117,7 +117,6 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
                 percentage = (sum / Double(sumOfWeek))*100
                 let percentString = "\(round(percentage))%"
                 let nameString = "\(unique[i])"
-                print("nameString")
                 cell.percentLabel.text = "\(round(percentage))%"
                 configureCell(cell as! ProgressCell, percentage: percentString, time: timeString, name: nameString)
                     }
@@ -176,9 +175,6 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func calculateRows(activitiesArray: [History]) -> Int {
-        //use month for max number of rows
-       // let TimeActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForMonthActivities()
-        print("entering calculaterows")
         var sum = 0
         for item in activitiesArray{
             numberOfRows.insert(item.name!, atIndex: 0)
@@ -186,7 +182,6 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
 
         let unique = Array(Set(numberOfRows))
         return unique.count
-        print("uniwue count: \(unique.count)")
     }
     
 
