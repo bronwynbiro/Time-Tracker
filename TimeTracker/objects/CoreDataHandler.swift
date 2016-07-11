@@ -232,6 +232,7 @@ class CoreDataHandler: NSObject {
         return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
         print(fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
     }
+    
     func fetchCoreDataForMonthActivities() -> [History] {
         let fetchRequest = NSFetchRequest()
         let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
@@ -245,7 +246,7 @@ class CoreDataHandler: NSObject {
         let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@)", startDate, endDate)
         fetchRequest.predicate = predicate
         
-        filterResults("lift")
+      //  filterResultsMonth("lift")
         
         return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
     }
@@ -280,7 +281,7 @@ class CoreDataHandler: NSObject {
         return nil
     }
     
-    func filterResults(i: String)-> [History] {
+    func filterResultsMonth(i: String)-> [History] {
         var activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
         // for activity in activitiesArray {
         let fetchRequest = NSFetchRequest()
@@ -294,6 +295,37 @@ class CoreDataHandler: NSObject {
         //  fetchRequest.resultType = .DictionaryResultType
         return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
     }
+    
+    func filterResultsWeek(i: String)-> [History] {
+        var activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
+        // for activity in activitiesArray {
+        let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
+        fetchRequest.entity = entityDescription
+        
+        let startDate = NSDate.dateSevenDaysAgo()
+        let endDate = NSDate.dateByMovingToEndOfDay()
+        let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@) AND (name = %@)", startDate, endDate, i)
+        fetchRequest.predicate = predicate
+        //  fetchRequest.resultType = .DictionaryResultType
+        return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
+    }
+    
+    func filterResultsDay(i: String)-> [History] {
+        var activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
+        // for activity in activitiesArray {
+        let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
+        fetchRequest.entity = entityDescription
+        
+        let startDate = NSDate.dateByMovingToBeginningOfDay()
+        let endDate = NSDate.dateByMovingToEndOfDay()
+        let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@) AND (name = %@)", startDate, endDate, i)
+        fetchRequest.predicate = predicate
+        //  fetchRequest.resultType = .DictionaryResultType
+        return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
+    }
+
     
     /**
      Delete a single Core Data object

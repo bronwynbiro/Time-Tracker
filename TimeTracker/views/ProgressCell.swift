@@ -13,6 +13,7 @@ import UIKit
 class ProgressCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     /**
      Customize the look of the cell
@@ -22,6 +23,7 @@ class ProgressCell: UITableViewCell {
         
         nameLabel.textColor = UIColor.blackColor()
         percentLabel.textColor = UIColor.blackColor()
+        timeLabel.textColor = UIColor.blackColor()
         backgroundColor = UIColor.whiteColor()
     }
     
