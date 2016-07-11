@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTracker/viewcontrollers/ProgressViewController.swift"
-            timestampString = "489889623.675382"
+            timestampString = "489894370.132772"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "calculateWeeklyActivities(_:)"
             landmarkType = "5">
             <Locations>
@@ -58,11 +58,11 @@
                   moduleName = "TimeTracker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bronwynbiro/Desktop/School/cmpt/Time-Tracker/Time-Tracker/TimeTracker/viewcontrollers/ProgressViewController.swift"
-                  timestampString = "489889776.333676"
+                  timestampString = "489897177.619054"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
                   offsetFromSymbolStart = "716">
                </Location>
                <Location
@@ -73,11 +73,11 @@
                   moduleName = "TimeTracker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bronwynbiro/Desktop/School/cmpt/Time-Tracker/Time-Tracker/TimeTracker/viewcontrollers/ProgressViewController.swift"
-                  timestampString = "489889776.333891"
+                  timestampString = "489897177.619285"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
                   offsetFromSymbolStart = "1542">
                </Location>
             </Locations>
@@ -90,27 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTracker/viewcontrollers/ProgressViewController.swift"
-            timestampString = "489889748.600727"
+            timestampString = "489894370.132772"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "calculateMonthlyActivities(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TimeTracker/viewcontrollers/ProgressViewController.swift"
-            timestampString = "489889623.675382"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "calculateMonthlyActivities(_:)"
             landmarkType = "5">
          </BreakpointContent>

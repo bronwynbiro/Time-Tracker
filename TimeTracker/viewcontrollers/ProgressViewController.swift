@@ -33,6 +33,7 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.delegate = self
         self.tableView.dataSource = self
         loadNormalState()
+        tableView.reloadData()
     }
     
     func loadNormalState() {
@@ -91,37 +92,54 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
             var uniqueActivArr = Array(Set(activArr))
             sum = 0
             for myObj in uniqueActivArr {
-                 var cell = tableView.dequeueReusableCellWithIdentifier("ProgressCell") as! ProgressCell
+                let testPath1 = NSIndexPath(forRow:0, inSection: 0)
+                 var cell1 = tableView.cellForRowAtIndexPath(testPath1) as! ProgressCell
                 if myObj.name == "lift" {
                     sum += (myObj.duration?.doubleValue)!
                     percentage = (sum / Double(sumOfMonth))*100
                     print("\(unique[i]): percent \(percentage)")
                     liftText.text = "Percentage of \(unique[i]): \(round(percentage))%"
+                    var percentString = "\(round(percentage))%"
+                    var nameString = "\(unique[i])"
+                    cell1.percentLabel.text = "\(round(percentage))%"
+                    configureCell(cell1 as! ProgressCell, percentage: percentString, name: nameString)
                 }
                 else {
-                     var cell = tableView.dequeueReusableCellWithIdentifier("ProgressCell") as! ProgressCell
+                let testPath = NSIndexPath(forRow:1, inSection: 0)
+                    var cell = tableView.cellForRowAtIndexPath(testPath) as! ProgressCell
                     sum += (myObj.duration?.doubleValue)!
                     percentage = (sum / Double(sumOfMonth))*100
                     print("\(unique[i]): percent \(percentage)")
                     workText.text = "Percentage of \(unique[i]): \(round(percentage))%"
-                    cell.nameLabel.text = "\(unique[i])"
-                    var percentString = "\(unique[i])"
+                    var nameString = "\(unique[i])"
+                    var percentString = "\(round(percentage))%"
                     cell.percentLabel.text = "\(round(percentage))%"
-                    let testPath = NSIndexPath(forRow:0, inSection: 1)
-                    configureCell(cell, indexPath: testPath, percentage: percentString)
-                    
+                    configureCell(cell as! ProgressCell, percentage: percentString, name: nameString)
                 }
             }
         }
+        tableView.reloadData()
+    }
+    
+    func calculateRows() -> Int {
+        let monthActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForMonthActivities()
+        var sum = 0
+        var namesArray = [String]()
+        for histname in monthActivitiesArray{
+            namesArray.insert(histname.name!, atIndex: 0)
+        }
+
+        let unique = Array(Set(namesArray))
+        return unique.count
     }
 
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return calculateRows()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ProgressCell", forIndexPath: indexPath) as! ProgressCell
-        //configureCell(cell, indexPath: indexPath)
+       // configureCell(cell, indexPath: indexPath)
         return cell
     }
     
@@ -129,10 +147,10 @@ class ProgressViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
-    func configureCell(cell: ProgressCell, indexPath: NSIndexPath, percentage: String!)  {
+    func configureCell(cell: ProgressCell, percentage: String!, name: String!)  {
         cell.backgroundColor = UIColor.whiteColor()
        // cell.nameLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
-        cell.nameLabel.text = "test"
+        cell.nameLabel.text = "\(name)"
         cell.percentLabel.text = "\(percentage)"
        /// cell.percentLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
 }
