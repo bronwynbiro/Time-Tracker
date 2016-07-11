@@ -7,10 +7,9 @@ This Swift iOS app allows users to track the hours spent on given activities. Us
 3. Solve bug with deleting the first history item </br>
 4. Clean up the UI and make it adaptive. </br>
 
-Below are some screenshots of the current state of the app. < /br>
+Below are some screenshots of the current state of the app. 
 
-![alt tag](https://raw.githubusercontent.com/bronwynbiro/time-tracker/master/home.png)
-![alt tag](https://raw.githubusercontent.com/bronwynbiro/time-tracker/master/edit.png)
-![alt tag](https://raw.githubusercontent.com/bronwynbiro/time-tracker/master/history.png)
-![alt tag](https://raw.githubusercontent.com/bronwynbiro/time-tracker/master/progress.png)
+![Homepage](https://raw.githubusercontent.com/bronwynbiro/time-tracker/master/main.png)
+![History](https://raw.githubusercontent.com/bronwynbiro/time-tracker/master/history.png)
+![Progress](https://raw.githubusercontent.com/bronwynbiro/time-tracker/master/progress.png)
 
