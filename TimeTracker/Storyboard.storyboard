@@ -475,10 +475,10 @@
             </objects>
             <point key="canvasLocation" x="727" y="1215"/>
         </scene>
-        <!--Progress -->
+        <!--Progress View Controller-->
         <scene sceneID="sXe-qh-G1g">
             <objects>
-                <viewController id="22o-dN-ldG" customClass="ProgressViewController" customModule="TimeTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="22o-dN-ldG" userLabel="Progress View Controller" customClass="ProgressViewController" customModule="TimeTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="umd-gH-cVc"/>
                         <viewControllerLayoutGuide type="bottom" id="JB9-ve-XgM"/>
@@ -488,14 +488,74 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixW-Gx-sBJ">
-                                <rect key="frame" x="13" y="20" width="124" height="32"/>
+                                <rect key="frame" x="0.0" y="20" width="124" height="32"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Daily "/>
                                 <connections>
                                     <action selector="calculateTodaysActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="9d7-Su-j3y"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9m-d5-QVV">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="umB-gF-NVF">
+                                <rect key="frame" x="0.0" y="324" width="414" height="522"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="ProgressCell" rowHeight="72" id="hqR-g7-dOc" userLabel="ProgressCell" customClass="ProgressCell" customModule="TimeTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="22" width="414" height="72"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hqR-g7-dOc" id="ZdA-HW-LOq">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="71"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="rHY-hE-5P8">
+                                                    <rect key="frame" x="21" y="-13" width="290" height="30"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Vw6-AF-41H" userLabel="Percentage Label">
+                                                    <rect key="frame" x="319" y="-3" width="84" height="24"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3x-i1-nnU">
+                                                    <rect key="frame" x="353" y="42" width="53" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="rHY-hE-5P8" firstAttribute="top" secondItem="ZdA-HW-LOq" secondAttribute="top" constant="10" id="baM-MB-7yV"/>
+                                                <constraint firstAttribute="trailing" secondItem="rHY-hE-5P8" secondAttribute="trailing" constant="15" id="mZo-bX-4Xj"/>
+                                                <constraint firstItem="rHY-hE-5P8" firstAttribute="leading" secondItem="ZdA-HW-LOq" secondAttribute="leading" constant="15" id="we5-1a-G8R"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="rHY-hE-5P8" id="lbL-FU-JnW"/>
+                                            <outlet property="percentLabel" destination="Vw6-AF-41H" id="oCJ-vY-MI1"/>
+                                            <outlet property="timeLabel" destination="E3x-i1-nnU" id="hI8-cG-vC3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="22o-dN-ldG" id="fV1-Ch-cWd"/>
+                                    <outlet property="delegate" destination="22o-dN-ldG" id="ICx-7J-Xg6"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-ch-QhI">
+                                <rect key="frame" x="290" y="20" width="124" height="32"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Monthly"/>
+                                <connections>
+                                    <action selector="calculateMonthlyActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="rac-oC-8I6"/>
+                                </connections>
+                            </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Screen Shot 2016-05-08 at 4.19.26 PM" translatesAutoresizingMaskIntoConstraints="NO" id="EL0-z6-kjw">
+                                <rect key="frame" x="-7" y="60" width="421" height="256"/>
+                            </imageView>
+                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9m-d5-QVV">
                                 <rect key="frame" x="145" y="20" width="124" height="32"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Weekly"/>
@@ -503,30 +563,6 @@
                                     <action selector="calculateWeeklyActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="r30-SD-L3s"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-ch-QhI">
-                                <rect key="frame" x="277" y="20" width="124" height="32"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Monthly"/>
-                                <connections>
-                                    <action selector="calculateMonthlyActivities:" destination="22o-dN-ldG" eventType="touchUpInside" id="rac-oC-8I6"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuW-g3-Lum" customClass="ProgressViewController">
-                                <rect key="frame" x="39" y="81" width="350" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Qt-u0-Ggn">
-                                <rect key="frame" x="86" y="367" width="242" height="215"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gbk-5g-8KO">
-                                <rect key="frame" x="86" y="158" width="242" height="159"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -534,16 +570,14 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="dailyButton" destination="ixW-Gx-sBJ" id="Rqs-hC-fBn"/>
-                        <outlet property="liftText" destination="2Qt-u0-Ggn" id="l9C-vn-yKS"/>
                         <outlet property="monthlyButton" destination="Nye-ch-QhI" id="zhv-A4-qJj"/>
-                        <outlet property="testLabel" destination="kuW-g3-Lum" id="Lv3-GB-iAK"/>
+                        <outlet property="tableView" destination="umB-gF-NVF" id="TOp-7k-ED9"/>
                         <outlet property="weeklyButton" destination="P9m-d5-QVV" id="6mj-c3-OhO"/>
-                        <outlet property="workText" destination="Gbk-5g-8KO" id="TQs-k2-Byc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVo-Cj-lLT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1409" y="1534"/>
+            <point key="canvasLocation" x="1403" y="1506"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="zLG-tR-YMw">

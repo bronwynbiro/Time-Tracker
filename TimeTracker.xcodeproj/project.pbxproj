@@ -31,6 +31,7 @@
 		955118FE1CEFE334009E004D /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955118FD1CEFE334009E004D /* EditViewController.swift */; };
 		958012C11D165EF9000946F6 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958012C01D165EF9000946F6 /* ProgressViewController.swift */; };
 		95B56B891CE37D3800D6B89E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B56B881CE37D3800D6B89E /* HeaderView.swift */; };
+		95ED46031D33178E00F9F1EA /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED46021D33178E00F9F1EA /* ProgressCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		955118FD1CEFE334009E004D /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		958012C01D165EF9000946F6 /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		95B56B881CE37D3800D6B89E /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderView.swift; path = ../viewcontrollers/HeaderView.swift; sourceTree = "<group>"; };
+		95ED46021D33178E00F9F1EA /* ProgressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				56A6DAA91BCF705F00A80680 /* ActivityTextfield.swift */,
 				95B56B881CE37D3800D6B89E /* HeaderView.swift */,
 				56A6DAAD1BCF727700A80680 /* HistoryCell.swift */,
+				95ED46021D33178E00F9F1EA /* ProgressCell.swift */,
 				56A6DAAF1BCF733F00A80680 /* NewActivityView.swift */,
 			);
 			name = Views;
@@ -248,6 +251,7 @@
 				95B56B891CE37D3800D6B89E /* HeaderView.swift in Sources */,
 				56A6DAB21BCF76F800A80680 /* DefaultNavigationController.swift in Sources */,
 				56A6DA9F1BCF691300A80680 /* Activity.swift in Sources */,
+				95ED46031D33178E00F9F1EA /* ProgressCell.swift in Sources */,
 				955118FE1CEFE334009E004D /* EditViewController.swift in Sources */,
 				56A6DA9E1BCF691300A80680 /* Activity+CoreDataProperties.swift in Sources */,
 				56A6DAAA1BCF705F00A80680 /* ActivityTextfield.swift in Sources */,
