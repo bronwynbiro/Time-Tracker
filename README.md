@@ -9,7 +9,7 @@ This Swift iOS app allows users to track the hours spent on given activities. Us
 
 Below are some screenshots of the current state of the app. 
 
-![Homepage](https://raw.githubusercontent.com/bronwynbiro/time-tracker/master/main.png)
-![History](https://raw.githubusercontent.com/bronwynbiro/time-tracker/master/history.png)
+![Homepage](https://raw.githubusercontent.com/bronwynbiro/time-tracker/master/main.png) </br>
+![History](https://raw.githubusercontent.com/bronwynbiro/time-tracker/master/history.png) </br>
 ![Progress](https://raw.githubusercontent.com/bronwynbiro/time-tracker/master/progress.png)
 
