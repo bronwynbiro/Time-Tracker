@@ -21,7 +21,6 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.separatorColor = color.pink()
         tableView.backgroundColor = UIColor.whiteColor()
-        //  suvar.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         loadNormalState()
@@ -247,12 +246,15 @@ func setChart(dataPoints: [String], values: [Double]) {
         let pieChartDataSet = PieChartDataSet(yVals: dataEntries, label: "")
         let pieChartData = PieChartData(xVals: dataPoints, dataSet: pieChartDataSet)
         pieChartView.data = pieChartData
+        pieChartView.legend.enabled = false
+        pieChartView.descriptionText = ""
 
-    pieChartView.drawSliceTextEnabled = true
+   // pieChartView.drawSliceTextEnabled = true
     
         let colors = [UIColor(red: 80/255, green: 227/255, blue: 194/255, alpha: 1), UIColor(red: 164/255, green: 249/255, blue: 242/255, alpha: 1), UIColor(red: 210/255, green: 128/255, blue: 240/255, alpha: 1), UIColor(red: 131/255, green: 222/255, blue: 252/255, alpha: 1), UIColor(red: 144/255, green: 19/255, blue: 254/255, alpha: 1)]
         
         pieChartDataSet.colors = colors
         
     }
+    
 }

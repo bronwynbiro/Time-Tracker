@@ -12,8 +12,8 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noActivitiesLabel: UILabel!
-    @IBOutlet weak var addButton: UIButton!
     var activitiesArray: [Activity] = []
+    @IBOutlet weak var addButton: UIButton!
 
     /// custom fadeview to make unavailable to hit an activity while adding new one
     lazy var fadeView: UIView = {
