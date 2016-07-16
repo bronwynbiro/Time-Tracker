@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2FC97FE5CA735AF27A08356B /* Pods_TimeTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7A5D23346EC79AAFA9621BB /* Pods_TimeTracker.framework */; };
 		567692801BD0E40C00FEA04F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5676927F1BD0E40C00FEA04F /* CoreData.framework */; };
 		56A6DA801BCF655B00A80680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DA7F1BCF655B00A80680 /* AppDelegate.swift */; };
 		56A6DA8A1BCF655B00A80680 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A6DA881BCF655B00A80680 /* LaunchScreen.storyboard */; };
@@ -98,7 +97,6 @@
 		95C1C3001D3413D6003AD1F9 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../../../Downloads/Charts-master/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 		95C1C3151D342014003AD1F9 /* TimeTracker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimeTracker-Bridging-Header.h"; sourceTree = "<group>"; };
 		95ED46021D33178E00F9F1EA /* ProgressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
-		B7A5D23346EC79AAFA9621BB /* Pods_TimeTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +105,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				567692801BD0E40C00FEA04F /* CoreData.framework in Frameworks */,
-				2FC97FE5CA735AF27A08356B /* Pods_TimeTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				5676927F1BD0E40C00FEA04F /* CoreData.framework */,
-				B7A5D23346EC79AAFA9621BB /* Pods_TimeTracker.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
