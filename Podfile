@@ -1,5 +1,5 @@
-platform :ios, ‘8.0’
-use_frameworks!
+platform :ios, ‘9.3’
+#use_frameworks!
  
 target ’TimeTracker’ do
     pod 'Charts'
