@@ -9,30 +9,16 @@ import CoreData
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    /// the choosen activity object to use
     var choosenActivity: Activity?
-    
-    /// boolean value to determine whether an activity is running
     var isActivityRunning: Bool = false
-    /// boolean value to determine whether an activity is paused
     var isActivityPaused: Bool = false
-    /// passed seconds from start
     var passedSeconds: Int = 0
-    
-    /// date of start
     var startDate: NSDate?
-    /// date of quitting the app
     var quitDate: NSDate?
-    
-    /// timer that counts the seconds
     var activityTimer: NSTimer?
-    /// total number of seconds for history objects
     var totalduration: NSInteger = 0
-    
-    /// array of all the activities (history objects) that happened today
     var todaysActivitiesArray: [History] = []
     
-    /// today's date formatter
     lazy var todayDateFormatter: NSDateFormatter = {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "hh:mm"

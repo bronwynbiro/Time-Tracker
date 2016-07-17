@@ -4,7 +4,6 @@ import CoreData
 import Charts
 
 class progressViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-//class ProgressViewController: UIViewController {
     @IBOutlet weak var dailyButton: UIButton!
     @IBOutlet weak var weeklyButton: UIButton!
     @IBOutlet weak var monthlyButton: UIButton!
@@ -157,7 +156,6 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             
         }
-        //testLabel.text = "\(NSString.createDurationStringFromDuration(Double(sumOfMonth)))"
         var namesArray = [String]()
         for histname in monthActivitiesArray{
             namesArray.insert(histname.name!, atIndex: 0)
@@ -217,7 +215,6 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ProgressCell", forIndexPath: indexPath) as! ProgressCell
-       // configureCell(cell, indexPath: indexPath)
         return cell
     }
     
@@ -227,17 +224,14 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func configureCell(cell: ProgressCell, percentage: String!, time: String!, name: String!)  {
         cell.backgroundColor = UIColor.whiteColor()
-       // cell.nameLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
         cell.nameLabel.text = "\(name)"
         cell.percentLabel.text = "\(percentage)"
         cell.timeLabel.text = "\(time)"
-       /// cell.percentLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
     }
     
 func setChart(dataPoints: [String], values: [Double]) {
         
         var dataEntries: [ChartDataEntry] = []
-       // let pieChart = PieChart
         for i in 0..<dataPoints.count {
             let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
             dataEntries.append(dataEntry)
@@ -248,8 +242,6 @@ func setChart(dataPoints: [String], values: [Double]) {
         pieChartView.data = pieChartData
         pieChartView.legend.enabled = false
         pieChartView.descriptionText = ""
-
-   // pieChartView.drawSliceTextEnabled = true
     
         let colors = [UIColor(red: 80/255, green: 227/255, blue: 194/255, alpha: 1), UIColor(red: 164/255, green: 249/255, blue: 242/255, alpha: 1), UIColor(red: 210/255, green: 128/255, blue: 240/255, alpha: 1), UIColor(red: 131/255, green: 222/255, blue: 252/255, alpha: 1), UIColor(red: 144/255, green: 19/255, blue: 254/255, alpha: 1)]
         
