@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 import CoreData
-import Charts
+//import Charts
 
 class progressViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var dailyButton: UIButton!
