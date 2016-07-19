@@ -28,46 +28,46 @@
 		56A6DABA1BCF8BD000A80680 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A6DAB91BCF8BD000A80680 /* Images.xcassets */; };
 		56A6DABF1BCFDE2C00A80680 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DABE1BCFDE2C00A80680 /* HistoryViewController.swift */; };
 		955118FE1CEFE334009E004D /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955118FD1CEFE334009E004D /* EditViewController.swift */; };
+		95738D001D3DE2F800EAB881 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9556520F1D3BEE1300C063FB /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		95738D031D3DE2F800EAB881 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9556520F1D3BEE1300C063FB /* Charts.framework */; };
 		958012C11D165EF9000946F6 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958012C01D165EF9000946F6 /* ProgressViewController.swift */; };
 		95B56B891CE37D3800D6B89E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B56B881CE37D3800D6B89E /* HeaderView.swift */; };
 		95ED46031D33178E00F9F1EA /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED46021D33178E00F9F1EA /* ProgressCell.swift */; };
-		95FAAB661D3B338E00442DAF /* CoreData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5676927F1BD0E40C00FEA04F /* CoreData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		95FAAB671D3B33A500442DAF /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95FAAB501D3B2EDC00442DAF /* Charts.framework */; };
-		95FAAB681D3B33A500442DAF /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95FAAB501D3B2EDC00442DAF /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CFC8CF98F67F20815F89EAC8 /* Pods_TimeTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A362DEB906B172DAF4EB25E /* Pods_TimeTracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		95FAAB4F1D3B2EDC00442DAF /* PBXContainerItemProxy */ = {
+		9556520E1D3BEE1300C063FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 95FAAB481D3B2EDC00442DAF /* Charts.xcodeproj */;
+			containerPortal = 955652071D3BEE1200C063FB /* Charts.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
 			remoteInfo = "Charts-iOS";
 		};
-		95FAAB511D3B2EDC00442DAF /* PBXContainerItemProxy */ = {
+		955652101D3BEE1300C063FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 95FAAB481D3B2EDC00442DAF /* Charts.xcodeproj */;
+			containerPortal = 955652071D3BEE1200C063FB /* Charts.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A52C5C371BAC5CA400594CDD;
 			remoteInfo = "Charts-TV";
 		};
-		95FAAB531D3B2EDC00442DAF /* PBXContainerItemProxy */ = {
+		955652121D3BEE1300C063FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 95FAAB481D3B2EDC00442DAF /* Charts.xcodeproj */;
+			containerPortal = 955652071D3BEE1200C063FB /* Charts.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 65B3F5BF1C7370BE000983D0;
 			remoteInfo = "Charts-OSX";
 		};
-		95FAAB551D3B2EDC00442DAF /* PBXContainerItemProxy */ = {
+		955652141D3BEE1300C063FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 95FAAB481D3B2EDC00442DAF /* Charts.xcodeproj */;
+			containerPortal = 955652071D3BEE1200C063FB /* Charts.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 06AEE7A21BDC3F8B009875AE;
 			remoteInfo = ChartsTests;
 		};
-		95FAAB691D3B33A500442DAF /* PBXContainerItemProxy */ = {
+		95738D051D3DE2F800EAB881 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 95FAAB481D3B2EDC00442DAF /* Charts.xcodeproj */;
+			containerPortal = 955652071D3BEE1200C063FB /* Charts.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
 			remoteInfo = "Charts-iOS";
@@ -75,14 +75,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		95FAAB5A1D3B2EF900442DAF /* Embed Frameworks */ = {
+		95738D071D3DE2F900EAB881 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				95FAAB661D3B338E00442DAF /* CoreData.framework in Embed Frameworks */,
-				95FAAB681D3B33A500442DAF /* Charts.framework in Embed Frameworks */,
+				95738D001D3DE2F800EAB881 /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,14 +112,14 @@
 		56A6DAB71BCF8B3700A80680 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		56A6DAB91BCF8BD000A80680 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		56A6DABE1BCFDE2C00A80680 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
-		791508CF4523BA9E5FCBCF73 /* libPods-TimeTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TimeTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A362DEB906B172DAF4EB25E /* Pods_TimeTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C938704749F7896FCFC334A /* Pods-TimeTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TimeTracker/Pods-TimeTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		955118FD1CEFE334009E004D /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		955652071D3BEE1200C063FB /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../../../Downloads/Charts-master-4/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 		958012C01D165EF9000946F6 /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		95B56B881CE37D3800D6B89E /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderView.swift; path = ../viewcontrollers/HeaderView.swift; sourceTree = "<group>"; };
 		95C1C3151D342014003AD1F9 /* TimeTracker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimeTracker-Bridging-Header.h"; sourceTree = "<group>"; };
 		95ED46021D33178E00F9F1EA /* ProgressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
-		95FAAB481D3B2EDC00442DAF /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../../../Downloads/Charts-master-3/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 		EB0801D41FDA0FC437A9F377 /* Pods-TimeTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-TimeTracker/Pods-TimeTracker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,7 +128,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95FAAB671D3B33A500442DAF /* Charts.framework in Frameworks */,
+				95738D031D3DE2F800EAB881 /* Charts.framework in Frameworks */,
+				CFC8CF98F67F20815F89EAC8 /* Pods_TimeTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				5676927F1BD0E40C00FEA04F /* CoreData.framework */,
-				791508CF4523BA9E5FCBCF73 /* libPods-TimeTracker.a */,
+				5A362DEB906B172DAF4EB25E /* Pods_TimeTracker.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -150,8 +150,8 @@
 			children = (
 				56A6DA7E1BCF655B00A80680 /* TimeTracker */,
 				567692811BD0E41000FEA04F /* Frameworks */,
+				955652071D3BEE1200C063FB /* Charts.xcodeproj */,
 				56A6DA7D1BCF655B00A80680 /* Products */,
-				95FAAB481D3B2EDC00442DAF /* Charts.xcodeproj */,
 				6065572DB981679FA686C358 /* Pods */,
 			);
 			sourceTree = "<group>";
@@ -249,13 +249,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		95FAAB491D3B2EDC00442DAF /* Products */ = {
+		955652081D3BEE1200C063FB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				95FAAB501D3B2EDC00442DAF /* Charts.framework */,
-				95FAAB521D3B2EDC00442DAF /* Charts.framework */,
-				95FAAB541D3B2EDC00442DAF /* Charts.framework */,
-				95FAAB561D3B2EDC00442DAF /* ChartsTests.xctest */,
+				9556520F1D3BEE1300C063FB /* Charts.framework */,
+				955652111D3BEE1300C063FB /* Charts.framework */,
+				955652131D3BEE1300C063FB /* Charts.framework */,
+				955652151D3BEE1300C063FB /* ChartsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,12 +273,12 @@
 				56A6DA7A1BCF655B00A80680 /* Resources */,
 				596BF9399D694A979182DCFE /* [CP] Embed Pods Frameworks */,
 				FA5E7CB3C6E51ABC40B8B07E /* [CP] Copy Pods Resources */,
-				95FAAB5A1D3B2EF900442DAF /* Embed Frameworks */,
+				95738D071D3DE2F900EAB881 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				95FAAB6A1D3B33A500442DAF /* PBXTargetDependency */,
+				95738D061D3DE2F800EAB881 /* PBXTargetDependency */,
 			);
 			name = TimeTracker;
 			productName = TimeTracker;
@@ -314,8 +314,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 95FAAB491D3B2EDC00442DAF /* Products */;
-					ProjectRef = 95FAAB481D3B2EDC00442DAF /* Charts.xcodeproj */;
+					ProductGroup = 955652081D3BEE1200C063FB /* Products */;
+					ProjectRef = 955652071D3BEE1200C063FB /* Charts.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -326,32 +326,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		95FAAB501D3B2EDC00442DAF /* Charts.framework */ = {
+		9556520F1D3BEE1300C063FB /* Charts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Charts.framework;
-			remoteRef = 95FAAB4F1D3B2EDC00442DAF /* PBXContainerItemProxy */;
+			remoteRef = 9556520E1D3BEE1300C063FB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		95FAAB521D3B2EDC00442DAF /* Charts.framework */ = {
+		955652111D3BEE1300C063FB /* Charts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Charts.framework;
-			remoteRef = 95FAAB511D3B2EDC00442DAF /* PBXContainerItemProxy */;
+			remoteRef = 955652101D3BEE1300C063FB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		95FAAB541D3B2EDC00442DAF /* Charts.framework */ = {
+		955652131D3BEE1300C063FB /* Charts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Charts.framework;
-			remoteRef = 95FAAB531D3B2EDC00442DAF /* PBXContainerItemProxy */;
+			remoteRef = 955652121D3BEE1300C063FB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		95FAAB561D3B2EDC00442DAF /* ChartsTests.xctest */ = {
+		955652151D3BEE1300C063FB /* ChartsTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ChartsTests.xctest;
-			remoteRef = 95FAAB551D3B2EDC00442DAF /* PBXContainerItemProxy */;
+			remoteRef = 955652141D3BEE1300C063FB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -449,10 +449,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		95FAAB6A1D3B33A500442DAF /* PBXTargetDependency */ = {
+		95738D061D3DE2F800EAB881 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Charts-iOS";
-			targetProxy = 95FAAB691D3B33A500442DAF /* PBXContainerItemProxy */;
+			targetProxy = 95738D051D3DE2F800EAB881 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -486,7 +486,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: bronwyn.biro@gmail.com (9PK6Y23GK3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: bronwyn.biro@gmail.com (9PK6Y23GK3)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -530,7 +531,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: bronwyn.biro@gmail.com (9PK6Y23GK3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: bronwyn.biro@gmail.com (9PK6Y23GK3)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -583,6 +585,7 @@
 				INFOPLIST_FILE = TimeTracker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bronwynbiro.TimeTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TimeTracker/TimeTracker-Bridging-Header.h";
