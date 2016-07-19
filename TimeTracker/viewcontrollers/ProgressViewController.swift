@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 import CoreData
-//import Charts
+import Charts
 
 class progressViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var dailyButton: UIButton!
@@ -11,7 +11,8 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     var numberOfRows = ["test1"]
     var percentArray = [Double]()
     var orderedNamesArray = [String]()
-    @IBOutlet var pieChartView: PieChartView!
+    @IBOutlet weak var pieChartView: PieChartView!
+    
 
     
     override func viewDidLoad() {
@@ -238,7 +239,7 @@ func setChart(dataPoints: [String], values: [Double]) {
         }
         
         let pieChartDataSet = PieChartDataSet(yVals: dataEntries, label: "")
-        let pieChartData = PieChartData(xVals: dataPoints, dataSet: pieChartDataSet)
+        let pieChartData = PieChartData(xVals: dataPoints, dataSet: pieChartDataSet) as PieChartData
         pieChartView.data = pieChartData
         pieChartView.legend.enabled = false
         pieChartView.descriptionText = ""

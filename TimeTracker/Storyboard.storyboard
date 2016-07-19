@@ -514,10 +514,10 @@
             </objects>
             <point key="canvasLocation" x="727" y="1215"/>
         </scene>
-        <!--Bar Chart View-->
+        <!--PieChartView-->
         <scene sceneID="sXe-qh-G1g">
             <objects>
-                <viewController id="22o-dN-ldG" userLabel="Bar Chart View" customClass="progressViewController" customModule="TimeTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="22o-dN-ldG" userLabel="PieChartView" customClass="progressViewController" customModule="TimeTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="umd-gH-cVc"/>
                         <viewControllerLayoutGuide type="bottom" id="JB9-ve-XgM"/>
@@ -631,7 +631,7 @@
                     <connections>
                         <outlet property="dailyButton" destination="ixW-Gx-sBJ" id="Rqs-hC-fBn"/>
                         <outlet property="monthlyButton" destination="Nye-ch-QhI" id="zhv-A4-qJj"/>
-                        <outlet property="pieChartView" destination="yT7-5j-SD4" id="9VZ-kg-q4p"/>
+                        <outlet property="pieChartView" destination="yT7-5j-SD4" id="Kze-UW-Bqz"/>
                         <outlet property="tableView" destination="umB-gF-NVF" id="TOp-7k-ED9"/>
                         <outlet property="weeklyButton" destination="P9m-d5-QVV" id="6mj-c3-OhO"/>
                     </connections>
