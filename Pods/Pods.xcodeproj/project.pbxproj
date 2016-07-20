@@ -7,35 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6BBD376FCB6030D92D43376A44BB8C54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		D1F86ECE9A2AF73FC49FDA4EE31418A8 /* Pods-TimeTracker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C10821BB43DE215023CFC3A01DE0834 /* Pods-TimeTracker-dummy.m */; };
+		3D12CE3D62F6E42B66FF1221482C8DB9 /* Pods-TimeTracker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEEB6C564D3AB2C9AAA667B5F86DC6C /* Pods-TimeTracker-dummy.m */; };
+		A775119F1F67EE43DD7B52848575AE90 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		AF7AE047D97C0E49CA529523924402D2 /* Pods-TimeTracker-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C6553C530A5F157B74F5DFAD3DD94ED8 /* Pods-TimeTracker-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		017581799259A7A3759DE54FD00E9FED /* Pods-TimeTracker-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TimeTracker-frameworks.sh"; sourceTree = "<group>"; };
-		0799722D52EB7460AD8FAF595E7524D2 /* Pods-TimeTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TimeTracker.debug.xcconfig"; sourceTree = "<group>"; };
-		17BC14E991C339DEE6CA7D360F3C3B22 /* Pods-TimeTracker-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TimeTracker-resources.sh"; sourceTree = "<group>"; };
-		5C10821BB43DE215023CFC3A01DE0834 /* Pods-TimeTracker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TimeTracker-dummy.m"; sourceTree = "<group>"; };
-		62592F67C836397BE38AFE510BD35FDF /* Pods-TimeTracker-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TimeTracker-acknowledgements.plist"; sourceTree = "<group>"; };
+		0F1A6488885E82B20E5A9364DA6EBFA6 /* Pods-TimeTracker-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TimeTracker-frameworks.sh"; sourceTree = "<group>"; };
+		1ADB0EE17678A552627008B73BDB9C76 /* Pods-TimeTracker-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TimeTracker-acknowledgements.plist"; sourceTree = "<group>"; };
+		33A4F7BDB95A28F7E85CCFE08B2DE3DE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A7D40DE4E9989457C040CBF9C56553B /* Pods-TimeTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TimeTracker.release.xcconfig"; sourceTree = "<group>"; };
+		3AEEB6C564D3AB2C9AAA667B5F86DC6C /* Pods-TimeTracker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TimeTracker-dummy.m"; sourceTree = "<group>"; };
+		3D1B91C9ADC9F5AD5D7140C7B981A5A0 /* Pods-TimeTracker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-TimeTracker.modulemap"; sourceTree = "<group>"; };
+		4D6C18B02CC1E520D95B89B1549E79F2 /* Pods_TimeTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		64ECAF69314DDD55384BD3B1E3C76806 /* Pods-TimeTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TimeTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		94FC89F486AD102F29AFB6A1CCB678F9 /* Pods-TimeTracker-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TimeTracker-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C6553C530A5F157B74F5DFAD3DD94ED8 /* Pods-TimeTracker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TimeTracker-umbrella.h"; sourceTree = "<group>"; };
+		C72B335458749301C65C5D93AEA850EA /* Pods-TimeTracker-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TimeTracker-resources.sh"; sourceTree = "<group>"; };
 		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		DD3EC588084F09271BB244EB0FEB7E7B /* Pods-TimeTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TimeTracker.release.xcconfig"; sourceTree = "<group>"; };
-		F8AE74ECE7751458D299C33334C916BC /* libPods-TimeTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TimeTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD02252F7ECE0CB34863A03FD62DFAF3 /* Pods-TimeTracker-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TimeTracker-acknowledgements.markdown"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E6B73ACABE22C00CE4B97C103F5DFDD0 /* Frameworks */ = {
+		71A89010897FD78AF99F9723606FDF22 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BBD376FCB6030D92D43376A44BB8C54 /* Foundation.framework in Frameworks */,
+				A775119F1F67EE43DD7B52848575AE90 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D0971E5CDAC98F17E8C632FBF6C6EC1 /* Pods-TimeTracker */ = {
+			isa = PBXGroup;
+			children = (
+				33A4F7BDB95A28F7E85CCFE08B2DE3DE /* Info.plist */,
+				3D1B91C9ADC9F5AD5D7140C7B981A5A0 /* Pods-TimeTracker.modulemap */,
+				94FC89F486AD102F29AFB6A1CCB678F9 /* Pods-TimeTracker-acknowledgements.markdown */,
+				1ADB0EE17678A552627008B73BDB9C76 /* Pods-TimeTracker-acknowledgements.plist */,
+				3AEEB6C564D3AB2C9AAA667B5F86DC6C /* Pods-TimeTracker-dummy.m */,
+				0F1A6488885E82B20E5A9364DA6EBFA6 /* Pods-TimeTracker-frameworks.sh */,
+				C72B335458749301C65C5D93AEA850EA /* Pods-TimeTracker-resources.sh */,
+				C6553C530A5F157B74F5DFAD3DD94ED8 /* Pods-TimeTracker-umbrella.h */,
+				64ECAF69314DDD55384BD3B1E3C76806 /* Pods-TimeTracker.debug.xcconfig */,
+				3A7D40DE4E9989457C040CBF9C56553B /* Pods-TimeTracker.release.xcconfig */,
+			);
+			name = "Pods-TimeTracker";
+			path = "Target Support Files/Pods-TimeTracker";
+			sourceTree = "<group>";
+		};
+		35D0FC99DBFE56213E5825B068DE1721 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2D0971E5CDAC98F17E8C632FBF6C6EC1 /* Pods-TimeTracker */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
 		3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -44,29 +74,14 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		47A1457DEABB19A405153F8C1F613282 /* Pods-TimeTracker */ = {
-			isa = PBXGroup;
-			children = (
-				FD02252F7ECE0CB34863A03FD62DFAF3 /* Pods-TimeTracker-acknowledgements.markdown */,
-				62592F67C836397BE38AFE510BD35FDF /* Pods-TimeTracker-acknowledgements.plist */,
-				5C10821BB43DE215023CFC3A01DE0834 /* Pods-TimeTracker-dummy.m */,
-				017581799259A7A3759DE54FD00E9FED /* Pods-TimeTracker-frameworks.sh */,
-				17BC14E991C339DEE6CA7D360F3C3B22 /* Pods-TimeTracker-resources.sh */,
-				0799722D52EB7460AD8FAF595E7524D2 /* Pods-TimeTracker.debug.xcconfig */,
-				DD3EC588084F09271BB244EB0FEB7E7B /* Pods-TimeTracker.release.xcconfig */,
-			);
-			name = "Pods-TimeTracker";
-			path = "Target Support Files/Pods-TimeTracker";
-			sourceTree = "<group>";
-		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
 				F42D9B0C416952B96BF553BB99363839 /* Pods */,
-				C95DD1E2FAC80FE57EA6051FDCF5DD13 /* Products */,
-				C0A909459E741D6E49DE4B1CA1128A95 /* Targets Support Files */,
+				C1651DD0DA6D0CF6CBAB14A2F6E32E8F /* Products */,
+				35D0FC99DBFE56213E5825B068DE1721 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,18 +100,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C0A909459E741D6E49DE4B1CA1128A95 /* Targets Support Files */ = {
+		C1651DD0DA6D0CF6CBAB14A2F6E32E8F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				47A1457DEABB19A405153F8C1F613282 /* Pods-TimeTracker */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		C95DD1E2FAC80FE57EA6051FDCF5DD13 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F8AE74ECE7751458D299C33334C916BC /* libPods-TimeTracker.a */,
+				4D6C18B02CC1E520D95B89B1549E79F2 /* Pods_TimeTracker.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,13 +118,25 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		714DB9E6D1CBDDF9DAA676D1C796FC99 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF7AE047D97C0E49CA529523924402D2 /* Pods-TimeTracker-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		25FD16D54C83C16F5532B0D68C288ACA /* Pods-TimeTracker */ = {
+		BC766161285E57B48EDAF39D067FC833 /* Pods-TimeTracker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 742BF358663A14D07920DB48E71C2D8F /* Build configuration list for PBXNativeTarget "Pods-TimeTracker" */;
+			buildConfigurationList = 775DC75BF5B682F7BF4A4830C17A6EE8 /* Build configuration list for PBXNativeTarget "Pods-TimeTracker" */;
 			buildPhases = (
-				A0ABA8274A986E704CB77257FAF4C9B6 /* Sources */,
-				E6B73ACABE22C00CE4B97C103F5DFDD0 /* Frameworks */,
+				3DB3A778E2BBB45F32122EFA4C37F813 /* Sources */,
+				71A89010897FD78AF99F9723606FDF22 /* Frameworks */,
+				714DB9E6D1CBDDF9DAA676D1C796FC99 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -125,8 +144,8 @@
 			);
 			name = "Pods-TimeTracker";
 			productName = "Pods-TimeTracker";
-			productReference = F8AE74ECE7751458D299C33334C916BC /* libPods-TimeTracker.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = 4D6C18B02CC1E520D95B89B1549E79F2 /* Pods_TimeTracker.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -145,21 +164,21 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = C95DD1E2FAC80FE57EA6051FDCF5DD13 /* Products */;
+			productRefGroup = C1651DD0DA6D0CF6CBAB14A2F6E32E8F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				25FD16D54C83C16F5532B0D68C288ACA /* Pods-TimeTracker */,
+				BC766161285E57B48EDAF39D067FC833 /* Pods-TimeTracker */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A0ABA8274A986E704CB77257FAF4C9B6 /* Sources */ = {
+		3DB3A778E2BBB45F32122EFA4C37F813 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1F86ECE9A2AF73FC49FDA4EE31418A8 /* Pods-TimeTracker-dummy.m in Sources */,
+				3D12CE3D62F6E42B66FF1221482C8DB9 /* Pods-TimeTracker-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,47 +265,71 @@
 			};
 			name = Debug;
 		};
-		7CCFC2D2989904ECDC9CDD6821D6FB82 /* Debug */ = {
+		7C6695EA58F47875E893A978A64590C5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0799722D52EB7460AD8FAF595E7524D2 /* Pods-TimeTracker.debug.xcconfig */;
+			baseConfigurationReference = 3A7D40DE4E9989457C040CBF9C56553B /* Pods-TimeTracker.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		C4C73B8DA5551684579FC21E0D29C605 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD3EC588084F09271BB244EB0FEB7E7B /* Pods-TimeTracker.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TimeTracker/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TimeTracker/Pods-TimeTracker.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pods_TimeTracker;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		E5D516EC9BEC04551E2C938D2F3251CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64ECAF69314DDD55384BD3B1E3C76806 /* Pods-TimeTracker.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-TimeTracker/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TimeTracker/Pods-TimeTracker.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_TimeTracker;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -300,11 +343,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		742BF358663A14D07920DB48E71C2D8F /* Build configuration list for PBXNativeTarget "Pods-TimeTracker" */ = {
+		775DC75BF5B682F7BF4A4830C17A6EE8 /* Build configuration list for PBXNativeTarget "Pods-TimeTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7CCFC2D2989904ECDC9CDD6821D6FB82 /* Debug */,
-				C4C73B8DA5551684579FC21E0D29C605 /* Release */,
+				E5D516EC9BEC04551E2C938D2F3251CC /* Debug */,
+				7C6695EA58F47875E893A978A64590C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

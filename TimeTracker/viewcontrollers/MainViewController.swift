@@ -184,7 +184,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func calculateDeletedDurationForToday(historyToSubtract: History?) -> NSInteger {
-        var todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
+        let todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
         var totalDuration = calculateTotalDurationForToday()
         if todaysActivitiesArray.count < 1 {
             totalDuration = 0
@@ -194,7 +194,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         print(todaysActivitiesArray)
         print(totalDuration)
-        CoreDataHandler.sharedInstance.deleteObject(historyToSubtract as! NSManagedObject)
+      //  CoreDataHandler.sharedInstance.deleteObject(historyToSubtract as! NSManagedObject)
         CoreDataHandler.sharedInstance.saveContext()
         
         return totalDuration
@@ -291,7 +291,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! HistoryCell
         if todaysActivitiesArray.count > 0 {
+<<<<<<< HEAD
         var history = todaysActivitiesArray[indexPath.row]
+=======
+        let history = todaysActivitiesArray[indexPath.row]
+        print(todaysActivitiesArray)
+            print(history)
+>>>>>>> a49a6acddfdb15b1ae06c1f3afc2bed8a9d0ed97
         cell.nameLabel.text = "\(history.name!)"
         cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
         cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
