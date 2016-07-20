@@ -119,7 +119,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      */
     func saveActivityToHistory() {
         CoreDataHandler.sharedInstance.saveHistory(choosenActivity!.name!, startDate: startDate!, endDate: NSDate(), duration: passedSeconds)
-        
+        startDate = nil
+        choosenActivity = nil
         passedSeconds = 0
         loadCoreDataEntities()
     }
@@ -206,7 +207,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "TimeTracker"
-        //MARK": change items to be different colors
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "history_icon"), style: .Plain, target: self, action: Selector("openHistoryView"))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "list_icon"), style: .Plain, target: self, action: Selector("openActivityView"))
         
@@ -265,7 +265,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             totalduration = calculateTotalDurationForToday()
         }
         tableView.reloadData()
-        print(todaysActivitiesArray)
     }
     
     lazy var fetchController: NSFetchedResultsController = {
@@ -293,13 +292,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! HistoryCell
         if todaysActivitiesArray.count > 0 {
         var history = todaysActivitiesArray[indexPath.row]
-        print(todaysActivitiesArray)
-            print(history)
         cell.nameLabel.text = "\(history.name!)"
         cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
         cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
-       // history.nsmanagedobjectcontextobjectsdidchangenotification
-       // NSObject.didchange
         }
         return cell
     }
