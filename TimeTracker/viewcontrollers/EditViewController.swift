@@ -73,7 +73,7 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
         history.startDate = StartDatePicker.date
         history.endDate = EndDatePicker.date
         cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
-        var PassDuration = history.endDate!.timeIntervalSinceDate(history.startDate!)
+        let PassDuration = history.endDate!.timeIntervalSinceDate(history.startDate!)
         cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration))
         CoreDataHandler.sharedInstance.updateHistory(history.name!, startDate: history.startDate!, endDate: history.endDate!, duration: Int(PassDuration), PassPath: PassPath, PassHistory: PassHistory)
         

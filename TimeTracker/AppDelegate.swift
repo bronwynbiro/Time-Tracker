@@ -29,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     func applicationDidEnterBackground(application: UIApplication) {
         NSNotificationCenter.defaultCenter().postNotificationName("AppDidEnterBackground", object: nil)
-        //MARK: save coredata too
          CoreDataHandler.sharedInstance.saveContext()
+        
     }
 
     /**
@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     */
     func applicationDidBecomeActive(application: UIApplication) {
         NSNotificationCenter.defaultCenter().postNotificationName("AppBecameActive", object: nil)
+        
     }
 
     /**

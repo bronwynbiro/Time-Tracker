@@ -23,7 +23,6 @@ class CoreDataHandler: NSObject {
         }
         return Static.instance!
     }
-    //EDIT: added below func
     lazy var managedObjectContext: NSManagedObjectContext? = {
         let coordinator = self.persistentStoreCoordinator
         var managedObjectContext = NSManagedObjectContext()
@@ -66,12 +65,10 @@ class CoreDataHandler: NSObject {
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             
-            dict[NSUnderlyingErrorKey] = error as! NSError
+            dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-            // Replace this with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
-            abort()
+           
         }
         return persistentStoreCoordinator
     }()
@@ -84,7 +81,7 @@ class CoreDataHandler: NSObject {
         do {
             try backgroundManagedObjectContext.save()
         } catch {
-            // Error occured while deleting objects
+            
         }
     }
     
@@ -230,7 +227,6 @@ class CoreDataHandler: NSObject {
         fetchRequest.predicate = predicate
         
         return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
-        print(fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
     }
     
     func fetchCoreDataForMonthActivities() -> [History] {
@@ -322,7 +318,6 @@ class CoreDataHandler: NSObject {
         let endDate = NSDate.dateByMovingToEndOfDay()
         let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@) AND (name = %@)", startDate, endDate, i)
         fetchRequest.predicate = predicate
-        //  fetchRequest.resultType = .DictionaryResultType
         return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
     }
 

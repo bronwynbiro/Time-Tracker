@@ -138,7 +138,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             var objectsToDelete: [History] = []
             let selectedIndexPaths = tableView.indexPathsForSelectedRows
             for indexPath in selectedIndexPaths! {
-                var history = fetchController.objectAtIndexPath(indexPath)
+                let history = fetchController.objectAtIndexPath(indexPath)
                 objectsToDelete.append(history as! History)
             }
             checkToShowEmptyLabel()
@@ -357,7 +357,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      */
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            var historyToSubtract = fetchController.objectAtIndexPath(indexPath) as! History
+            let historyToSubtract = fetchController.objectAtIndexPath(indexPath) as! History
            MainViewController().calculateDeletedDurationForToday(historyToSubtract)
            
             

@@ -93,11 +93,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         isActivityRunning = true
         isActivityPaused = false
         
-        //EDIt
+        
         let dateFormatter = NSDateFormatter()
-        //the "M/d/yy, H:mm" is put together from the Symbol Table
         dateFormatter.dateFormat = "MM/dd/yyyy, HH:mm"
-        print(dateFormatter.stringFromDate(startDate!))
     }
     
     /**
@@ -138,9 +136,21 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      If an activity is running save the return date to be able count the elapsed seconds between going to background and coming back. And count the passed seconds.
      */
     func appLoadedFromBackground() {
+        /*
         if isActivityPaused == false {
             let passedSecondsTillInactive = NSDate().timeIntervalSinceDate(quitDate!)
             passedSeconds += Int(passedSecondsTillInactive)
+        }
+        updateLabel()
+  */
+        if isActivityPaused == false {
+        let passedSec = NSUserDefaults.standardUserDefaults().objectForKey("passedSeconds") as! Int
+        let quitDate = NSUserDefaults.standardUserDefaults().objectForKey("quitDate") as? NSDate
+        let minutes = (passedSec / 60) % 60
+        let hours = (passedSec) / 3600
+        minutesLabel.text = NSString.timeStringWithTimeToDisplay(minutes)
+        hoursLabel.text = NSString.timeStringWithTimeToDisplay(hours)
+
         }
     }
     
@@ -148,10 +158,17 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      If an activity is running save the quit date to be able count the elapsed seconds between going to background and coming back.
      */
     func appGoesIntoBackground() {
+        /*
         if isActivityPaused == false {
             quitDate = NSDate()
         }
+ */
+        if isActivityPaused == false {
+            let currDate = NSDate()
+            NSUserDefaults.standardUserDefaults().setObject(currDate, forKey:"quitDate")
+        }
     }
+    
     
     /**
      Update labels every time the timer's method called.
@@ -182,6 +199,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         return sumOfDuration
     }
+        
     
     func calculateDeletedDurationForToday(historyToSubtract: History?) -> NSInteger {
         let todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
@@ -192,9 +210,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         else {
             totalDuration = totalDuration - Int(historyToSubtract!.duration!)
         }
-        print(todaysActivitiesArray)
-        print(totalDuration)
-      //  CoreDataHandler.sharedInstance.deleteObject(historyToSubtract as! NSManagedObject)
         CoreDataHandler.sharedInstance.saveContext()
         
         return totalDuration
@@ -209,12 +224,23 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         title = "TimeTracker"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "history_icon"), style: .Plain, target: self, action: Selector("openHistoryView"))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "list_icon"), style: .Plain, target: self, action: Selector("openActivityView"))
-        
         view.backgroundColor = color.pink()
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.separatorColor = color.pink()
         tableView.backgroundColor = UIColor.whiteColor()
         
+        if isActivityPaused == false {
+            if choosenActivity != nil {
+            let passedSec = NSUserDefaults.standardUserDefaults().objectForKey("passedSeconds") as! Int
+            let quitDate = NSUserDefaults.standardUserDefaults().objectForKey("quitDate") as? NSDate
+            let minutes = (passedSec / 60) % 60
+            let hours = (passedSec) / 3600
+            minutesLabel.text = NSString.timeStringWithTimeToDisplay(minutes)
+            hoursLabel.text = NSString.timeStringWithTimeToDisplay(hours)
+            
+          }
+        }
+
         addObservers()
     }
     
@@ -245,9 +271,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      Adds observers for the notifications
      */
     func addObservers() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appGoesIntoBackground"), name: "AppDidEnterBackground", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.appGoesIntoBackground), name: "AppDidEnterBackground", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appLoadedFromBackground"), name: "AppBecameActive", object: nil)
     }
+    
+
     
     /**
      Removes notification observer for this class
@@ -291,13 +319,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! HistoryCell
         if todaysActivitiesArray.count > 0 {
-<<<<<<< HEAD
-        var history = todaysActivitiesArray[indexPath.row]
-=======
         let history = todaysActivitiesArray[indexPath.row]
-        print(todaysActivitiesArray)
-            print(history)
->>>>>>> a49a6acddfdb15b1ae06c1f3afc2bed8a9d0ed97
         cell.nameLabel.text = "\(history.name!)"
         cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
         cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
