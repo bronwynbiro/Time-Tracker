@@ -63,9 +63,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 openActivityView()
             }
         }
-        NSUserDefaults.standardUserDefaults().setBool(isActivityPaused, forKey:"quitActivityPaused")
-        
-        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     /**
@@ -82,9 +79,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if passedSeconds >= 60 {
             saveActivityToHistory()
         }
-        NSUserDefaults.standardUserDefaults().setBool(isActivityPaused, forKey:"quitActivityPaused")
-        
-        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     /**
@@ -102,10 +96,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy, HH:mm"
-        
-        NSUserDefaults.standardUserDefaults().setBool(isActivityPaused, forKey:"quitActivityPaused")
-        
-        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     /**
@@ -116,8 +106,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         isActivityRunning = false
         invalidateTimer()
         startPauseButton.setTitle("START", forState: .Normal)
-        NSUserDefaults.standardUserDefaults().setBool(isActivityPaused, forKey:"quitActivityPaused")
-        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     func startActivityTimer() {
@@ -156,15 +144,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         updateLabel()
   */
         if isActivityPaused == false {
-        let quitActivityPaused = NSUserDefaults.standardUserDefaults().setBool(isActivityPaused, forKey:"quitActivityPaused")
         let passedSec = NSUserDefaults.standardUserDefaults().objectForKey("passedSeconds") as! Int
         let quitDate = NSUserDefaults.standardUserDefaults().objectForKey("quitDate") as? NSDate
-            if quitDate == nil {
-                print("nil quitdate in main")
-            }
-            print("in apploaded.")
-           // print("passedSec:", passedSec)
-           // print("quitDate:", quitDate)
         let minutes = (passedSec / 60) % 60
         let hours = (passedSec) / 3600
         minutesLabel.text = NSString.timeStringWithTimeToDisplay(minutes)
@@ -177,14 +158,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      If an activity is running save the quit date to be able count the elapsed seconds between going to background and coming back.
      */
     func appGoesIntoBackground() {
+        /*
         if isActivityPaused == false {
             quitDate = NSDate()
         }
-        let quitDateMain =  NSUserDefaults.standardUserDefaults().setBool(isActivityPaused, forKey:"quitDate")
-             NSUserDefaults.standardUserDefaults().synchronize()
-            print("in main view controller appgoesinto.")
+ */
+        if isActivityPaused == false {
+            let currDate = NSDate()
+            NSUserDefaults.standardUserDefaults().setObject(currDate, forKey:"quitDate")
         }
-
+    }
     
     
     /**
@@ -245,25 +228,19 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.separatorColor = color.pink()
         tableView.backgroundColor = UIColor.whiteColor()
-    /*
-         MARK: maube move this
+        
         if isActivityPaused == false {
-            if isActivityRunning == false {
-                if startDate != nil {
+            if choosenActivity != nil {
             let passedSec = NSUserDefaults.standardUserDefaults().objectForKey("passedSeconds") as! Int
             let quitDate = NSUserDefaults.standardUserDefaults().objectForKey("quitDate") as? NSDate
-            NSUserDefaults.standardUserDefaults().synchronize()        
-            NSUserDefaults.standardUserDefaults().setBool(isActivityPaused, forKey:"quitActivityPaused")
             let minutes = (passedSec / 60) % 60
             let hours = (passedSec) / 3600
             minutesLabel.text = NSString.timeStringWithTimeToDisplay(minutes)
             hoursLabel.text = NSString.timeStringWithTimeToDisplay(hours)
-                    
-            NSUserDefaults.standardUserDefaults().synchronize()
+            
           }
         }
-        }
- */
+
         addObservers()
     }
     
@@ -294,8 +271,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      Adds observers for the notifications
      */
     func addObservers() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.appGoesIntoBackground), name: "ApplicationDidEnterBackground", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appLoadedFromBackground"), name: "ApplicationBecameActive", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.appGoesIntoBackground), name: "AppDidEnterBackground", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appLoadedFromBackground"), name: "AppBecameActive", object: nil)
     }
     
 
@@ -406,6 +383,5 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     deinit {
         resetObservers()
-}
-
+    }
 }
