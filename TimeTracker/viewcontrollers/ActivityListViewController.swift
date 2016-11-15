@@ -5,6 +5,8 @@
 
 
 import UIKit
+import RealmSwift
+
 
  /// View controller that holds all the activities
 
@@ -74,8 +76,8 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     */
     func showNormalNavigationBar() {
         navigationItem.leftBarButtonItem = nil
-        navigationItem.backBarButtonItem?.action = Selector("backButtonPressed")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("addNewActivity"))
+        navigationItem.backBarButtonItem?.action = #selector(ActivityListViewController.backButtonPressed)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(ActivityListViewController.addNewActivity))
     }
 
     /**
@@ -92,7 +94,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
         view.addSubview(newActivityView)
         newActivityView.slideViewDown()
         view.insertSubview(fadeView, belowSubview: newActivityView)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("dismissAddview"))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(ActivityListViewController.dismissAddview))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self.newActivityView, action: Selector("saveItem"))
     }
 

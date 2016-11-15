@@ -79,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(application: UIApplication) {
         print("app will enter foreground..")
-        var currDate = NSDate()
+        let currDate = NSDate()
         let quitActivityRunning = NSUserDefaults.standardUserDefaults().objectForKey("quitActivityRunning") as? Bool
         if quitActivityRunning == true {
             //retrieve time of exit, calculate time in background, set

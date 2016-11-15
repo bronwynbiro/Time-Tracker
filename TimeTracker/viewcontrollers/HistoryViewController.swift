@@ -69,20 +69,20 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      */
     func loadNormalState() {
         navigationItem.leftBarButtonItem = nil
-        navigationItem.backBarButtonItem?.action = Selector("backButtonPressed")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("editButtonPressed"))
+        navigationItem.backBarButtonItem?.action = #selector(HistoryViewController.backButtonPressed)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(HistoryViewController.editButtonPressed))
     }
     
     /**
      Load the editing state of the navigation bar
      */
     func loadEditState() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Delete", style: .Plain, target: self, action: Selector("deleteButtonPressed"))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Delete", style: .Plain, target: self, action: #selector(HistoryViewController.deleteButtonPressed))
         
         if numberOfItemsToDelete() == 0 {
             navigationItem.leftBarButtonItem?.enabled = false
         }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("doneButtonPressed"))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(HistoryViewController.doneButtonPressed))
     }
     
     /**

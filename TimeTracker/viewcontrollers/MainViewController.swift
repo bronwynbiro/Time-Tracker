@@ -121,7 +121,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func startActivityTimer() {
-        activityTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("updateLabel"), userInfo: nil, repeats: true)
+        activityTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(MainViewController.updateLabel), userInfo: nil, repeats: true)
     }
     
     /**
@@ -190,7 +190,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      Update labels every time the timer's method called.
      */
     func updateLabel() {
-        passedSeconds++
+        passedSeconds += 1
         
         let minutes = (passedSeconds / 60) % 60
         let hours = passedSeconds / 3600
@@ -238,15 +238,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "TimeTracker"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "history_icon"), style: .Plain, target: self, action: Selector("openHistoryView"))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "list_icon"), style: .Plain, target: self, action: Selector("openActivityView"))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "history_icon"), style: .Plain, target: self, action: #selector(MainViewController.openHistoryView))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "list_icon"), style: .Plain, target: self, action: #selector(MainViewController.openActivityView))
         view.backgroundColor = color.pink()
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.separatorColor = color.pink()
         tableView.backgroundColor = UIColor.whiteColor()
         
         print("one")
-         var quitActivityRunning = NSUserDefaults.standardUserDefaults().objectForKey("quitActivityRunning") as? Bool
+         let quitActivityRunning = NSUserDefaults.standardUserDefaults().objectForKey("quitActivityRunning") as? Bool
          var passedSec = 0
         print("passedsec set")
          if quitActivityRunning == true {
@@ -300,7 +300,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      */
     func addObservers() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.appGoesIntoBackground), name: "ApplicationDidEnterBackground", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("appLoadedFromBackground"), name: "ApplicationBecameActive", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.appLoadedFromBackground), name: "ApplicationBecameActive", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.applicationWillEnterForeground), name: "ApplicationDidEnterForeground", object: nil)
     }
     
