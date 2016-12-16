@@ -407,23 +407,4 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     deinit {
         resetObservers()
     }
-    
-    //realm test
-    let config = Realm.Configuration(
-        schemaVersion: 1,
-        migrationBlock: { migration, oldSchemaVersion in
-            migration.renameProperty(onType: Person.className(), from: "yearsSinceBirth", to: "age")
-            migration.enumerateObjects(ofType: Person.className()) { oldObject, newObject in
-                // Migrate Person
-            }
-    }
-    )
-    
-    let realm = try! Realm(configuration: config)
-    let sortedDogs = realm.objects(Dog.self).filter("color = 'tan'").sorted(byProperty: "name")
-    let jim = Person()
-    try! realm.write {
-    jim.dogs.append(objectsIn: sortedDogs)
-    }
-    
 }
