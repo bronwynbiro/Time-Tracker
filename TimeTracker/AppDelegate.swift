@@ -12,8 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var window: UIWindow?
-        func application(application: UIApplication,
-                         didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        func application(_ application: UIApplication,
+                         didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
             return true
         }
     }
@@ -24,36 +24,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     // Save app's state to load it back when the user comes back.
     
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         print("application will resign active...")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
         CoreDataHandler.sharedInstance.saveContext()
         let quitActivityRunning =
-            NSUserDefaults.standardUserDefaults().boolForKey("quitActivityRunning")
-        NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.bool(forKey: "quitActivityRunning")
+        UserDefaults.standard.synchronize()
         //set the time of exiting app to calculate time it was in background later
-        let currDate = NSDate()
+        let currDate = Date()
         if quitActivityRunning == true {
-            NSUserDefaults.standardUserDefaults().setObject(currDate as NSDate, forKey:"quitDate")
+            UserDefaults.standard.set(currDate as Date, forKey:"quitDate")
         }
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
     }
     
     
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
          print("did enter background app goes in.")
-         NSUserDefaults.standardUserDefaults().synchronize()
-         NSNotificationCenter.defaultCenter().postNotificationName("AppDidEnterBackground", object: nil)
+         UserDefaults.standard.synchronize()
+         NotificationCenter.default.post(name: Notification.Name(rawValue: "AppDidEnterBackground"), object: nil)
          CoreDataHandler.sharedInstance.saveContext()
          let quitActivityRunning =
-         NSUserDefaults.standardUserDefaults().boolForKey("quitActivityRunning")
-         NSUserDefaults.standardUserDefaults().synchronize()
-         let currDate = NSDate()
+         UserDefaults.standard.bool(forKey: "quitActivityRunning")
+         UserDefaults.standard.synchronize()
+         let currDate = Date()
          if quitActivityRunning == true {
-         NSUserDefaults.standardUserDefaults().setObject(currDate as NSDate, forKey:"quitDate")
-         NSUserDefaults.standardUserDefaults().synchronize()
+         UserDefaults.standard.set(currDate as Date, forKey:"quitDate")
+         UserDefaults.standard.synchronize()
          }
-         NSUserDefaults.standardUserDefaults().synchronize()
+         UserDefaults.standard.synchronize()
          print("quitActivityRunning?", quitActivityRunning)
          print("currdate", currDate)
          
@@ -62,33 +62,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //  Loads the passed seconds if the timer was active when the app was closed.
     
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         print("app did become active..")
-        let currDate = NSDate()
-        let quitActivityRunning = NSUserDefaults.standardUserDefaults().objectForKey("quitActivityRunning") as? Bool
+        let currDate = Date()
+        let quitActivityRunning = UserDefaults.standard.object(forKey: "quitActivityRunning") as? Bool
         if quitActivityRunning == true {
             //retrieve time of exit, calculate time in background, set
-            let quitDate = NSUserDefaults.standardUserDefaults().objectForKey("quitDate") as! NSDate
+            let quitDate = UserDefaults.standard.object(forKey: "quitDate") as! Date
             print("quit date became activ:", quitDate)
-            let passedSec = currDate.timeIntervalSinceDate(quitDate)
-            NSUserDefaults.standardUserDefaults().setDouble(passedSec, forKey: "secondsInBackground")
+            let passedSec = currDate.timeIntervalSince(quitDate)
+            UserDefaults.standard.set(passedSec, forKey: "secondsInBackground")
             print("passed seconds active:", passedSec)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.synchronize()
         }
     }
     
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         print("app will enter foreground..")
-        let currDate = NSDate()
-        let quitActivityRunning = NSUserDefaults.standardUserDefaults().objectForKey("quitActivityRunning") as? Bool
+        let currDate = Date()
+        let quitActivityRunning = UserDefaults.standard.object(forKey: "quitActivityRunning") as? Bool
         if quitActivityRunning == true {
             //retrieve time of exit, calculate time in background, set
-            let quitDate = NSUserDefaults.standardUserDefaults().objectForKey("quitDate") as! NSDate
+            let quitDate = UserDefaults.standard.object(forKey: "quitDate") as! Date
             print("quit date in will enter foreground:", quitDate)
-            let passedSec = currDate.timeIntervalSinceDate(quitDate)
-            NSUserDefaults.standardUserDefaults().setDouble(passedSec, forKey: "secondsInBackground")
+            let passedSec = currDate.timeIntervalSince(quitDate)
+            UserDefaults.standard.set(passedSec, forKey: "secondsInBackground")
             print("passed seconds will enter foreground:", passedSec)
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.synchronize()
             
         }
     }
@@ -97,21 +97,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      Save core data context if the app is closed.
      - parameter application: application
      */
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         print("app will terminate..")
         CoreDataHandler.sharedInstance.saveContext()
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
         CoreDataHandler.sharedInstance.saveContext()
         let quitActivityRunning =
-            NSUserDefaults.standardUserDefaults().boolForKey("quitActivityRunning")
-        NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.bool(forKey: "quitActivityRunning")
+        UserDefaults.standard.synchronize()
         //set the time of exiting app to calculate time it was in background later
-        let currDate = NSDate()
+        let currDate = Date()
         if quitActivityRunning == true {
-            NSUserDefaults.standardUserDefaults().setObject(currDate as NSDate, forKey:"quitDate")
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.set(currDate as Date, forKey:"quitDate")
+            UserDefaults.standard.synchronize()
         }
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
     }
     
     

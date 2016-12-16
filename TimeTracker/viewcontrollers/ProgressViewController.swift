@@ -18,9 +18,9 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         title = "Progress"
         
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.separatorColor = color.pink()
-        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.backgroundColor = UIColor.white
         self.tableView.delegate = self
         self.tableView.dataSource = self
         loadNormalState()
@@ -30,12 +30,12 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     func loadNormalState() {
         navigationItem.leftBarButtonItem = nil
         navigationItem.backBarButtonItem?.action = Selector("backButtonPressed")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("editButtonPressed"))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: Selector("editButtonPressed"))
     }
     
 
     
-    @IBAction func calculateTodaysActivities(sender: UIButton) {
+    @IBAction func calculateTodaysActivities(_ sender: UIButton) {
         percentArray.removeAll()
         orderedNamesArray.removeAll()
         let todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
@@ -74,8 +74,8 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
                 cell.percentLabel.text = "\(round(percentage))%"
                 configureCell(cell , percentage: percentString, time: timeString, name: nameString)
             }
-            percentArray.insert(percentage, atIndex: 0)
-            orderedNamesArray.insert(nameString, atIndex: 0)
+            percentArray.insert(percentage, at: 0)
+            orderedNamesArray.insert(nameString, at: 0)
         }
         calculateRows(todaysActivitiesArray)
         self.tableView.reloadData()
@@ -85,7 +85,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     }
  
 
-    @IBAction func calculateWeeklyActivities(sender: UIButton) {
+    @IBAction func calculateWeeklyActivities(_ sender: UIButton) {
         percentArray.removeAll()
         orderedNamesArray.removeAll()
         let weekActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForWeekActivities()
@@ -126,8 +126,8 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
                 cell.percentLabel.text = "\(round(percentage))%"
                 configureCell(cell , percentage: percentString, time: timeString, name: nameString)
                 }
-                percentArray.insert(percentage, atIndex: 0)
-                orderedNamesArray.insert(nameString, atIndex: 0)
+                percentArray.insert(percentage, at: 0)
+                orderedNamesArray.insert(nameString, at: 0)
             }
             print("names array ordered", orderedNamesArray)
             print("percentArr", percentArray)
@@ -141,7 +141,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
 
-    @IBAction func calculateMonthlyActivities(sender: UIButton) {
+    @IBAction func calculateMonthlyActivities(_ sender: UIButton) {
         percentArray.removeAll()
         orderedNamesArray.removeAll()
         let monthActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForMonthActivities()
@@ -184,8 +184,8 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.tableView.reloadData()
                 configureCell(cell , percentage: percentString, time: timeString, name: nameString)
             }
-            percentArray.insert(percentage, atIndex: 0)
-            orderedNamesArray.insert(nameString, atIndex: 0)
+            percentArray.insert(percentage, at: 0)
+            orderedNamesArray.insert(nameString, at: 0)
         }
         calculateRows(monthActivitiesArray)
         self.tableView.reloadData()
@@ -194,10 +194,10 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         pieChartView.centerText = ("Total time: \(monthString)")
         }
     
-    func calculateRows(activitiesArray: [History]) -> Int {
+    func calculateRows(_ activitiesArray: [History]) -> Int {
         var sum = 0
         for item in activitiesArray{
-            numberOfRows.insert(item.name!, atIndex: 0)
+            numberOfRows.insert(item.name!, at: 0)
         }
 
         let unique = Array(Set(numberOfRows))
@@ -205,28 +205,28 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
 
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let unique = Array(Set(numberOfRows))
         return unique.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ProgressCell", forIndexPath: indexPath) as! ProgressCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProgressCell", for: indexPath) as! ProgressCell
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
-    func configureCell(cell: ProgressCell, percentage: String!, time: String!, name: String!)  {
-        cell.backgroundColor = UIColor.whiteColor()
+    func configureCell(_ cell: ProgressCell, percentage: String!, time: String!, name: String!)  {
+        cell.backgroundColor = UIColor.white
         cell.nameLabel.text = "\(name)"
         cell.percentLabel.text = "\(percentage)"
         cell.timeLabel.text = "\(time)"
     }
     
-func setChart(dataPoints: [String], values: [Double]) {
+func setChart(_ dataPoints: [String], values: [Double]) {
         
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {

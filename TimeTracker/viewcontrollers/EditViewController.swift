@@ -7,21 +7,21 @@ import UIKit
 import CoreData
 import Foundation
 
-extension NSDate
+extension Date
 {
-    convenience
+    
     init(dateString:String) {
-        let dateStringFormatter = NSDateFormatter()
+        let dateStringFormatter = DateFormatter()
         dateStringFormatter.dateFormat = "hh:mm"
-        dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        dateStringFormatter.locale = Locale(identifier: "en_US_POSIX")
         //MARK: switch to date from old??
-        let d = dateStringFormatter.dateFromString(dateString)!
-        self.init(timeInterval:0, sinceDate:d)
+        let d = dateStringFormatter.date(from: dateString)!
+        (self as NSDate).init(timeInterval:0, since:d)
     }
 }
 var fetchController: NSFetchedResultsController = {
     let entity = NSEntityDescription.entityForName("History", inManagedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext)
-    let fetchRequest = NSFetchRequest()
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
     fetchRequest.entity = entity
     
     let nameDescriptor = NSSortDescriptor(key: "name", ascending: false)
@@ -33,8 +33,8 @@ var fetchController: NSFetchedResultsController = {
 }()
 
 /// date formatter
-var todayDateFormatter: NSDateFormatter = {
-    let dateFormatter = NSDateFormatter()
+var todayDateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
     return dateFormatter
 }()
@@ -46,34 +46,34 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
     @IBOutlet weak var labelDisplay: UITextField!
     
     var PassCell: UITableViewCell!
-    var PassPath: NSIndexPath!
+    var PassPath: IndexPath!
     var tableView: UITableView!
-    var startDate: NSDate!
-    var endDate: NSDate!
+    var startDate: Date!
+    var endDate: Date!
     var PassHistory: History!
     var PassDuration: NSNumber!
     var choosenActivity: Activity?
     var passedSeconds: Int = 0
-    var startDateYear: NSDate?
+    var startDateYear: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        StartDatePicker.date = PassHistory.startDate!
-        EndDatePicker.date =  PassHistory.endDate!
+        StartDatePicker.date = PassHistory.startDate! as Date
+        EndDatePicker.date =  PassHistory.endDate! as Date
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func updateCellTime(sender: UIButton) {
-        let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell") as! HistoryCell
+    @IBAction func updateCellTime(_ sender: UIButton) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
         let indexPath = PassPath
         let history = PassHistory
-        history.startDate = StartDatePicker.date
-        history.endDate = EndDatePicker.date
-        cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
-        let PassDuration = history.endDate!.timeIntervalSinceDate(history.startDate!)
+        history?.startDate = StartDatePicker.date
+        history?.endDate = EndDatePicker.date
+        cell.timeLabel.text = "\(todayDateFormatter.string(from: history?.startDate! as! Date)) - \(todayDateFormatter.string(from: history?.endDate! as! Date))"
+        let PassDuration = history?.endDate!.timeIntervalSince(history?.startDate! as! Date)
         cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration))
         CoreDataHandler.sharedInstance.updateHistory(history.name!, startDate: history.startDate!, endDate: history.endDate!, duration: Int(PassDuration), PassPath: PassPath, PassHistory: PassHistory)
         

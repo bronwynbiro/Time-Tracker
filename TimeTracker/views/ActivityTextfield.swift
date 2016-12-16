@@ -39,21 +39,21 @@ class ActivityTextfield: UITextField {
         Customize the look of the textfield.
     */
     func setupView() {
-        borderStyle = .None
+        borderStyle = .none
         placeholder = "Activity name"
-        textAlignment = .Center
-        font = UIFont.systemFontOfSize(16.0)
+        textAlignment = .center
+        font = UIFont.systemFont(ofSize: 16.0)
         minimumFontSize = 10
-        autocorrectionType = .No
-        autocapitalizationType = .None
-        returnKeyType = .Done
-        contentVerticalAlignment = .Center
-        leftViewMode = .Always
+        autocorrectionType = .no
+        autocapitalizationType = .none
+        returnKeyType = .done
+        contentVerticalAlignment = .center
+        leftViewMode = .always
         leftView = self.leftViewForTextField()
-        layer.borderColor = UIColor.whiteColor().CGColor
+        layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 1.0
         layer.cornerRadius = 2.0
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
     }
 
     /**
@@ -62,7 +62,7 @@ class ActivityTextfield: UITextField {
     - returns: UIView the view to add
     */
     func leftViewForTextField() -> UIView {
-        let leftView = UIView(frame: CGRectMake(0.0, 0.0, 10.0, 0.0))
+        let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 0.0))
         return leftView
     }
 

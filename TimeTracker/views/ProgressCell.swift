@@ -21,10 +21,10 @@ class ProgressCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        nameLabel.textColor = UIColor.blackColor()
-        percentLabel.textColor = UIColor.blackColor()
-        timeLabel.textColor = UIColor.blackColor()
-        backgroundColor = UIColor.whiteColor()
+        nameLabel.textColor = UIColor.black
+        percentLabel.textColor = UIColor.black
+        timeLabel.textColor = UIColor.black
+        backgroundColor = UIColor.white
     }
     
 }

@@ -19,13 +19,13 @@ extension NSString {
 
     - returns: NSString formatted duration string
     */
-    class func createDurationStringFromDuration(duration: Double) -> String {
-        let formatter = NSNumberFormatter()
+    class func createDurationStringFromDuration(_ duration: Double) -> String {
+        let formatter = NumberFormatter()
         if duration < 2 {
         formatter.minimumIntegerDigits = 1
         }
 
-        let minutes = UInt32((duration / 60) % 60)
+        let minutes = UInt32((duration / 60).truncatingRemainder(dividingBy: 60))
         let hours = UInt32((duration / 3600))
 
         let minuteString = minutes > 9 ? String(minutes) : "0" + String(minutes)
@@ -39,7 +39,7 @@ extension NSString {
         Creates a string from the passed in integer
         - parameter time: integer to use for creating the time string
     */
-    class func timeStringWithTimeToDisplay(time: Int) -> String {
+    class func timeStringWithTimeToDisplay(_ time: Int) -> String {
         return String(format: "%.2d", time)
     }
 }

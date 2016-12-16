@@ -27,10 +27,10 @@ class HistoryCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        nameLabel.textColor = UIColor.blackColor()
-        durationLabel.textColor = UIColor.blackColor()
-        timeLabel.textColor = UIColor.blackColor()
-        backgroundColor = UIColor.whiteColor()
+        nameLabel.textColor = UIColor.black
+        durationLabel.textColor = UIColor.black
+        timeLabel.textColor = UIColor.black
+        backgroundColor = UIColor.white
     }
 
     /**
@@ -39,7 +39,7 @@ class HistoryCell: UITableViewCell {
     - parameter editing:  YES to enter editing mode, NO to leave it. The default value is NO
     - parameter animated: YES to animate the appearance or disappearance of the insertion/deletion control and the reordering control, NO to make the transition immediate.
     */
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         if editing == true {
             durationLabel.alpha = 0

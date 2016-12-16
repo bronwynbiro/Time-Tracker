@@ -1,24 +1,13 @@
-//
-//  NewActivityView.swift
-//  TimeTracker
-//
-
-
 import UIKit
+import CoreData
 
-/**
-    Delegate protocol.
-*/
+
 protocol NewActivityDelegate {
-    /**
-        Delegate method to tell the view controller that an activity has been saved.
-    */
+    //Delegate method to tell the view controller that an activity has been saved.
     func slideActivityViewUp()
 }
 
-/**
-    A view to add new activities.
-*/
+
 
 class NewActivityView: UIView, UITextFieldDelegate {
 
@@ -36,16 +25,16 @@ class NewActivityView: UIView, UITextFieldDelegate {
     */
     init(frame: CGRect, delegate: NewActivityDelegate) {
         let label = UILabel()
-        label.frame = CGRectMake(10.0, 10.0, CGRectGetWidth(frame)-20.0, 40.0)
+        label.frame = CGRect(x: 10.0, y: 10.0, width: frame.width-20.0, height: 40.0)
         label.text = "Enter the name of your activity"
-        label.textColor = UIColor.blackColor()
-        label.textAlignment = .Center
-        label.backgroundColor = UIColor.clearColor()
-        label.font = UIFont.boldSystemFontOfSize(14.0)
+        label.textColor = UIColor.black
+        label.textAlignment = .center
+        label.backgroundColor = UIColor.clear
+        label.font = UIFont.boldSystemFont(ofSize: 14.0)
         label.numberOfLines = 0
 
         self.textField = ActivityTextfield()
-        self.textField.frame = CGRectMake(10.0, CGRectGetHeight(frame) - 40.0, CGRectGetWidth(label.frame), 30.0)
+        self.textField.frame = CGRect(x: 10.0, y: frame.height - 40.0, width: label.frame.width, height: 30.0)
 
         self.delegate = delegate
         super.init(frame: frame)
@@ -54,7 +43,7 @@ class NewActivityView: UIView, UITextFieldDelegate {
         self.addSubview(self.textField)
         self.addSubview(label)
 
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
         layer.cornerRadius = 2.0
     }
 
@@ -91,11 +80,11 @@ class NewActivityView: UIView, UITextFieldDelegate {
         var frame = self.frame
         frame.origin.y = -10
 
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
                 self.frame = frame
-            }) { (finished) -> Void in
+            }, completion: { (finished) -> Void in
                 self.textField.becomeFirstResponder()
-        }
+        }) 
     }
 
     /**
@@ -105,11 +94,11 @@ class NewActivityView: UIView, UITextFieldDelegate {
         var frame = self.frame
         frame.origin.y = -100
 
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
                 self.frame = frame
-            }) { (finished) -> Void in
+            }, completion: { (finished) -> Void in
                 self.textField.resignFirstResponder()
-        }
+        }) 
     }
 
     /**
@@ -117,7 +106,7 @@ class NewActivityView: UIView, UITextFieldDelegate {
     - param textField The text field whose return button was pressed.
     - return BOOL YES if the text field should implement its default behavior for the return button; otherwise, NO.
     */
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         saveItem()
         return true
     }

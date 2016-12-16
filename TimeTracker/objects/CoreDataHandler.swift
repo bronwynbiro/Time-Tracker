@@ -1,9 +1,3 @@
-//
-//  CoreDataHandler.swift
-//  TimeTracker
-//
-
-
 import UIKit
 import CoreData
 
@@ -14,9 +8,9 @@ class CoreDataHandler: NSObject {
      - parameter activityName: activityName activity to be saved.
      - returns: BOOL boolean value determining whether the activity is already in core data or not.
      */
-    func isDuplicate(activityName: String) -> Bool {
+    func isDuplicate(_ activityName: String) -> Bool {
         let entityDescription = NSEntityDescription.entityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext)
-        let request = NSFetchRequest()
+        let request = NSFetchRequest<NSFetchRequestResult>()
         request.entity = entityDescription
         let predicate = NSPredicate(format: "name = %@", activityName)
         request.predicate = predicate
@@ -33,8 +27,8 @@ class CoreDataHandler: NSObject {
      Creates a NSDateFormatter to format the dates of the Route object
      - returns: NSDateFormatter the dateFormatter object
      */
-    lazy var dateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
+    lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
         return dateFormatter
     }()
@@ -43,7 +37,7 @@ class CoreDataHandler: NSObject {
      Adds new activity to core data.
      - parameter name: name activity name to be saved.
      */
-    func addNewActivityName(name: String) {
+    func addNewActivityName(_ name: String) {
         let newActivity = NSEntityDescription.insertNewObjectForEntityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext) as! Activity
         newActivity.name = name
         saveContext()
@@ -56,13 +50,13 @@ class CoreDataHandler: NSObject {
      - parameter endDate:   when it was finished
      - parameter duration:  duration of the activity
      */
-    func saveHistory(name: String, startDate: NSDate, endDate: NSDate, duration: NSInteger) {
+    func saveHistory(_ name: String, startDate: Date, endDate: Date, duration: NSInteger) {
         let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
         history.name = name
         history.startDate = startDate
         history.endDate = endDate
-        history.duration = duration
-        history.saveTime = dateFormatter.stringFromDate(endDate)
+        history.duration = duration as NSNumber?
+        history.saveTime = dateFormatter.string(from: endDate)
         saveContext()
     }
     
@@ -75,28 +69,28 @@ class CoreDataHandler: NSObject {
      - parameter duration:  duration of the activity
      */
     
-    func updateHistory(name: String, startDate: NSDate, endDate: NSDate, duration: NSInteger, PassPath: NSIndexPath, PassHistory: History) {
+    func updateHistory(_ name: String, startDate: Date, endDate: Date, duration: NSInteger, PassPath: IndexPath, PassHistory: History) {
         //    let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
         let history = PassHistory
         history.name = name
         history.startDate = startDate
         history.endDate = endDate
         //calculate new duration
-        let calendar = NSCalendar.currentCalendar()
-        let dateMakerFormatter = NSDateFormatter()
+        let calendar = Calendar.current
+        let dateMakerFormatter = DateFormatter()
         dateMakerFormatter.dateFormat = "hh:mm a"
         let startTime = startDate
         let endTime = endDate
-        let hourMinuteComponents: NSCalendarUnit = [.Hour, .Minute]
-        let timeDifference = calendar.components(
+        let hourMinuteComponents: NSCalendar.Unit = [.hour, .minute]
+        let timeDifference = (calendar as NSCalendar).components(
             hourMinuteComponents,
-            fromDate: startTime,
-            toDate: endTime,
+            from: startTime,
+            to: endTime,
             options: [])
         let durationString = "\(timeDifference)"
-        let interval = endDate.timeIntervalSinceDate(startDate)
-        history.duration = interval
-        history.saveTime = dateFormatter.stringFromDate(endDate)
+        let interval = endDate.timeIntervalSince(startDate)
+        history.duration = interval as NSNumber?
+        history.saveTime = dateFormatter.string(from: endDate)
         saveContext()
     }
     
@@ -106,7 +100,7 @@ class CoreDataHandler: NSObject {
      - returns: array of history objects
      */
     func allHistoryItems() -> [History]? {
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
         fetchRequest.entity = entityDescription
         
@@ -121,15 +115,15 @@ class CoreDataHandler: NSObject {
      - returns: array of History objects
      */
     func fetchCoreDataForTodayActivities() -> [History] {
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
         fetchRequest.entity = entityDescription
         
         let dateDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
         fetchRequest.sortDescriptors = [dateDescriptor]
         
-        let startDate = NSDate.dateByMovingToBeginningOfDay()
-        let endDate = NSDate.dateByMovingToEndOfDay()
+        let startDate = Date.dateByMovingToBeginningOfDay()
+        let endDate = Date.dateByMovingToEndOfDay()
         let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@)", startDate, endDate)
         fetchRequest.predicate = predicate
         
@@ -138,15 +132,15 @@ class CoreDataHandler: NSObject {
     
     
     func fetchCoreDataForWeekActivities() -> [History] {
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
         fetchRequest.entity = entityDescription
         
         let dateDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
         fetchRequest.sortDescriptors = [dateDescriptor]
         
-        let startDate = NSDate.dateSevenDaysAgo()
-        let endDate = NSDate.dateByMovingToEndOfDay()
+        let startDate = Date.dateSevenDaysAgo()
+        let endDate = Date.dateByMovingToEndOfDay()
         let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@)", startDate, endDate)
         fetchRequest.predicate = predicate
         
@@ -154,15 +148,15 @@ class CoreDataHandler: NSObject {
     }
     
     func fetchCoreDataForMonthActivities() -> [History] {
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
         fetchRequest.entity = entityDescription
         
         let dateDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
         fetchRequest.sortDescriptors = [dateDescriptor]
         
-        let startDate = NSDate.dateMonthAgo()
-        let endDate = NSDate.dateByMovingToEndOfDay()
+        let startDate = Date.dateMonthAgo()
+        let endDate = Date.dateByMovingToEndOfDay()
         let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@)", startDate, endDate)
         fetchRequest.predicate = predicate
         
@@ -176,7 +170,7 @@ class CoreDataHandler: NSObject {
      - returns: array of Activity objects
      */
     func fetchCoreDataAllActivities() -> [Activity] {
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         let entityDescription = NSEntityDescription.entityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext)
         fetchRequest.entity = entityDescription
         
@@ -190,7 +184,7 @@ class CoreDataHandler: NSObject {
      - parameter fetchRequest: request to make
      - returns: array of objects
      */
-    func fetchCoreDataWithFetchRequest(fetchRequest: NSFetchRequest) -> [AnyObject]? {
+    func fetchCoreDataWithFetchRequest(_ fetchRequest: NSFetchRequest<NSFetchRequestResult>) -> [AnyObject]? {
         do {
             let fetchResults = try backgroundManagedObjectContext.executeFetchRequest(fetchRequest)
             return fetchResults
@@ -201,45 +195,45 @@ class CoreDataHandler: NSObject {
         return nil
     }
     
-    func filterResultsMonth(i: String)-> [History] {
+    func filterResultsMonth(_ i: String)-> [History] {
         var activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
         // for activity in activitiesArray {
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
         fetchRequest.entity = entityDescription
         
-        let startDate = NSDate.dateMonthAgo()
-        let endDate = NSDate.dateByMovingToEndOfDay()
+        let startDate = Date.dateMonthAgo()
+        let endDate = Date.dateByMovingToEndOfDay()
         let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@) AND (name = %@)", startDate, endDate, i)
         fetchRequest.predicate = predicate
         //  fetchRequest.resultType = .DictionaryResultType
         return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
     }
     
-    func filterResultsWeek(i: String)-> [History] {
+    func filterResultsWeek(_ i: String)-> [History] {
         var activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
         // for activity in activitiesArray {
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
         fetchRequest.entity = entityDescription
         
-        let startDate = NSDate.dateSevenDaysAgo()
-        let endDate = NSDate.dateByMovingToEndOfDay()
+        let startDate = Date.dateSevenDaysAgo()
+        let endDate = Date.dateByMovingToEndOfDay()
         let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@) AND (name = %@)", startDate, endDate, i)
         fetchRequest.predicate = predicate
         //  fetchRequest.resultType = .DictionaryResultType
         return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
     }
     
-    func filterResultsDay(i: String)-> [History] {
+    func filterResultsDay(_ i: String)-> [History] {
         var activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
         // for activity in activitiesArray {
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
         fetchRequest.entity = entityDescription
         
-        let startDate = NSDate.dateByMovingToBeginningOfDay()
-        let endDate = NSDate.dateByMovingToEndOfDay()
+        let startDate = Date.dateByMovingToBeginningOfDay()
+        let endDate = Date.dateByMovingToEndOfDay()
         let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@) AND (name = %@)", startDate, endDate, i)
         fetchRequest.predicate = predicate
         return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
@@ -250,7 +244,7 @@ class CoreDataHandler: NSObject {
      Delete a single Core Data object
      - parameter object: object to delete
      */
-    func deleteObject(object: NSManagedObject) {
+    func deleteObject(_ object: NSManagedObject) {
         backgroundManagedObjectContext.deleteObject(object)
         saveContext()
     }
@@ -259,7 +253,7 @@ class CoreDataHandler: NSObject {
      Delete multiple objects
      - parameter objectsToDelete: objects to delete
      */
-    func deleteObjects(objectsToDelete: [NSManagedObject]) {
+    func deleteObjects(_ objectsToDelete: [NSManagedObject]) {
         for object in objectsToDelete {
             backgroundManagedObjectContext.deleteObject(object)
         }

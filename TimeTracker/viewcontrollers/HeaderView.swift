@@ -44,11 +44,11 @@ class HeaderView: UIView {
 
     - returns: created label
     */
-    func createLabelWithFrame(frame: CGRect, title: NSString) -> UILabel {
+    func createLabelWithFrame(_ frame: CGRect, title: NSString) -> UILabel {
         let titleLabel = UILabel(frame: frame)
         titleLabel.text = title as String
-        titleLabel.textColor = .blackColor()
-        titleLabel.textAlignment = .Left
+        titleLabel.textColor = .black
+        titleLabel.textAlignment = .left
         titleLabel.font = UIFont(name: "Avenir-Book", size: 16)
     
 

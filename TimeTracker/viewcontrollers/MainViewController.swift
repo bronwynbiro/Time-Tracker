@@ -1,11 +1,5 @@
-//
-//  MainViewController.swift
-//  TimeTracker
-//
-
-
 import UIKit
-import CoreData
+import RealmSwift
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -13,14 +7,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var isActivityRunning: Bool = false
     var isActivityPaused: Bool = false
     var passedSeconds: Int = 0
-    var startDate: NSDate?
-    var quitDate: NSDate?
-    var activityTimer: NSTimer?
+    var startDate: Date?
+    var quitDate: Date?
+    var activityTimer: Timer?
     var totalduration: NSInteger = 0
     var todaysActivitiesArray: [History] = []
     
-    lazy var todayDateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
+    lazy var todayDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm"
         return dateFormatter
     }()
@@ -36,8 +30,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      Called when user selected an activity on ActivityListViewController. First it checks to see if any activities are running, if YES it stops the current one, and runs the new
      - parameter unwindSegue: the unwind segue
      */
-    @IBAction func unwindFromActivitiesView(unwindSegue: UIStoryboardSegue) {
-        let sourceViewController = unwindSegue.sourceViewController as! ActivityListViewController
+    @IBAction func unwindFromActivitiesView(_ unwindSegue: UIStoryboardSegue) {
+        let sourceViewController = unwindSegue.source as! ActivityListViewController
         
         let selectedActivity = sourceViewController.selectedActivity()
         if choosenActivity != selectedActivity {
@@ -57,15 +51,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if isActivityPaused == true {
                 isActivityPaused = false
                 isActivityRunning = true
-                startPauseButton.setTitle("PAUSE", forState: .Normal)
+                startPauseButton.setTitle("PAUSE", for: UIControlState())
                 startActivityTimer()
             } else {
                 openActivityView()
             }
         }
-        NSUserDefaults.standardUserDefaults().setBool(isActivityRunning, forKey:"quitActivityrunning")
+        UserDefaults.standard.set(isActivityRunning, forKey:"quitActivityrunning")
         
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
     }
     
     /**
@@ -78,34 +72,34 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         minutesLabel.text = "00"
         hoursLabel.text = "00"
         activityLabel.text = "START"
-        startPauseButton.setTitle("START", forState: .Normal)
+        startPauseButton.setTitle("START", for: UIControlState())
         if passedSeconds >= 60 {
             saveActivityToHistory()
         }
-        NSUserDefaults.standardUserDefaults().setBool(isActivityRunning, forKey:"quitActivityRunning")
+        UserDefaults.standard.set(isActivityRunning, forKey:"quitActivityRunning")
         
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
     }
     
     /**
      Start the new activity. start timer and set properties.
      */
     func startActivity() {
-        startDate = NSDate()
+        startDate = Date()
         passedSeconds = 0
         invalidateTimer()
         startActivityTimer()
-        startPauseButton.setTitle("PAUSE", forState: .Normal)
+        startPauseButton.setTitle("PAUSE", for: UIControlState())
         isActivityRunning = true
         isActivityPaused = false
         
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy, HH:mm"
         
-        NSUserDefaults.standardUserDefaults().setBool(isActivityRunning, forKey:"quitActivityRunning")
+        UserDefaults.standard.set(isActivityRunning, forKey:"quitActivityRunning")
         
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
     }
     
     /**
@@ -115,20 +109,20 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         isActivityPaused = true
         isActivityRunning = false
         invalidateTimer()
-        startPauseButton.setTitle("START", forState: .Normal)
-        NSUserDefaults.standardUserDefaults().setBool(isActivityRunning, forKey:"quitActivityRunning")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        startPauseButton.setTitle("START", for: UIControlState())
+        UserDefaults.standard.set(isActivityRunning, forKey:"quitActivityRunning")
+        UserDefaults.standard.synchronize()
     }
     
     func startActivityTimer() {
-        activityTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(MainViewController.updateLabel), userInfo: nil, repeats: true)
+        activityTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(MainViewController.updateLabel), userInfo: nil, repeats: true)
     }
     
     /**
      Save the finished activity to core data as a history object.
      */
     func saveActivityToHistory() {
-        CoreDataHandler.sharedInstance.saveHistory(choosenActivity!.name!, startDate: startDate!, endDate: NSDate(), duration: passedSeconds)
+        CoreDataHandler.sharedInstance.saveHistory(choosenActivity!.name!, startDate: startDate!, endDate: Date(), duration: passedSeconds)
         startDate = nil
         choosenActivity = nil
         passedSeconds = 0
@@ -156,9 +150,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
          updateLabel()
          */
         if isActivityRunning == true {
-            let quitActivityRunning = NSUserDefaults.standardUserDefaults().setBool(isActivityRunning, forKey:"quitActivityRunning")
-            let passedSec = NSUserDefaults.standardUserDefaults().integerForKey("secondsInBackground")
-            let quitDate = NSUserDefaults.standardUserDefaults().objectForKey("quitDate") as? NSDate
+            let quitActivityRunning = UserDefaults.standard.set(isActivityRunning, forKey:"quitActivityRunning")
+            let passedSec = UserDefaults.standard.integer(forKey: "secondsInBackground")
+            let quitDate = UserDefaults.standard.object(forKey: "quitDate") as? Date
             if quitDate == nil {
                 print("nil quitdate in main")
             }
@@ -178,9 +172,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      */
     func appGoesIntoBackground() {
         if isActivityRunning == true{
-            quitDate = NSDate()
+            quitDate = Date()
         }
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
         print("in main view controller appgoesinto.")
     }
     
@@ -207,7 +201,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var sumOfDuration = 0
         if todaysActivitiesArray.count > 0 {
             for history in todaysActivitiesArray {
-                sumOfDuration += (history.duration?.integerValue)!
+                sumOfDuration += (history.duration?.intValue)!
             }
         }
         else {
@@ -217,7 +211,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    func calculateDeletedDurationForToday(historyToSubtract: History?) -> NSInteger {
+    func calculateDeletedDurationForToday(_ historyToSubtract: History?) -> NSInteger {
         let todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
         var totalDuration = calculateTotalDurationForToday()
         if todaysActivitiesArray.count < 1 {
@@ -238,24 +232,24 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "TimeTracker"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "history_icon"), style: .Plain, target: self, action: #selector(MainViewController.openHistoryView))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "list_icon"), style: .Plain, target: self, action: #selector(MainViewController.openActivityView))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "history_icon"), style: .plain, target: self, action: #selector(MainViewController.openHistoryView))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "list_icon"), style: .plain, target: self, action: #selector(MainViewController.openActivityView))
         view.backgroundColor = color.pink()
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.separatorColor = color.pink()
-        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.backgroundColor = UIColor.white
         
         print("one")
-         let quitActivityRunning = NSUserDefaults.standardUserDefaults().objectForKey("quitActivityRunning") as? Bool
+         let quitActivityRunning = UserDefaults.standard.object(forKey: "quitActivityRunning") as? Bool
          var passedSec = 0
         print("passedsec set")
          if quitActivityRunning == true {
-            passedSec = NSUserDefaults.standardUserDefaults().objectForKey("passedSeconds") as! Int
+            passedSec = UserDefaults.standard.object(forKey: "passedSeconds") as! Int
             print("passed seconds main:", passedSec)
             }
         print("exited loop quitrunning")
          
-         NSUserDefaults.standardUserDefaults().synchronize()
+         UserDefaults.standard.synchronize()
          
          var minutes = 0
          var hours = 0
@@ -269,14 +263,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         //updateLabel()
         
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
     }
     
     /**
      Called when the view appeared. Load the core data entities for today
      - param: animated YES if animated
      */
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loadCoreDataEntities()
     }
@@ -285,23 +279,23 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      Opens history view
      */
     func openHistoryView() {
-        performSegueWithIdentifier("showHistory", sender: nil)
+        performSegue(withIdentifier: "showHistory", sender: nil)
     }
     
     /**
      Opens Activity view
      */
     func openActivityView() {
-        performSegueWithIdentifier("showActivities", sender: nil)
+        performSegue(withIdentifier: "showActivities", sender: nil)
     }
     
     /**
      Adds observers for the notifications
      */
     func addObservers() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.appGoesIntoBackground), name: "ApplicationDidEnterBackground", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.appLoadedFromBackground), name: "ApplicationBecameActive", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.applicationWillEnterForeground), name: "ApplicationDidEnterForeground", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.appGoesIntoBackground), name: NSNotification.Name(rawValue: "ApplicationDidEnterBackground"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.appLoadedFromBackground), name: NSNotification.Name(rawValue: "ApplicationBecameActive"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.applicationWillEnterForeground), name: NSNotification.Name(rawValue: "ApplicationDidEnterForeground"), object: nil)
     }
     
     
@@ -310,7 +304,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      Removes notification observer for this class
      */
     func resetObservers() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     /**
@@ -326,7 +320,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     lazy var fetchController: NSFetchedResultsController = {
         let entity = NSEntityDescription.entityForName("History", inManagedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext)
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.entity = entity
         
         let nameDescriptor = NSSortDescriptor(key: "name", ascending: false)
@@ -345,12 +339,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      - parameter indexPath: indexPath
      - returns: created cell
      */
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! HistoryCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! HistoryCell
         if todaysActivitiesArray.count > 0 {
             let history = todaysActivitiesArray[indexPath.row]
             cell.nameLabel.text = "\(history.name!)"
-            cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
+            cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date)) - \(todayDateFormatter.string(from: history.endDate! as Date))"
             cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
         }
         return cell
@@ -362,7 +356,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      - parameter section:   in which section
      - returns: number of rows
      */
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todaysActivitiesArray.count
     }
     
@@ -372,7 +366,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      - parameter indexPath: at which indexpath
      - returns: height
      */
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
     }
     
@@ -382,7 +376,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      - parameter section:   at which section
      - returns: height
      */
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
     
@@ -393,10 +387,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      - returns: headerView
      */
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let title = self.tableView(tableView, titleForHeaderInSection: section)
         let heightForRow = self.tableView(tableView, heightForHeaderInSection: section)
-        let headerView = HeaderView(frame: CGRectMake(0.0, 0.0, CGRectGetWidth(tableView.frame), heightForRow), title: title!)
+        let headerView = HeaderView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: heightForRow), title: title! as NSString)
         return headerView
     }
     
@@ -406,12 +400,30 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      - parameter section:   at which section
      - returns: title
      */
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return String(format: "Total time spent today: \(NSString.createDurationStringFromDuration(Double(totalduration)))")
     }
     
     deinit {
         resetObservers()
+    }
+    
+    //realm test
+    let config = Realm.Configuration(
+        schemaVersion: 1,
+        migrationBlock: { migration, oldSchemaVersion in
+            migration.renameProperty(onType: Person.className(), from: "yearsSinceBirth", to: "age")
+            migration.enumerateObjects(ofType: Person.className()) { oldObject, newObject in
+                // Migrate Person
+            }
+    }
+    )
+    
+    let realm = try! Realm(configuration: config)
+    let sortedDogs = realm.objects(Dog.self).filter("color = 'tan'").sorted(byProperty: "name")
+    let jim = Person()
+    try! realm.write {
+    jim.dogs.append(objectsIn: sortedDogs)
     }
     
 }

@@ -1,12 +1,6 @@
-//
-//  HistoryViewController.swift
-//  TimeTracker
-//
-
-
 import UIKit
 import Foundation
-import CoreData
+
 
 /**
  History view controller to display the history objects from core data.
@@ -14,7 +8,7 @@ import CoreData
 
 extension MainViewController {
     var appDelegate:AppDelegate {
-        return UIApplication.sharedApplication().delegate as! AppDelegate
+        return UIApplication.shared.delegate as! AppDelegate
     }
 }
 
@@ -27,9 +21,9 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var noItemsLabel: UILabel!
     
     /// fetch controller
-    lazy var fetchController: NSFetchedResultsController = {
+    lazy var fetchController: NSFetchedResultsController = {  
         let entity = NSEntityDescription.entityForName("History", inManagedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext)
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.entity = entity
         
         let nameDescriptor = NSSortDescriptor(key: "name", ascending: false)
@@ -40,8 +34,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         return fetchedController
     }()
     
-    lazy var todayDateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
+    lazy var todayDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm"
         return dateFormatter
     }()
@@ -54,9 +48,9 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         title = "History"
         
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.separatorColor = color.pink()
-        tableView.backgroundColor = UIColor.whiteColor()
+        tableView.backgroundColor = UIColor.white
         //  suvar.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -70,19 +64,19 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     func loadNormalState() {
         navigationItem.leftBarButtonItem = nil
         navigationItem.backBarButtonItem?.action = #selector(HistoryViewController.backButtonPressed)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(HistoryViewController.editButtonPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(HistoryViewController.editButtonPressed))
     }
     
     /**
      Load the editing state of the navigation bar
      */
     func loadEditState() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Delete", style: .Plain, target: self, action: #selector(HistoryViewController.deleteButtonPressed))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(HistoryViewController.deleteButtonPressed))
         
         if numberOfItemsToDelete() == 0 {
-            navigationItem.leftBarButtonItem?.enabled = false
+            navigationItem.leftBarButtonItem?.isEnabled = false
         }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(HistoryViewController.doneButtonPressed))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(HistoryViewController.doneButtonPressed))
     }
     
     /**
@@ -97,7 +91,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      Checks for the available Activities, if YES show the empty view
      */
     func checkToShowEmptyLabel() {
-        noItemsLabel.hidden = fetchController.fetchedObjects?.count != 0
+        noItemsLabel.isHidden = fetchController.fetchedObjects?.count != 0
         tableView.reloadData()
     }
     
@@ -117,7 +111,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      */
     func updateDeleteButtonTitle() {
         let itemsCountToDelete = numberOfItemsToDelete()
-        navigationItem.leftBarButtonItem?.enabled = itemsCountToDelete != 0
+        navigationItem.leftBarButtonItem?.isEnabled = itemsCountToDelete != 0
         navigationItem.leftBarButtonItem?.title = "Delete (\(itemsCountToDelete))"
     }
     
@@ -138,7 +132,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             var objectsToDelete: [History] = []
             let selectedIndexPaths = tableView.indexPathsForSelectedRows
             for indexPath in selectedIndexPaths! {
-                let history = fetchController.objectAtIndexPath(indexPath)
+                let history = fetchController.object(at: indexPath)
                 objectsToDelete.append(history as! History)
             }
             checkToShowEmptyLabel()
@@ -163,7 +157,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      Pop the viewController
      */
     func backButtonPressed() {
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: tableView methods
@@ -171,7 +165,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      Notifies the receiver that the fetched results controller is about to start processing of one or more changes due to an add, remove, move, or update.
      - parameter controller: controller The fetched results controller that sent the message.
      */
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
     
@@ -183,20 +177,20 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter type:         what happened
      - parameter newIndexPath: The destination path for the object for insertions or moves (this value is nil for a deletion).
      */
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch (type) {
-        case NSFetchedResultsChangeType.Insert:
-            tableView.insertRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case NSFetchedResultsChangeType.insert:
+            tableView.insertRows(at: [indexPath!], with: .fade)
             break
-        case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Left)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .left)
             break
-        case .Update:
-            configureCell(tableView.cellForRowAtIndexPath(indexPath!) as! HistoryCell, indexPath: indexPath!)
+        case .update:
+            configureCell(tableView.cellForRow(at: indexPath!) as! HistoryCell, indexPath: indexPath!)
             break
-        case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Left)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: .left)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
             break
         }
     }
@@ -208,16 +202,16 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter sectionIndex: the index of the section
      - parameter type:         what happened
      */
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch(type)
         {
-        case .Insert:
-            tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .insert:
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
             break
-        case .Delete:
-            tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Left)
+        case .delete:
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .left)
             break
-        case .Update:
+        case .update:
             break
         default:
             break
@@ -228,7 +222,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      Notifies the receiver that the fetched results controller has completed processing of one or more changes due to an add, remove, move, or update.
      - parameter controller: The fetched results controller that sent the message.
      */
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
     
@@ -238,7 +232,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter indexPath: at which indexpath
      - returns: height for a row
      */
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
     }
     
@@ -248,7 +242,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter section:   at which section
      - returns: number of rows
      */
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = fetchController.sections {
             let sectionInfo = sections[section]
             return sectionInfo.numberOfObjects
@@ -262,7 +256,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter tableView: tableView
      - returns: number of sections to display
      */
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         if let sections = fetchController.sections {
             return sections.count
         } else {
@@ -276,7 +270,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter section:   section
      - returns: height of a header
      */
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
     
@@ -286,7 +280,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter section:   section
      - returns: title of the header
      */
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if let sections = fetchController.sections {
             return sections[section].name
         } else {
@@ -300,10 +294,10 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter section:   section
      - returns: headerView
      */
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let title = self.tableView(tableView, titleForHeaderInSection: section)
         let heightForView = self.tableView(tableView, heightForHeaderInSection: section)
-        let headerView = HeaderView(frame: CGRectMake(0.0, 0.0, CGRectGetWidth(tableView.frame), heightForView), title: title!)
+        let headerView = HeaderView(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: heightForView), title: title! as NSString)
         return headerView
     }
     
@@ -313,8 +307,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter indexPath: indexPath
      - returns: cell
      */
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("HistoryCell") as! HistoryCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
         
         configureCell(cell, indexPath: indexPath)
         
@@ -327,15 +321,15 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter indexPath: indexPath
      */
     
-    func configureCell(cell: HistoryCell, indexPath: NSIndexPath) -> History {
-        let history = fetchController.objectAtIndexPath(indexPath) as! History
+    func configureCell(_ cell: HistoryCell, indexPath: IndexPath) -> History {
+        let history = fetchController.object(at: indexPath) as! History
         if let str = history.name {
             cell.nameLabel.text = history.name
         }
-        cell.backgroundColor = UIColor.whiteColor()
-        cell.timeLabel.text = "\(todayDateFormatter.stringFromDate(history.startDate!)) - \(todayDateFormatter.stringFromDate(history.endDate!))"
+        cell.backgroundColor = UIColor.white
+        cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate!)) - \(todayDateFormatter.string(from: history.endDate!))"
         cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
-        print (todayDateFormatter.stringFromDate(history.startDate!))
+        print (todayDateFormatter.string(from: history.startDate!))
         return history
     }
     
@@ -345,7 +339,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter indexPath: at which indexPath
      - returns: true if editing allowed
      */
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
@@ -355,9 +349,9 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter editingStyle: the editing style, in this case Delete
      - parameter indexPath:    at which indexpath
      */
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            let historyToSubtract = fetchController.objectAtIndexPath(indexPath) as! History
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let historyToSubtract = fetchController.object(at: indexPath) as! History
            MainViewController().calculateDeletedDurationForToday(historyToSubtract)
            
             
@@ -387,12 +381,12 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter tableView: tableView
      - parameter indexPath: indexPath that was selected
      */
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.editing == true {
-            tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: .None)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.isEditing == true {
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
             updateDeleteButtonTitle()
         } else {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
@@ -401,8 +395,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter tableView: tableView
      - parameter indexPath: cell at the indexPath that was deselected
      */
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.editing == true {
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if tableView.isEditing == true {
             updateDeleteButtonTitle()
         }
     }
@@ -428,16 +422,16 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
     //MARK: segue for editview
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let nextView = (segue.destinationViewController as! EditViewController)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextView = (segue.destination as! EditViewController)
         // Get the cell that generated this segue.
         let indexPath = tableView.indexPathForSelectedRow
-        if let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! HistoryCell! {
-            let history = fetchController.objectAtIndexPath(indexPath!)
-            let selectedCell = tableView.cellForRowAtIndexPath(indexPath!)
+        if let currentCell = tableView.cellForRow(at: indexPath!) as! HistoryCell! {
+            let history = fetchController.object(at: indexPath!)
+            let selectedCell = tableView.cellForRow(at: indexPath!)
             nextView.PassCell = selectedCell
             nextView.PassPath = indexPath
-            nextView.PassHistory = fetchController.objectAtIndexPath(indexPath!) as! History
+            nextView.PassHistory = fetchController.object(at: indexPath!) as! History
             nextView.tableView = tableView
             nextView.startDate = history.startDate
             nextView.endDate = history.endDate

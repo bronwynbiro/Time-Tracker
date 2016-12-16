@@ -17,8 +17,8 @@ class DefaultNavigationController: UINavigationController {
 
         - returns: UIStatusBarStyle the statusbar style
     */
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
 
     /**
@@ -27,9 +27,9 @@ class DefaultNavigationController: UINavigationController {
     */
     override func awakeFromNib() {
         super.awakeFromNib()
-        navigationBar.tintColor = UIColor.whiteColor()
-        navigationBar.barTintColor = UIColor.whiteColor()
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationBar.tintColor = UIColor.white
+        navigationBar.barTintColor = UIColor.white
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         view.backgroundColor = color.pink()
     }
 
