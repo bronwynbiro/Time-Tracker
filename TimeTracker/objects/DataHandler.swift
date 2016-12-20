@@ -64,11 +64,11 @@ class dataHandler: NSObject {
        // let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
         history.name = name
         history.startDate = startDate as Date
-        history.endDate = endDate
+        history.endDate = endDate as Date
         history.duration = duration as NSNumber?
-        history.saveTime = dateFormatter.stringFromDate(endDate)
+        history.saveTime = dateFormatter.string(from: endDate as Date)
         try! realm.write {
-            realm.add(history)
+            realm.create(history)
         }
        //TODO: saveContext()
     }
@@ -126,19 +126,10 @@ class dataHandler: NSObject {
      - returns: array of History objects
      */
     func fetchCoreDataForTodayActivities() -> [History] {
-        let fetchRequest = NSFetchRequest()
-        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
-        fetchRequest.entity = entityDescription
-        
-        let dateDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
-        fetchRequest.sortDescriptors = [dateDescriptor]
-        
-        let startDate = NSDate.dateByMovingToBeginningOfDay()
-        let endDate = NSDate.dateByMovingToEndOfDay()
-        let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@)", startDate, endDate)
-        fetchRequest.predicate = predicate
-        
-        return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
+        let startDate = Date.dateByMovingToBeginningOfDay()
+        let endDate = Date.dateByMovingToEndOfDay()
+        let todayActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
+        return todayActivities as! [History]
     }
     
     

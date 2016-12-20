@@ -33,7 +33,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func unwindFromActivitiesView(_ unwindSegue: UIStoryboardSegue) {
         let sourceViewController = unwindSegue.source as! ActivityListViewController
         
-        let selectedActivity = sourceViewController.selectedActivity()
+        let selectedActivity = sourceViewController.selectedActivity() as Activity
         if choosenActivity != selectedActivity {
             stopActivity()
             choosenActivity = selectedActivity
