@@ -1,13 +1,12 @@
-//
-//  History.swift
-//  TimeTracker
-//
-
 import Foundation
 import CoreData
 
 class History: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
+    
+    var saveTime: String?
+    var startDate: Date?
+    var name: String?
+    var endDate: Date?
+    var duration: NSNumber?
 
 }

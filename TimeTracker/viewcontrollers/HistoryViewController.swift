@@ -12,12 +12,8 @@ extension MainViewController {
     }
 }
 
-class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
-    
-    
-    /// table view to display items
+class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
-    /// A label to display when there are no items in the view
     @IBOutlet weak var noItemsLabel: UILabel!
     
     /// fetch controller

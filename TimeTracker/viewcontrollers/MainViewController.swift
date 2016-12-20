@@ -43,6 +43,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     /**
      IBAction method to handle the start and pause button's press action.
+     TODO: check logic
      */
     @IBAction func startPauseActivity() {
         if isActivityRunning == true {
@@ -58,7 +59,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
         UserDefaults.standard.set(isActivityRunning, forKey:"quitActivityrunning")
-        
         UserDefaults.standard.synchronize()
     }
     

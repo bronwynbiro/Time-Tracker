@@ -16,11 +16,8 @@ class NewActivityView: UIView, UITextFieldDelegate {
     var delegate: NewActivityDelegate?
 
     /**
-    Custom initaliser
-
     - parameter frame:    frame
     - parameter delegate: delegate
-
     - returns: self
     */
     init(frame: CGRect, delegate: NewActivityDelegate) {
@@ -51,9 +48,7 @@ class NewActivityView: UIView, UITextFieldDelegate {
         super.init(coder: aDecoder)
     }
 
-    /**
-        Save an activity to core data if it is not already in the core data or not null.
-    */
+   
     func saveItem() {
         let activityName = textField.text
         if activityName?.characters.count == 0 {
