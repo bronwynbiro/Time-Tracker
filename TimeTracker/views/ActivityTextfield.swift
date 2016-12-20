@@ -1,13 +1,4 @@
-//
-//  ActivityTextfield.swift
-//  TimeTracker
-//
-
 import UIKit
-
-/**
-    Custom textfield class to display a custom textfield.
-*/
 
 class ActivityTextfield: UITextField {
 

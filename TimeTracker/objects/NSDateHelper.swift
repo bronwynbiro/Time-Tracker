@@ -1,8 +1,3 @@
-//
-//  NSDateHelper.swift
-//  TimeTracker
-//
-
 import Foundation
 
 extension Date {

@@ -1,14 +1,4 @@
-//
-//  DefaultNavigationController.swift
-//  TimeTracker
-//
-
-
 import UIKit
-
-/** 
-    Custom navigation controller so that we could customise it
-*/
 
 class DefaultNavigationController: UINavigationController {
 

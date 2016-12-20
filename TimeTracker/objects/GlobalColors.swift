@@ -1,14 +1,7 @@
-//
-//  GlobalColors.swift
-//  TimeTracker
-//
-
 import Foundation
 import UIKit
 
-/**
-    Have all colors in one separate class
-*/
+
 extension UIColor {}
 struct color {
     static func blue() ->UIColor {

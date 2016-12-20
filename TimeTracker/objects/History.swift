@@ -1,8 +1,7 @@
 import Foundation
-import CoreData
+import RealmSwift
 
-class History: NSManagedObject {
-    
+class History {
     var saveTime: String?
     var startDate: Date?
     var name: String?

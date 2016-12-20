@@ -1,9 +1,3 @@
-//
-//  StringHelper.swift
-//  TimeTracker
-//
-
-
 import Foundation
 
 /**

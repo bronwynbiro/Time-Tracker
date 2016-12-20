@@ -28,6 +28,7 @@
 		95738D031D3DE2F800EAB881 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9556520F1D3BEE1300C063FB /* Charts.framework */; };
 		958012C11D165EF9000946F6 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958012C01D165EF9000946F6 /* ProgressViewController.swift */; };
 		95B56B891CE37D3800D6B89E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B56B881CE37D3800D6B89E /* HeaderView.swift */; };
+		95D666211E08E8C600F9D288 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D666201E08E8C600F9D288 /* DataHandler.swift */; };
 		95ED46031D33178E00F9F1EA /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED46021D33178E00F9F1EA /* ProgressCell.swift */; };
 		F8B9AC41A37A2A483973191A /* Pods_TimeTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07C7D2D8F4C9FC3CDBB3104 /* Pods_TimeTracker.framework */; };
 /* End PBXBuildFile section */
@@ -110,6 +111,7 @@
 		958012C01D165EF9000946F6 /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		95B56B881CE37D3800D6B89E /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderView.swift; path = ../viewcontrollers/HeaderView.swift; sourceTree = "<group>"; };
 		95C1C3151D342014003AD1F9 /* TimeTracker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimeTracker-Bridging-Header.h"; sourceTree = "<group>"; };
+		95D666201E08E8C600F9D288 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
 		95ED46021D33178E00F9F1EA /* ProgressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
 		A07C7D2D8F4C9FC3CDBB3104 /* Pods_TimeTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB0801D41FDA0FC437A9F377 /* Pods-TimeTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-TimeTracker/Pods-TimeTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			children = (
 				56A6DA9B1BCF691300A80680 /* Activity.swift */,
 				56A6DA9D1BCF691300A80680 /* History.swift */,
+				95D666201E08E8C600F9D288 /* DataHandler.swift */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 			files = (
 				56A6DAB01BCF733F00A80680 /* NewActivityView.swift in Sources */,
 				95B56B891CE37D3800D6B89E /* HeaderView.swift in Sources */,
+				95D666211E08E8C600F9D288 /* DataHandler.swift in Sources */,
 				56A6DAB21BCF76F800A80680 /* DefaultNavigationController.swift in Sources */,
 				56A6DA9F1BCF691300A80680 /* Activity.swift in Sources */,
 				95ED46031D33178E00F9F1EA /* ProgressCell.swift in Sources */,

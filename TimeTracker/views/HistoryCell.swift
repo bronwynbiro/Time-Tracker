@@ -1,9 +1,3 @@
-//
-//  HistoryCell.swift
-//  TimeTracker
-//
-
-
 import UIKit
 
 /**

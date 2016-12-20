@@ -1,9 +1,5 @@
 import UIKit
-//import RealmSwift
-
-
-
- /// View controller that holds all the activities
+import RealmSwift
 
 class ActivityListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NewActivityDelegate {
 

@@ -1,8 +1,3 @@
-//
-//  EditViewController.swift
-//  TimeTracker
-//
-
 import UIKit
 import CoreData
 import Foundation
@@ -19,6 +14,7 @@ extension Date
         (self as NSDate).init(timeInterval:0, since:d)
     }
 }
+/*
 var fetchController: NSFetchedResultsController = {
     let entity = NSEntityDescription.entityForName("History", inManagedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext)
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
@@ -31,8 +27,8 @@ var fetchController: NSFetchedResultsController = {
     //fetchedController.delegate = self
     return fetchedController
 }()
+ */
 
-/// date formatter
 var todayDateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"

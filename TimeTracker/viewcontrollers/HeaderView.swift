@@ -1,13 +1,4 @@
-//
-//  HeaderView.swift
-//  TimeTracker
-//
-
-
 import UIKit
-
-//Custom view for the tableView headers
-
 
 class HeaderView: UIView {
 

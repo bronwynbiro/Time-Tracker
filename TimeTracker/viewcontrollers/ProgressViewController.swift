@@ -1,6 +1,6 @@
 import UIKit
 import Foundation
-import CoreData
+import RealmSwift
 import Charts
 
 class progressViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
