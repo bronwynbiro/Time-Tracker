@@ -45,9 +45,11 @@ class dataHandler: NSObject {
     func addNewActivityName(name: String) {
         let newActivity = Activity()
         newActivity.name = "\(name)"
+        /*
         try! realm.write {
             realm.add(newActivity)
         }
+ */
         newActivity.name = name
         //TODO: saveContext()
     }
@@ -119,12 +121,6 @@ class dataHandler: NSObject {
     }
     
     
-    //TODO: up to here migrated with Realm 
-    
-    /**
-     Fetch core data for activities for today
-     - returns: array of History objects
-     */
     func fetchCoreDataForTodayActivities() -> [History] {
         let startDate = Date.dateByMovingToBeginningOfDay()
         let endDate = Date.dateByMovingToEndOfDay()
@@ -134,40 +130,24 @@ class dataHandler: NSObject {
     
     
     func fetchCoreDataForWeekActivities() -> [History] {
-        let fetchRequest = NSFetchRequest()
-        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
-        fetchRequest.entity = entityDescription
-        
-        let dateDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
-        fetchRequest.sortDescriptors = [dateDescriptor]
-        
-        let startDate = NSDate.dateSevenDaysAgo()
-        let endDate = NSDate.dateByMovingToEndOfDay()
-        let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@)", startDate, endDate)
-        fetchRequest.predicate = predicate
-        
-        return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
+        let startDate = Date.dateSevenDaysAgo()
+        let endDate = Date.dateByMovingToEndOfDay()
+        let weekActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
+        return weekActivities as! [History]
     }
     
     func fetchCoreDataForMonthActivities() -> [History] {
-        let fetchRequest = NSFetchRequest()
-        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
-        fetchRequest.entity = entityDescription
-        
-        let dateDescriptor = NSSortDescriptor(key: "startDate", ascending: false)
-        fetchRequest.sortDescriptors = [dateDescriptor]
-        
         let startDate = Date.dateMonthAgo()
         let endDate = Date.dateByMovingToEndOfDay()
-        let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@)", startDate, endDate)
-        fetchRequest.predicate = predicate
-        return (fetchCoreDataWithFetchRequest(fetchRequest) as! [History])
+        let monthActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
+        return monthActivities as! [History]
     }
     
     /**
      Fetch core data for all the activities
      - returns: array of Activity objects
      */
+    //TODO: ended here
     func fetchCoreDataAllActivities() -> [Activity] {
         let fetchRequest = NSFetchRequest()
         let entityDescription = NSEntityDescription.entityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext)
@@ -193,7 +173,7 @@ class dataHandler: NSObject {
         
         return nil
     }
-    
+    /*
     func filterResultsMonth(i: String)-> [History] {
         var activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
         // for activity in activitiesArray {
@@ -236,20 +216,19 @@ class dataHandler: NSObject {
         fetchRequest.predicate = predicate
         return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
     }
+ */
     
 
-    /**
-     Delete a single Core Data object
-     - parameter object: object to delete
-     */
-    func deleteObject(object: NSManagedObject) {
-    }
+    func deleteObject(objectToDelete: Object) {
+            try! realm.write {
+                realm.delete(objectToDelete)
+            }
+        }
     
     /*
-     Delete multiple objects
-     - parameter objectsToDelete: objects to delete
-     */
     func deleteObjects(objectsToDelete: [NSManagedObject]) {
     }
+ */
+
+ }
     
-}
