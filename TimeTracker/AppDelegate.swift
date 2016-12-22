@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         print("application will resign active...")
         UserDefaults.standard.synchronize()
-        CoreDataHandler.sharedInstance.saveContext()
         let quitActivityRunning =
             UserDefaults.standard.bool(forKey: "quitActivityRunning")
         UserDefaults.standard.synchronize()
@@ -44,7 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          print("did enter background app goes in.")
          UserDefaults.standard.synchronize()
          NotificationCenter.default.post(name: Notification.Name(rawValue: "AppDidEnterBackground"), object: nil)
-         CoreDataHandler.sharedInstance.saveContext()
          let quitActivityRunning =
          UserDefaults.standard.bool(forKey: "quitActivityRunning")
          UserDefaults.standard.synchronize()
@@ -99,9 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     func applicationWillTerminate(_ application: UIApplication) {
         print("app will terminate..")
-        CoreDataHandler.sharedInstance.saveContext()
         UserDefaults.standard.synchronize()
-        CoreDataHandler.sharedInstance.saveContext()
         let quitActivityRunning =
             UserDefaults.standard.bool(forKey: "quitActivityRunning")
         UserDefaults.standard.synchronize()

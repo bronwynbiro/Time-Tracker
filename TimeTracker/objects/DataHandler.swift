@@ -4,7 +4,7 @@ import RealmSwift
 
 let realm = try! Realm()
 
-class DataHandler: NSObject {
+class dataHandler: NSObject {
     
     
     /**
