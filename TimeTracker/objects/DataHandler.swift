@@ -2,9 +2,10 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class dataHandler: NSObject {
+let realm = try! Realm()
+
+class DataHandler: NSObject {
     
-    let realm = try! Realm()
     
     /**
      Tells whether the passed in activity's name is already saved or not.
@@ -63,16 +64,16 @@ class dataHandler: NSObject {
      */
     func saveHistory(name: String, startDate: NSDate, endDate: NSDate, duration: NSInteger) {
         let history = History()
-       // let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
         history.name = name
         history.startDate = startDate as Date
         history.endDate = endDate as Date
         history.duration = duration as NSNumber?
         history.saveTime = dateFormatter.string(from: endDate as Date)
+        /*
         try! realm.write {
             realm.create(history)
         }
-       //TODO: saveContext()
+         */
     }
     
     /**
@@ -90,24 +91,18 @@ class dataHandler: NSObject {
         history.name = name
         history.startDate = startDate as Date
         history.endDate = endDate as Date
-        //calculate new duration
+        
         let calendar = NSCalendar.current
         let dateMakerFormatter = DateFormatter()
         dateMakerFormatter.dateFormat = "hh:mm a"
-        let startTime = startDate
-        let endTime = endDate
-        let hourMinuteComponents: NSCalendar.Unit = [.hour, .minute]
-        let timeDifference = calendar.components(
-            fromDate: startTime as Date,
-            toDate: endTime as Date)
-        let durationString = "\(timeDifference)"
+        let timeDifference = calendar.dateComponents([.hour, .minute], from: startDate as Date, to: endDate as Date)
+      //  let durationString = "\(timeDifference)"
         let interval = endDate.timeIntervalSince(startDate as Date)
-        history.duration = interval as NSNumber?
-        history.saveTime = dateFormatter.string(from: endDate as Date)
         try! realm.write {
             realm.add(history)
+            history.duration = interval as NSNumber?
+            history.saveTime = dateFormatter.string(from: endDate as Date)
         }
-       // saveContext()
     }
     
     
@@ -117,107 +112,61 @@ class dataHandler: NSObject {
      */
     func allHistoryItems() -> [History]? {
         let allHistory = realm.objects(History.self).sorted(byProperty: "startDate")
-        return allHistory as! [History]
+        return Array(allHistory)
     }
     
     
-    func fetchCoreDataForTodayActivities() -> [History] {
+    func fetchDataForTodayActivities() -> [History] {
         let startDate = Date.dateByMovingToBeginningOfDay()
         let endDate = Date.dateByMovingToEndOfDay()
         let todayActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
-        return todayActivities as! [History]
+        return Array(todayActivities)
     }
     
     
-    func fetchCoreDataForWeekActivities() -> [History] {
+    func fetchDataForWeekActivities() -> [History] {
         let startDate = Date.dateSevenDaysAgo()
         let endDate = Date.dateByMovingToEndOfDay()
         let weekActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
-        return weekActivities as! [History]
+        return Array(weekActivities)
     }
     
-    func fetchCoreDataForMonthActivities() -> [History] {
+    func fetchDataForMonthActivities() -> [History] {
         let startDate = Date.dateMonthAgo()
         let endDate = Date.dateByMovingToEndOfDay()
         let monthActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
-        return monthActivities as! [History]
+        return Array(monthActivities)
     }
     
-    /**
-     Fetch core data for all the activities
-     - returns: array of Activity objects
-     */
-    //TODO: ended here
-    func fetchCoreDataAllActivities() -> [Activity] {
-        let fetchRequest = NSFetchRequest()
-        let entityDescription = NSEntityDescription.entityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext)
-        fetchRequest.entity = entityDescription
-        
-        let nameDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        fetchRequest.sortDescriptors = [nameDescriptor]
-        return (fetchCoreDataWithFetchRequest(fetchRequest) as! [Activity])
+
+    func fetchDataAllActivities() -> [Activity] {
+        //TODO: ascending = true
+        let allActivities = realm.objects(Activity.self).sorted(byProperty: "name")
+        return Array(allActivities)
     }
     
-    /**
-     Fetches Core Data with the given fetch request and returns an array with the results if it was successful.
-     - parameter fetchRequest: request to make
-     - returns: array of objects
-     */
-    func fetchCoreDataWithFetchRequest(fetchRequest: NSFetchRequest) -> [AnyObject]? {
-        do {
-            let fetchResults = try backgroundManagedObjectContext.executeFetchRequest(fetchRequest)
-            return fetchResults
-        } catch {
-            // error occured
-        }
-        
-        return nil
-    }
-    /*
+
     func filterResultsMonth(i: String)-> [History] {
-        var activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
-        // for activity in activitiesArray {
-        let fetchRequest = NSFetchRequest()
-        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
-        fetchRequest.entity = entityDescription
-        
         let startDate = Date.dateMonthAgo()
         let endDate = Date.dateByMovingToEndOfDay()
-        let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@) AND (name = %@)", startDate, endDate, i)
-        fetchRequest.predicate = predicate
-        //  fetchRequest.resultType = .DictionaryResultType
-        return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
+        let monthActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
+        return Array(monthActivities)
+       
     }
     
     func filterResultsWeek(i: String)-> [History] {
-        var activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
-        // for activity in activitiesArray {
-        let fetchRequest = NSFetchRequest()
-        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
-        fetchRequest.entity = entityDescription
-        
         let startDate = Date.dateSevenDaysAgo()
         let endDate = Date.dateByMovingToEndOfDay()
-        let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@) AND (name = %@)", startDate, endDate, i)
-        fetchRequest.predicate = predicate
-        //  fetchRequest.resultType = .DictionaryResultType
-        return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
+        let weekActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
+        return Array(weekActivities)
     }
     
     func filterResultsDay(i: String)-> [History] {
-        var activitiesArray = dataHandler.sharedInstance.fetchCoreDataAllActivities()
-        let fetchRequest = NSFetchRequest()
-        let entityDescription = NSEntityDescription.entityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext)
-        fetchRequest.entity = entityDescription
-        
         let startDate = Date.dateByMovingToBeginningOfDay()
         let endDate = Date.dateByMovingToEndOfDay()
-        let predicate = NSPredicate(format: "(startDate >= %@) AND (startDate <= %@) AND (name = %@)", startDate, endDate, i)
-        fetchRequest.predicate = predicate
-        return fetchCoreDataWithFetchRequest(fetchRequest) as! [History]
+        let todayActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
+        return Array(todayActivities)
     }
- */
-    
 
     func deleteObject(objectToDelete: Object) {
             try! realm.write {

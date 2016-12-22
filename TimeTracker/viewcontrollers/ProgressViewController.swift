@@ -29,8 +29,8 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func loadNormalState() {
         navigationItem.leftBarButtonItem = nil
-        navigationItem.backBarButtonItem?.action = Selector("backButtonPressed")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: Selector("editButtonPressed"))
+        navigationItem.backBarButtonItem?.action = Selector(("backButtonPressed"))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: Selector(("editButtonPressed")))
     }
     
 
@@ -38,7 +38,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func calculateTodaysActivities(_ sender: UIButton) {
         percentArray.removeAll()
         orderedNamesArray.removeAll()
-        let todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
+        let todaysActivitiesArray = DataHandler.fetchCoreDataForTodayActivities()
         numberOfRows.removeAll()
         calculateRows(todaysActivitiesArray)
         self.tableView.reloadData()
@@ -60,7 +60,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         var nameString: String = " "
         
         for i in unique.indices{
-            let activArr = CoreDataHandler.sharedInstance.filterResultsDay(unique[i])
+            let activArr = DataHandler.filterResultsDay(unique[i])
             let uniqueActivArr = Array(Set(activArr))
             sum = 0
             for myObj in uniqueActivArr {
@@ -88,7 +88,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func calculateWeeklyActivities(_ sender: UIButton) {
         percentArray.removeAll()
         orderedNamesArray.removeAll()
-        let weekActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForWeekActivities()
+        let weekActivitiesArray = DataHandler.fetchDataForWeekActivities()
         numberOfRows.removeAll()
         calculateRows(weekActivitiesArray)
         self.tableView.reloadData()
@@ -108,10 +108,10 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         var sum: Double = 0
         var percentage: Double = 0
         var nameString: String = ""
-        
+        //TODO: modify below for different 
         if unique.count > 0 {
             for i in unique.indices{
-                let activArr = CoreDataHandler.sharedInstance.filterResultsWeek(unique[i])
+                let activArr = DataHandler.sharedInstance.filterResultsWeek(unique[i])
                 let uniqueActivArr = Array(Set(activArr))
                 sum = 0
             for myObj in uniqueActivArr {
@@ -129,8 +129,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
                 percentArray.insert(percentage, at: 0)
                 orderedNamesArray.insert(nameString, at: 0)
             }
-            print("names array ordered", orderedNamesArray)
-            print("percentArr", percentArray)
+    
         calculateRows(weekActivitiesArray)
         self.tableView.reloadData()
         setChart(orderedNamesArray, values: percentArray)
@@ -144,7 +143,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func calculateMonthlyActivities(_ sender: UIButton) {
         percentArray.removeAll()
         orderedNamesArray.removeAll()
-        let monthActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForMonthActivities()
+        let monthActivitiesArray = DataHandler.sharedInstance.fetchDataForMonthActivities()
         numberOfRows.removeAll()
         calculateRows(monthActivitiesArray)
         self.tableView.reloadData()
