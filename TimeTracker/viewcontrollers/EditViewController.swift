@@ -9,25 +9,12 @@ extension Date
         let dateStringFormatter = DateFormatter()
         dateStringFormatter.dateFormat = "hh:mm"
         dateStringFormatter.locale = Locale(identifier: "en_US_POSIX")
-        //MARK: switch to date from old??
         let d = dateStringFormatter.date(from: dateString)!
-        (self as NSDate).init(timeInterval:0, since:d)
+        self.init(timeInterval:0, since:d)
     }
 }
-/*
-var fetchController: NSFetchedResultsController = {
-    let entity = NSEntityDescription.entityForName("History", inManagedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext)
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
-    fetchRequest.entity = entity
-    
-    let nameDescriptor = NSSortDescriptor(key: "name", ascending: false)
-    fetchRequest.sortDescriptors = [nameDescriptor]
-    
-    let fetchedController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext, sectionNameKeyPath: "saveTime", cacheName: nil)
-    //fetchedController.delegate = self
-    return fetchedController
-}()
- */
+
+let data = dataHandler()
 
 var todayDateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
@@ -64,14 +51,13 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
     
     @IBAction func updateCellTime(_ sender: UIButton) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
-        let indexPath = PassPath
         let history = PassHistory
         history?.startDate = StartDatePicker.date
         history?.endDate = EndDatePicker.date
-        cell.timeLabel.text = "\(todayDateFormatter.string(from: history?.startDate! as! Date)) - \(todayDateFormatter.string(from: history?.endDate! as! Date))"
-        let PassDuration = history?.endDate!.timeIntervalSince(history?.startDate! as! Date!)
-        cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration))
-        CoreDataHandler.sharedInstance.updateHistory(history.name!, startDate: history.startDate!, endDate: history.endDate!, duration: Int(PassDuration), PassPath: PassPath, PassHistory: PassHistory)
+        cell.timeLabel.text = "\(todayDateFormatter.string(from: history!.startDate! )) - \(todayDateFormatter.string(from: history!.endDate!))"
+        let PassDuration = history?.endDate!.timeIntervalSince(history?.startDate! as Date!)
+        cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration)!)
+        data.updateHistory(name: history!.name!, startDate: history!.startDate! as NSDate, endDate: history!.endDate! as NSDate, duration: Int(PassDuration!), PassPath: PassPath as NSIndexPath, PassHistory: PassHistory)
         
         tableView.reloadData()
     }

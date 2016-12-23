@@ -143,7 +143,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let activity = activitiesArray[indexPath.row]
-            CoreDataHandler.sharedInstance.deleteObject(activity)
+            dataHandler.deleteObject(activity)
             reloadCoreDataEntities()
         }
     }

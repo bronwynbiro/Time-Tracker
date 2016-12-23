@@ -3,23 +3,18 @@ import CoreData
 
 
 protocol NewActivityDelegate {
-    //Delegate method to tell the view controller that an activity has been saved.
     func slideActivityViewUp()
 }
 
+let DataHandler = dataHandler()
 
 
 class NewActivityView: UIView, UITextFieldDelegate {
 
     var textField: ActivityTextfield = ActivityTextfield()
-
     var delegate: NewActivityDelegate?
 
-    /**
-    - parameter frame:    frame
-    - parameter delegate: delegate
-    - returns: self
-    */
+
     init(frame: CGRect, delegate: NewActivityDelegate) {
         let label = UILabel()
         label.frame = CGRect(x: 10.0, y: 10.0, width: frame.width-20.0, height: 40.0)
@@ -55,11 +50,11 @@ class NewActivityView: UIView, UITextFieldDelegate {
             textField.text = ""
             slideViewUp()
         } else {
-            if CoreDataHandler.sharedInstance.isDuplicate(activityName!) == true {
+            if DataHandler.isDuplicate(activityName!) == true {
                 let alertView = UIAlertView(title: "Duplicate", message: "This activity is already in your activity list.", delegate: nil, cancelButtonTitle: "Ok")
                 alertView.show()
             } else {
-                CoreDataHandler.sharedInstance.addNewActivityName(activityName!)
+                DataHandler.addNewActivityName(activityName!)
 
                 textField.text = ""
                 slideViewUp()
