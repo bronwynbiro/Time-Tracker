@@ -76,7 +76,6 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
             percentArray.insert(percentage, at: 0)
             orderedNamesArray.insert(nameString, at: 0)
         }
-        calculateRows(todaysActivitiesArray)
         self.tableView.reloadData()
         setChart(orderedNamesArray, values: percentArray)
         let dayString = "\(NSString.createDurationStringFromDuration(Double(sumOfDay)))"
@@ -89,7 +88,6 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         orderedNamesArray.removeAll()
         let weekActivitiesArray = DataHandler.fetchDataForWeekActivities()
         numberOfRows.removeAll()
-        calculateRows(weekActivitiesArray)
         self.tableView.reloadData()
         var sumOfWeek = 0
         if weekActivitiesArray.count > 0 {

@@ -8,7 +8,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     var activitiesArray: [Activity] = []
     @IBOutlet weak var addButton: UIButton!
 
-    /// custom fadeview to make unavailable to hit an activity while adding new one
+    // Custom fadeview to make unavailable to hit an activity while adding new one
     lazy var fadeView: UIView = {
         let fadeView = UIView(frame: self.view.bounds)
         fadeView.backgroundColor = UIColor.black
@@ -16,7 +16,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
         return fadeView
     }()
 
-    /// A custom view to be able to add new activities
+    // A custom view to be able to add new activities
     lazy var newActivityView: NewActivityView = {
         let frame = CGRect(x: 10.0, y: -100.0, width: self.view.frame.width-20.0, height: 100.0);
         let newActivityView = NewActivityView(frame: frame, delegate: self)
@@ -51,7 +51,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
         Load activity entities from core data.
     */
     func reloadCoreDataEntities() {
-        activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
+        activitiesArray = data.fetchDataAllActivities()
         refreshView()
     }
 
@@ -143,7 +143,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let activity = activitiesArray[indexPath.row]
-            dataHandler.deleteObject(activity)
+            data.deleteObject(objectToDelete: activity)
             reloadCoreDataEntities()
         }
     }
