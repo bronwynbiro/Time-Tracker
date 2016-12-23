@@ -1,9 +1,5 @@
 import UIKit
 
-/**
- Application appDelegate that is responsible for loading the application.
- */
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -18,12 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    /**
-     Save app's state to load it back when the user comes back.
-     - parameter application: application
-     */
-    // Save app's state to load it back when the user comes back.
-    
+
     func applicationWillResignActive(_ application: UIApplication) {
         print("application will resign active...")
         UserDefaults.standard.synchronize()
@@ -57,9 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          
     }
     
-    
-    //  Loads the passed seconds if the timer was active when the app was closed.
-    
     func applicationDidBecomeActive(_ application: UIApplication) {
         print("app did become active..")
         let currDate = Date()
@@ -91,10 +79,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    /**
-     Save core data context if the app is closed.
-     - parameter application: application
-     */
     func applicationWillTerminate(_ application: UIApplication) {
         print("app will terminate..")
         UserDefaults.standard.synchronize()

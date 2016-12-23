@@ -98,8 +98,8 @@ class dataHandler: Object {
         let timeDifference = calendar.dateComponents([.hour, .minute], from: startDate as Date, to: endDate as Date)
       //  let durationString = "\(timeDifference)"
         let interval = endDate.timeIntervalSince(startDate as Date)
-        try! realm.write {
-            realm.add(history)
+        try! realm?.write {
+            realm?.add(history)
             history.duration = interval as NSNumber?
             history.saveTime = dateFormatter.string(from: endDate as Date)
         }
@@ -111,66 +111,66 @@ class dataHandler: Object {
      - returns: array of history objects
      */
     func allHistoryItems() -> [History]? {
-        let allHistory = realm.objects(History.self).sorted(byProperty: "startDate")
-        return Array(allHistory)
+        let allHistory = realm?.objects(History.self).sorted(byProperty: "startDate")
+        return Array(allHistory!)
     }
     
     
     func fetchDataForTodayActivities() -> [History] {
         let startDate = Date.dateByMovingToBeginningOfDay()
         let endDate = Date.dateByMovingToEndOfDay()
-        let todayActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
-        return Array(todayActivities)
+        let todayActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
+        return Array(todayActivities!)
     }
     
     
     func fetchDataForWeekActivities() -> [History] {
         let startDate = Date.dateSevenDaysAgo()
         let endDate = Date.dateByMovingToEndOfDay()
-        let weekActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
-        return Array(weekActivities)
+        let weekActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
+        return Array(weekActivities!)
     }
     
     func fetchDataForMonthActivities() -> [History] {
         let startDate = Date.dateMonthAgo()
         let endDate = Date.dateByMovingToEndOfDay()
-        let monthActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
-        return Array(monthActivities)
+        let monthActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
+        return Array(monthActivities!)
     }
     
 
     func fetchDataAllActivities() -> [Activity] {
         //TODO: ascending = true
-        let allActivities = realm.objects(Activity.self).sorted(byProperty: "name")
-        return Array(allActivities)
+        let allActivities = realm?.objects(Activity.self).sorted(byProperty: "name")
+        return Array(allActivities!)
     }
     
 
     func filterResultsMonth(i: String)-> [History] {
         let startDate = Date.dateMonthAgo()
         let endDate = Date.dateByMovingToEndOfDay()
-        let monthActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
-        return Array(monthActivities)
+        let monthActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
+        return Array(monthActivities!)
        
     }
     
     func filterResultsWeek(i: String)-> [History] {
         let startDate = Date.dateSevenDaysAgo()
         let endDate = Date.dateByMovingToEndOfDay()
-        let weekActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
-        return Array(weekActivities)
+        let weekActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
+        return Array(weekActivities!)
     }
     
     func filterResultsDay(i: String)-> [History] {
         let startDate = Date.dateByMovingToBeginningOfDay()
         let endDate = Date.dateByMovingToEndOfDay()
-        let todayActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
-        return Array(todayActivities)
+        let todayActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
+        return Array(todayActivities!)
     }
 
     func deleteObject(objectToDelete: Object) {
-            try! realm.write {
-                realm.delete(objectToDelete)
+            try! realm?.write {
+                realm?.delete(objectToDelete)
             }
         }
     
