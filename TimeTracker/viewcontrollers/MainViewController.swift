@@ -123,7 +123,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      Save the finished activity to core data as a history object.
      */
     func saveActivityToHistory() {
-        CoreDataHandler.sharedInstance.saveHistory(choosenActivity!.name!, startDate: startDate!, endDate: Date(), duration: passedSeconds)
+        data.saveHistory(name: choosenActivity!.name!, startDate: startDate! as NSDate, endDate: Date() as NSDate, duration: passedSeconds)
         startDate = nil
         choosenActivity = nil
         passedSeconds = 0
@@ -204,7 +204,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     func calculateDeletedDurationForToday(_ historyToSubtract: History?) -> NSInteger {
-        let todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
+        let todaysActivitiesArray = data.fetchDataForTodayActivities()
         var totalDuration = calculateTotalDurationForToday()
         if todaysActivitiesArray.count < 1 {
             totalDuration = 0
@@ -212,8 +212,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         else {
             totalDuration = totalDuration - Int(historyToSubtract!.duration!)
         }
-        CoreDataHandler.sharedInstance.saveContext()
-        
         return totalDuration
         
     }
@@ -299,7 +297,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      Load history entities from core data.
      */
     func loadCoreDataEntities() {
-        todaysActivitiesArray = data.sharedInstance.fetchCoreDataForTodayActivities()
+        todaysActivitiesArray = data.fetchDataForTodayActivities()
         if todaysActivitiesArray.count > 0 {
             totalduration = calculateTotalDurationForToday()
         }

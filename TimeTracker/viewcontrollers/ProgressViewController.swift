@@ -229,7 +229,7 @@ func setChart(_ dataPoints: [String], values: [Double]) {
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
         pieChartView.data = pieChartData
         pieChartView.legend.enabled = false
-        pieChartView.descriptionText = ""
+        pieChartView.chartDescription?.text = ""
     
         let colors = [UIColor(red: 80/255, green: 227/255, blue: 194/255, alpha: 1), UIColor(red: 164/255, green: 249/255, blue: 242/255, alpha: 1), UIColor(red: 210/255, green: 128/255, blue: 240/255, alpha: 1), UIColor(red: 131/255, green: 222/255, blue: 252/255, alpha: 1), UIColor(red: 144/255, green: 19/255, blue: 254/255, alpha: 1)]
         

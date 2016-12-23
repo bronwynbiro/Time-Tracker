@@ -23,9 +23,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
         return newActivityView
     }()
 
-    /**
-        Called when finish loading the view, load core data entities
-    */
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "My activities"
@@ -36,51 +34,36 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
         tableView.separatorColor = UIColor.white
         tableView.backgroundColor = UIColor.white
 
-        reloadCoreDataEntities()
+        reloadDataEntities()
     }
 
-    /**
-        Refresh the view, reload the tableView and check if it's needed to show the empty view.
-    */
     func refreshView() {
         tableView.reloadData()
         checkToShowEmptyView()
     }
 
-    /**
-        Load activity entities from core data.
-    */
-    func reloadCoreDataEntities() {
+    
+    func reloadDataEntities() {
         activitiesArray = data.fetchDataAllActivities()
         refreshView()
     }
 
-    /**
-        Checks for the available Activities, if YES show the empty view
-    */
+
     func checkToShowEmptyView() {
         noActivitiesLabel.isHidden = activitiesArray.count != 0
     }
 
-    /**
-        Shows the original navigation bar with back and add buttons
-    */
+ 
     func showNormalNavigationBar() {
         navigationItem.leftBarButtonItem = nil
         navigationItem.backBarButtonItem?.action = #selector(ActivityListViewController.backButtonPressed)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(ActivityListViewController.addNewActivity))
     }
 
-    /**
-        Dismissed the viewController
-    */
     func backButtonPressed() {
         navigationController?.popViewController(animated: true)
     }
 
-    /**
-        Slide down new activity view and change the barbutton item
-    */
     @IBAction func addNewActivity() {
         view.addSubview(newActivityView)
         newActivityView.slideViewDown()
@@ -144,7 +127,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
         if editingStyle == .delete {
             let activity = activitiesArray[indexPath.row]
             data.deleteObject(objectToDelete: activity)
-            reloadCoreDataEntities()
+            reloadDataEntities()
         }
     }
 
@@ -173,7 +156,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     */
     func slideActivityViewUp() {
         dismissAddview()
-        reloadCoreDataEntities()
+        reloadDataEntities()
     }
 
     /**

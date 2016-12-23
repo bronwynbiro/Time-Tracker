@@ -1,11 +1,6 @@
 import UIKit
 import Foundation
 
-
-/**
- History view controller to display the history objects from core data.
- */
-
 extension MainViewController {
     var appDelegate:AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
@@ -16,19 +11,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noItemsLabel: UILabel!
     
-    /// fetch controller
-    lazy var fetchController: NSFetchedResultsController = {  
-        let entity = NSEntityDescription.entityForName("History", inManagedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext)
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
-        fetchRequest.entity = entity
-        
-        let nameDescriptor = NSSortDescriptor(key: "name", ascending: false)
-        fetchRequest.sortDescriptors = [nameDescriptor]
-        
-        let fetchedController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataHandler.sharedInstance.backgroundManagedObjectContext, sectionNameKeyPath: "saveTime", cacheName: nil)
-       fetchedController.delegate = self
-        return fetchedController
-    }()
+ 
     
     lazy var todayDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -79,7 +62,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      Refresh the view, reload the tableView and check if it's needed to show the empty view.
      */
     func refreshView() {
-        loadCoreDataEntities()
+        //loadDataEntities()
         checkToShowEmptyLabel()
     }
     
@@ -87,19 +70,9 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      Checks for the available Activities, if YES show the empty view
      */
     func checkToShowEmptyLabel() {
-        noItemsLabel.isHidden = fetchController.fetchedObjects?.count != 0
+        let allActivities = realm.objects(Activity.self)
+        noItemsLabel.isHidden = allActivities.count != 0
         tableView.reloadData()
-    }
-    
-    /**
-     Load history entities from core data.
-     */
-    func loadCoreDataEntities() {
-        do {
-            try fetchController.performFetch()
-        } catch {
-            // error occured while fetching
-        }
     }
     
     /**
@@ -157,13 +130,13 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     // MARK: tableView methods
-    /**
-     Notifies the receiver that the fetched results controller is about to start processing of one or more changes due to an add, remove, move, or update.
-     - parameter controller: controller The fetched results controller that sent the message.
-     */
+    //Notifies the receiver that the fetched results controller is about to start processing of one or more changes due to an add, remove, move, or update.
+    //parameter controller: controller The fetched results controller that sent the message.
+/*
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
+    */
     
     /**
      Notifies the receiver that a fetched object has been changed due to an add, remove, move, or update. The fetched results controller reports changes to its section before changes to the fetch result objects.
@@ -410,7 +383,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func selectedActivity() -> Activity {
-        let activitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataAllActivities()
+        let activitiesArray = data.fetchDataAllActivities()
         let selectedIndexPath = tableView.indexPathForSelectedRow!
         return activitiesArray[selectedIndexPath.row]
     }
