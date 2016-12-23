@@ -13,6 +13,7 @@ class dataHandler: Object {
      - returns: BOOL boolean value determining whether the activity is already in core data or not.
      */
     func isDuplicate(activityName: String) -> Bool {
+        //TODO: fill in 
         /*
         let entityDescription = NSEntityDescription.entityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext)
         let request = NSFetchRequest()
@@ -27,6 +28,7 @@ class dataHandler: Object {
             return false
         }
  */
+        return false
     }
     
     /**

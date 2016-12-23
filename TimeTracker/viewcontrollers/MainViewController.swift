@@ -1,6 +1,7 @@
 import UIKit
 import RealmSwift
 
+let data = dataHandler()
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var choosenActivity: Activity?
@@ -142,13 +143,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      If an activity is running save the return date to be able count the elapsed seconds between going to background and coming back. And count the passed seconds.
      */
     func appLoadedFromBackground() {
-        /*
-         if isActivityRunning == false {
-         let passedSecondsTillInactive = NSDate().timeIntervalSinceDate(quitDate!)
-         passedSeconds += Int(passedSecondsTillInactive)
-         }
-         updateLabel()
-         */
         if isActivityRunning == true {
             let quitActivityRunning = UserDefaults.standard.set(isActivityRunning, forKey:"quitActivityRunning")
             let passedSec = UserDefaults.standard.integer(forKey: "secondsInBackground")
@@ -156,9 +150,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if quitDate == nil {
                 print("nil quitdate in main")
             }
-            print("in apploaded.")
-            // print("passedSec:", passedSec)
-            // print("quitDate:", quitDate)
+            print("in app loaded from background.")
             let minutes = (passedSec / 60) % 60
             let hours = (passedSec) / 3600
             minutesLabel.text = NSString.timeStringWithTimeToDisplay(minutes)
@@ -238,17 +230,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.separatorColor = color.pink()
         tableView.backgroundColor = UIColor.white
-        
-        print("one")
+    
          let quitActivityRunning = UserDefaults.standard.object(forKey: "quitActivityRunning") as? Bool
          var passedSec = 0
-        print("passedsec set")
          if quitActivityRunning == true {
             passedSec = UserDefaults.standard.object(forKey: "passedSeconds") as! Int
-            print("passed seconds main:", passedSec)
+            print("passed seconds main view did load:", passedSec)
             }
-        print("exited loop quitrunning")
-         
+
          UserDefaults.standard.synchronize()
          
          var minutes = 0
@@ -262,7 +251,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
          self.hoursLabel.text = NSString.timeStringWithTimeToDisplay(hours)
         
         //updateLabel()
-        
         UserDefaults.standard.synchronize()
     }
     
@@ -311,7 +299,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      Load history entities from core data.
      */
     func loadCoreDataEntities() {
-        todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
+        todaysActivitiesArray = data.sharedInstance.fetchCoreDataForTodayActivities()
         if todaysActivitiesArray.count > 0 {
             totalduration = calculateTotalDurationForToday()
         }

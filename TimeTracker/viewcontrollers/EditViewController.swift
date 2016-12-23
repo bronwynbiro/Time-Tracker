@@ -14,8 +14,6 @@ extension Date
     }
 }
 
-let data = dataHandler()
-
 var todayDateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"

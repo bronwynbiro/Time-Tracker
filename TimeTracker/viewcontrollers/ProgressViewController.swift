@@ -38,19 +38,18 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func calculateTodaysActivities(_ sender: UIButton) {
         percentArray.removeAll()
         orderedNamesArray.removeAll()
-        let todaysActivitiesArray = DataHandler.fetchCoreDataForTodayActivities()
+        let todaysActivitiesArray = data.fetchDataForTodayActivities()
         numberOfRows.removeAll()
-        calculateRows(todaysActivitiesArray)
         self.tableView.reloadData()
         var sumOfDay = 0
         if todaysActivitiesArray.count > 0 {
             for history in todaysActivitiesArray {
-                sumOfDay += (history.duration?.integerValue)!
+                sumOfDay += (history.duration?.intValue)!
             }
         }
         var namesArray = [String]()
         for histname in todaysActivitiesArray{
-            namesArray.insert(histname.name!, atIndex: 0)
+            namesArray.insert(histname.name!, at: 0)
         }
         
         let unique = Array(Set(namesArray))
@@ -60,12 +59,12 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         var nameString: String = " "
         
         for i in unique.indices{
-            let activArr = DataHandler.filterResultsDay(unique[i])
+            let activArr = DataHandler.filterResultsDay(i: unique[i])
             let uniqueActivArr = Array(Set(activArr))
             sum = 0
             for myObj in uniqueActivArr {
-                let testPath = NSIndexPath(forRow: i, inSection: 0)
-                let cell = tableView.cellForRowAtIndexPath(testPath) as! ProgressCell
+                let testPath = NSIndexPath(row: i, section: 0)
+                let cell = tableView.cellForRow(at: testPath as IndexPath) as! ProgressCell
                 sum += (myObj.duration?.doubleValue)!
                 let timeString = "\(NSString.createDurationStringFromDuration(Double(sum)))"
                 percentage = (sum / Double(sumOfDay))*100
@@ -95,12 +94,12 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         var sumOfWeek = 0
         if weekActivitiesArray.count > 0 {
             for history in weekActivitiesArray {
-                sumOfWeek += (history.duration?.integerValue)!
+                sumOfWeek += (history.duration?.intValue)!
             }
         }
         var namesArray = [String]()
         for histname in weekActivitiesArray{
-            namesArray.insert(histname.name!, atIndex: 0)
+            namesArray.insert(histname.name!, at: 0)
         }
         
         let unique = Array(Set(namesArray))
@@ -111,13 +110,13 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         //TODO: modify below for different 
         if unique.count > 0 {
             for i in unique.indices{
-                let activArr = DataHandler.sharedInstance.filterResultsWeek(unique[i])
+                let activArr = data.filterResultsWeek(i: unique[i])
                 let uniqueActivArr = Array(Set(activArr))
                 sum = 0
             for myObj in uniqueActivArr {
                 self.tableView.reloadData()
-                let testPath = NSIndexPath(forRow: i, inSection: 0)
-                let cell = tableView.cellForRowAtIndexPath(testPath) as! ProgressCell
+                let testPath = NSIndexPath(row: i, section: 0)
+                let cell = tableView.cellForRow(at: testPath as IndexPath) as! ProgressCell
                 sum += (myObj.duration?.doubleValue)!
                 let timeString = "\(NSString.createDurationStringFromDuration(Double(sum)))"
                 percentage = (sum / Double(sumOfWeek))*100
@@ -129,8 +128,6 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
                 percentArray.insert(percentage, at: 0)
                 orderedNamesArray.insert(nameString, at: 0)
             }
-    
-        calculateRows(weekActivitiesArray)
         self.tableView.reloadData()
         setChart(orderedNamesArray, values: percentArray)
         let weekString = "\(NSString.createDurationStringFromDuration(Double(sumOfWeek)))"
@@ -143,9 +140,8 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func calculateMonthlyActivities(_ sender: UIButton) {
         percentArray.removeAll()
         orderedNamesArray.removeAll()
-        let monthActivitiesArray = DataHandler.sharedInstance.fetchDataForMonthActivities()
+        let monthActivitiesArray = data.fetchDataForMonthActivities()
         numberOfRows.removeAll()
-        calculateRows(monthActivitiesArray)
         self.tableView.reloadData()
         var sumOfMonth: Double = 0
         if monthActivitiesArray.count > 0 {
@@ -156,7 +152,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         var namesArray = [String]()
         for histname in monthActivitiesArray{
-            namesArray.insert(histname.name!, atIndex: 0)
+            namesArray.insert(histname.name!, at: 0)
         }
         
         let unique = Array(Set(namesArray))
@@ -166,14 +162,14 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         var nameString: String = ""
         
         for i in unique.indices{
-            let activArr = CoreDataHandler.sharedInstance.filterResultsMonth(unique[i])
+            let activArr = data.filterResultsMonth(i: unique[i])
             let uniqueActivArr = Array(Set(activArr))
             sum = 0
             for myObj in uniqueActivArr {
-                numberOfRows.insert("test", atIndex: 0)
-                    let testPath = NSIndexPath(forRow: i, inSection: 0)
+                numberOfRows.insert("test", at: 0)
+                    let testPath = NSIndexPath(row: i, section: 0)
                     self.tableView.reloadData()
-                    let cell = tableView.cellForRowAtIndexPath(testPath) as! ProgressCell
+                    let cell = tableView.cellForRow(at: testPath as IndexPath) as! ProgressCell
                     sum += (myObj.duration?.doubleValue)!
                     let timeString = "\(NSString.createDurationStringFromDuration(Double(sum)))"
                     percentage = (sum / Double(sumOfMonth))*100
@@ -186,7 +182,6 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
             percentArray.insert(percentage, at: 0)
             orderedNamesArray.insert(nameString, at: 0)
         }
-        calculateRows(monthActivitiesArray)
         self.tableView.reloadData()
         setChart(orderedNamesArray, values: percentArray)
         let monthString = "\(NSString.createDurationStringFromDuration(Double(sumOfMonth)))"
@@ -194,7 +189,6 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     
     func calculateRows(_ activitiesArray: [History]) -> Int {
-        var sum = 0
         for item in activitiesArray{
             numberOfRows.insert(item.name!, at: 0)
         }
@@ -234,10 +228,10 @@ func setChart(_ dataPoints: [String], values: [Double]) {
         }
         
         let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "")
-        let pieChartData = PieChartData(values: dataPoints, dataSet: pieChartDataSet) as PieChartData
+        let pieChartData = PieChartData(dataSet: pieChartDataSet)
         pieChartView.data = pieChartData
         pieChartView.legend.enabled = false
-        pieChartView.chartDescriptionText = ""
+        pieChartView.descriptionText = ""
     
         let colors = [UIColor(red: 80/255, green: 227/255, blue: 194/255, alpha: 1), UIColor(red: 164/255, green: 249/255, blue: 242/255, alpha: 1), UIColor(red: 210/255, green: 128/255, blue: 240/255, alpha: 1), UIColor(red: 131/255, green: 222/255, blue: 252/255, alpha: 1), UIColor(red: 144/255, green: 19/255, blue: 254/255, alpha: 1)]
         
