@@ -44,6 +44,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
 
     
     func reloadDataEntities() {
+        var activitiesArray : Results<Activity>
         activitiesArray = data.fetchDataAllActivities()
         refreshView()
     }

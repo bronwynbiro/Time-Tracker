@@ -74,11 +74,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         hoursLabel.text = "00"
         activityLabel.text = "START"
         startPauseButton.setTitle("START", for: UIControlState())
+        /*
+         //TODO: do we need to save?
         if passedSeconds >= 60 {
             saveActivityToHistory()
         }
+         */
         UserDefaults.standard.set(isActivityRunning, forKey:"quitActivityRunning")
-        
         UserDefaults.standard.synchronize()
     }
     
@@ -119,9 +121,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         activityTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(MainViewController.updateLabel), userInfo: nil, repeats: true)
     }
     
-    /**
-     Save the finished activity to core data as a history object.
-     */
+    /*
+     //TODO: not sure if necessary with realm
     func saveActivityToHistory() {
         data.saveHistory(name: choosenActivity!.name!, startDate: startDate! as NSDate, endDate: Date() as NSDate, duration: passedSeconds)
         startDate = nil
@@ -129,10 +130,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         passedSeconds = 0
         loadCoreDataEntities()
     }
-    
-    /**
-     Invalidate the timer
-     */
+    */
+  
     func invalidateTimer() {
         if let timer = activityTimer {
             timer.invalidate()
@@ -297,6 +296,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      Load history entities from core data.
      */
     func loadCoreDataEntities() {
+        var todaysActivitiesArray: Results <History>
         todaysActivitiesArray = data.fetchDataForTodayActivities()
         if todaysActivitiesArray.count > 0 {
             totalduration = calculateTotalDurationForToday()

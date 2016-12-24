@@ -1,5 +1,6 @@
 import UIKit
 import Foundation
+import RealmSwift
 
 extension MainViewController {
     var appDelegate:AppDelegate {
@@ -17,6 +18,15 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm"
         return dateFormatter
+    }()
+    
+    lazy var fetchController: RealmResultsController<History, History> = {
+        let predicate = NSPredicate(format: "saveTime > 0")
+        let nameDescriptor = [SortDescriptor(property: "name"), SortDescriptor(property: "ascending: false")]
+        let fetchRequest = RealmRequest<History>(predicate: predicate, realm: realm, sortDescriptors: nameDescriptor)
+        let fetchedController = try! RealmResultsController<History, History>(request: fetchRequest, sectionKeyPath: "saveTime")
+       // fetchedController.delegate = self
+        return fetchedController
     }()
     
     
@@ -146,7 +156,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - parameter type:         what happened
      - parameter newIndexPath: The destination path for the object for insertions or moves (this value is nil for a deletion).
      */
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    func controller(_ controller: RealmResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: RealmResultsChangeType, newIndexPath: IndexPath?) {
         switch (type) {
         case NSFetchedResultsChangeType.insert:
             tableView.insertRows(at: [indexPath!], with: .fade)

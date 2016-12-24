@@ -27,6 +27,19 @@
 		95738D001D3DE2F800EAB881 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9556520F1D3BEE1300C063FB /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		95738D031D3DE2F800EAB881 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9556520F1D3BEE1300C063FB /* Charts.framework */; };
 		958012C11D165EF9000946F6 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958012C01D165EF9000946F6 /* ProgressViewController.swift */; };
+		9594484B1E0EFD2300FCB1E4 /* ObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9594483E1E0EFD2300FCB1E4 /* ObjectExtension.swift */; };
+		9594484C1E0EFD2300FCB1E4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 9594483F1E0EFD2300FCB1E4 /* README.md */; };
+		9594484D1E0EFD2300FCB1E4 /* RealmChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959448401E0EFD2300FCB1E4 /* RealmChange.swift */; };
+		9594484E1E0EFD2300FCB1E4 /* RealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959448411E0EFD2300FCB1E4 /* RealmExtension.swift */; };
+		9594484F1E0EFD2300FCB1E4 /* RealmLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959448421E0EFD2300FCB1E4 /* RealmLogger.swift */; };
+		959448501E0EFD2300FCB1E4 /* RealmNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959448431E0EFD2300FCB1E4 /* RealmNotification.swift */; };
+		959448511E0EFD2300FCB1E4 /* RealmQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959448441E0EFD2300FCB1E4 /* RealmQueueManager.swift */; };
+		959448521E0EFD2300FCB1E4 /* RealmRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959448451E0EFD2300FCB1E4 /* RealmRequest.swift */; };
+		959448531E0EFD2300FCB1E4 /* RealmResultsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959448461E0EFD2300FCB1E4 /* RealmResultsCache.swift */; };
+		959448541E0EFD2300FCB1E4 /* RealmResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959448471E0EFD2300FCB1E4 /* RealmResultsController.swift */; };
+		959448551E0EFD2300FCB1E4 /* RealmSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959448481E0EFD2300FCB1E4 /* RealmSection.swift */; };
+		959448561E0EFD2300FCB1E4 /* RealmThreadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959448491E0EFD2300FCB1E4 /* RealmThreadHelper.swift */; };
+		959448571E0EFD2300FCB1E4 /* RRCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9594484A1E0EFD2300FCB1E4 /* RRCError.swift */; };
 		95B56B891CE37D3800D6B89E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B56B881CE37D3800D6B89E /* HeaderView.swift */; };
 		95D666211E08E8C600F9D288 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D666201E08E8C600F9D288 /* DataHandler.swift */; };
 		95ED46031D33178E00F9F1EA /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED46021D33178E00F9F1EA /* ProgressCell.swift */; };
@@ -109,6 +122,19 @@
 		955118FD1CEFE334009E004D /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		955652071D3BEE1200C063FB /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../../../Downloads/Charts-master-4/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 		958012C01D165EF9000946F6 /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
+		9594483E1E0EFD2300FCB1E4 /* ObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectExtension.swift; sourceTree = "<group>"; };
+		9594483F1E0EFD2300FCB1E4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		959448401E0EFD2300FCB1E4 /* RealmChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmChange.swift; sourceTree = "<group>"; };
+		959448411E0EFD2300FCB1E4 /* RealmExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmExtension.swift; sourceTree = "<group>"; };
+		959448421E0EFD2300FCB1E4 /* RealmLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmLogger.swift; sourceTree = "<group>"; };
+		959448431E0EFD2300FCB1E4 /* RealmNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmNotification.swift; sourceTree = "<group>"; };
+		959448441E0EFD2300FCB1E4 /* RealmQueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmQueueManager.swift; sourceTree = "<group>"; };
+		959448451E0EFD2300FCB1E4 /* RealmRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmRequest.swift; sourceTree = "<group>"; };
+		959448461E0EFD2300FCB1E4 /* RealmResultsCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmResultsCache.swift; sourceTree = "<group>"; };
+		959448471E0EFD2300FCB1E4 /* RealmResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmResultsController.swift; sourceTree = "<group>"; };
+		959448481E0EFD2300FCB1E4 /* RealmSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSection.swift; sourceTree = "<group>"; };
+		959448491E0EFD2300FCB1E4 /* RealmThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmThreadHelper.swift; sourceTree = "<group>"; };
+		9594484A1E0EFD2300FCB1E4 /* RRCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRCError.swift; sourceTree = "<group>"; };
 		95B56B881CE37D3800D6B89E /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderView.swift; path = ../viewcontrollers/HeaderView.swift; sourceTree = "<group>"; };
 		95C1C3151D342014003AD1F9 /* TimeTracker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimeTracker-Bridging-Header.h"; sourceTree = "<group>"; };
 		95D666201E08E8C600F9D288 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
@@ -142,6 +168,7 @@
 		56A6DA731BCF655B00A80680 = {
 			isa = PBXGroup;
 			children = (
+				9594483D1E0EFD2300FCB1E4 /* RealmResultsSource */,
 				56A6DA7E1BCF655B00A80680 /* TimeTracker */,
 				567692811BD0E41000FEA04F /* Frameworks */,
 				955652071D3BEE1200C063FB /* Charts.xcodeproj */,
@@ -249,6 +276,27 @@
 				955652151D3BEE1300C063FB /* ChartsTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9594483D1E0EFD2300FCB1E4 /* RealmResultsSource */ = {
+			isa = PBXGroup;
+			children = (
+				9594483E1E0EFD2300FCB1E4 /* ObjectExtension.swift */,
+				9594483F1E0EFD2300FCB1E4 /* README.md */,
+				959448401E0EFD2300FCB1E4 /* RealmChange.swift */,
+				959448411E0EFD2300FCB1E4 /* RealmExtension.swift */,
+				959448421E0EFD2300FCB1E4 /* RealmLogger.swift */,
+				959448431E0EFD2300FCB1E4 /* RealmNotification.swift */,
+				959448441E0EFD2300FCB1E4 /* RealmQueueManager.swift */,
+				959448451E0EFD2300FCB1E4 /* RealmRequest.swift */,
+				959448461E0EFD2300FCB1E4 /* RealmResultsCache.swift */,
+				959448471E0EFD2300FCB1E4 /* RealmResultsController.swift */,
+				959448481E0EFD2300FCB1E4 /* RealmSection.swift */,
+				959448491E0EFD2300FCB1E4 /* RealmThreadHelper.swift */,
+				9594484A1E0EFD2300FCB1E4 /* RRCError.swift */,
+			);
+			name = RealmResultsSource;
+			path = "../../../../../Downloads/RealmResultsController-master/Source";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,17 +469,30 @@
 			files = (
 				56A6DAB01BCF733F00A80680 /* NewActivityView.swift in Sources */,
 				95B56B891CE37D3800D6B89E /* HeaderView.swift in Sources */,
+				959448501E0EFD2300FCB1E4 /* RealmNotification.swift in Sources */,
+				959448551E0EFD2300FCB1E4 /* RealmSection.swift in Sources */,
+				9594484C1E0EFD2300FCB1E4 /* README.md in Sources */,
 				95D666211E08E8C600F9D288 /* DataHandler.swift in Sources */,
 				56A6DAB21BCF76F800A80680 /* DefaultNavigationController.swift in Sources */,
 				56A6DA9F1BCF691300A80680 /* Activity.swift in Sources */,
 				95ED46031D33178E00F9F1EA /* ProgressCell.swift in Sources */,
+				959448531E0EFD2300FCB1E4 /* RealmResultsCache.swift in Sources */,
 				955118FE1CEFE334009E004D /* EditViewController.swift in Sources */,
+				959448541E0EFD2300FCB1E4 /* RealmResultsController.swift in Sources */,
+				959448521E0EFD2300FCB1E4 /* RealmRequest.swift in Sources */,
+				959448561E0EFD2300FCB1E4 /* RealmThreadHelper.swift in Sources */,
 				56A6DAAA1BCF705F00A80680 /* ActivityTextfield.swift in Sources */,
 				56A6DAAE1BCF727700A80680 /* HistoryCell.swift in Sources */,
 				56A6DAB61BCF875200A80680 /* ActivityListViewController.swift in Sources */,
+				959448571E0EFD2300FCB1E4 /* RRCError.swift in Sources */,
 				56A6DAB81BCF8B3700A80680 /* MainViewController.swift in Sources */,
 				56A6DAA81BCF6FCA00A80680 /* GlobalColors.swift in Sources */,
+				9594484D1E0EFD2300FCB1E4 /* RealmChange.swift in Sources */,
+				959448511E0EFD2300FCB1E4 /* RealmQueueManager.swift in Sources */,
 				56A6DAA11BCF691300A80680 /* History.swift in Sources */,
+				9594484E1E0EFD2300FCB1E4 /* RealmExtension.swift in Sources */,
+				9594484B1E0EFD2300FCB1E4 /* ObjectExtension.swift in Sources */,
+				9594484F1E0EFD2300FCB1E4 /* RealmLogger.swift in Sources */,
 				56A6DAA61BCF6F8600A80680 /* StringHelper.swift in Sources */,
 				56A6DAA31BCF6C2F00A80680 /* NSDateHelper.swift in Sources */,
 				958012C11D165EF9000946F6 /* ProgressViewController.swift in Sources */,
