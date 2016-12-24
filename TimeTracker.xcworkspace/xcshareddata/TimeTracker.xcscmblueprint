@@ -1,21 +1,28 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D9F81C85F2F8551107F5BB74ED038A0DC11B0121",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "D9F81C85F2F8551107F5BB74ED038A0DC11B0121" : 0,
-    "E394F946930110230A9C45C12E9DBDFEB2DC7E51" : 0
+    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3" : 0,
+    "E394F946930110230A9C45C12E9DBDFEB2DC7E51" : 0,
+    "D9F81C85F2F8551107F5BB74ED038A0DC11B0121" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "FD23C4CD-1011-47A9-9891-FB6CBB119B30",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "D9F81C85F2F8551107F5BB74ED038A0DC11B0121" : "Time-Tracker\/",
-    "E394F946930110230A9C45C12E9DBDFEB2DC7E51" : ""
+    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3" : "..",
+    "E394F946930110230A9C45C12E9DBDFEB2DC7E51" : "",
+    "D9F81C85F2F8551107F5BB74ED038A0DC11B0121" : "Time-Tracker\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "TimeTracker",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "TimeTracker.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:bronwynbiro\/Time-Tracker.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:bronwynbiro\/Time-Tracker.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
