@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:TimeTracker/objects/HistoryRealm.swift">
-   </FileRef>
-   <FileRef
       location = "group:TimeTracker.xcodeproj">
    </FileRef>
    <FileRef

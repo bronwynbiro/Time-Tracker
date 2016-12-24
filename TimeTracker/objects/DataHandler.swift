@@ -13,22 +13,8 @@ class dataHandler: Object {
      - returns: BOOL boolean value determining whether the activity is already in core data or not.
      */
     func isDuplicate(activityName: String) -> Bool {
-        //TODO: fill in 
-        /*
-        let entityDescription = NSEntityDescription.entityForName("Activity", inManagedObjectContext: self.backgroundManagedObjectContext)
-        let request = NSFetchRequest()
-        request.entity = entityDescription
-        let predicate = NSPredicate(format: "name = %@", activityName)
-        request.predicate = predicate
-        do {
-            let objects = try self.backgroundManagedObjectContext.executeFetchRequest(request)
-            return objects.count != 0
-        } catch {
-            // Error occured
-            return false
-        }
- */
-        return false
+        let objects = realm!.objects(Activity.self).filter("name = %@", activityName)
+        return objects.count != 0
     }
     
     /**
@@ -48,13 +34,11 @@ class dataHandler: Object {
     func addNewActivityName(name: String) {
         let newActivity = Activity()
         newActivity.name = "\(name)"
-        /*
-        try! realm.write {
-            realm.add(newActivity)
+    
+        try! realm!.write {
+            realm!.add(newActivity)
         }
- */
         newActivity.name = name
-        //TODO: saveContext()
     }
     
     /**
@@ -64,6 +48,8 @@ class dataHandler: Object {
      - parameter endDate:   when it was finished
      - parameter duration:  duration of the activity
      */
+    /*
+     //TODO: potentially unnecessary if realm autosaves?
     func saveHistory(name: String, startDate: NSDate, endDate: NSDate, duration: NSInteger) {
         let history = History()
         history.name = name
@@ -71,12 +57,12 @@ class dataHandler: Object {
         history.endDate = endDate as Date
         history.duration = duration as NSNumber?
         history.saveTime = dateFormatter.string(from: endDate as Date)
-        /*
-        try! realm.write {
-            realm.create(history)
+        try! realm!.write {
+            realm!.create(history)
         }
-         */
+        
     }
+ */
     
     /**
      Save updated history object to core data.
@@ -112,62 +98,62 @@ class dataHandler: Object {
      Fetch core data to get all history objects.
      - returns: array of history objects
      */
-    func allHistoryItems() -> [History]? {
+    func allHistoryItems() -> Results<History>? {
         let allHistory = realm?.objects(History.self).sorted(byProperty: "startDate")
-        return Array(allHistory!)
+        return allHistory!
     }
     
     
-    func fetchDataForTodayActivities() -> [History] {
+    func fetchDataForTodayActivities() -> Results<History>{
         let startDate = Date.dateByMovingToBeginningOfDay()
         let endDate = Date.dateByMovingToEndOfDay()
         let todayActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
-        return Array(todayActivities!)
+        return todayActivities!
     }
     
     
-    func fetchDataForWeekActivities() -> [History] {
+    func fetchDataForWeekActivities() -> Results<History> {
         let startDate = Date.dateSevenDaysAgo()
         let endDate = Date.dateByMovingToEndOfDay()
         let weekActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
-        return Array(weekActivities!)
+        return weekActivities!
     }
     
-    func fetchDataForMonthActivities() -> [History] {
+    func fetchDataForMonthActivities() -> Results<History> {
         let startDate = Date.dateMonthAgo()
         let endDate = Date.dateByMovingToEndOfDay()
         let monthActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
-        return Array(monthActivities!)
+        return monthActivities!
     }
     
 
-    func fetchDataAllActivities() -> [Activity] {
-        //TODO: ascending = true
+    func fetchDataAllActivities() -> Results<Activity> {
+        //TODO ascending = true
         let allActivities = realm?.objects(Activity.self).sorted(byProperty: "name")
-        return Array(allActivities!)
+        return allActivities!
     }
     
 
-    func filterResultsMonth(i: String)-> [History] {
+    func filterResultsMonth(i: String)-> Results<History> {
         let startDate = Date.dateMonthAgo()
         let endDate = Date.dateByMovingToEndOfDay()
         let monthActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
-        return Array(monthActivities!)
+        return monthActivities!
        
     }
     
-    func filterResultsWeek(i: String)-> [History] {
+    func filterResultsWeek(i: String)-> Results<History> {
         let startDate = Date.dateSevenDaysAgo()
         let endDate = Date.dateByMovingToEndOfDay()
         let weekActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
-        return Array(weekActivities!)
+        return weekActivities!
     }
     
-    func filterResultsDay(i: String)-> [History] {
+    func filterResultsDay(i: String)-> Results<History> {
         let startDate = Date.dateByMovingToBeginningOfDay()
         let endDate = Date.dateByMovingToEndOfDay()
         let todayActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
-        return Array(todayActivities!)
+        return todayActivities!
     }
 
     func deleteObject(objectToDelete: Object) {
