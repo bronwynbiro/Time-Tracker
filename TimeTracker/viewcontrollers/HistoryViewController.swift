@@ -117,9 +117,11 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             checkToShowEmptyLabel()
             updateDeleteButtonTitle()
             
-            if fetchController.fetchedObjects?.count == 0 {
+           // if fetchController.fetchedObjects?.count == 0 {
+            let rrc = fetchController
+            if rrc.numberOfSections == 0 {
                 loadNormalState()
-                loadCoreDataEntities()
+               // loadDataEntities()
             }
         }
     }
@@ -139,61 +141,33 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         navigationController?.popViewController(animated: true)
     }
     
-    // MARK: tableView methods
-    //Notifies the receiver that the fetched results controller is about to start processing of one or more changes due to an add, remove, move, or update.
-    //parameter controller: controller The fetched results controller that sent the message.
-/*
+   /*
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
     */
     
-    /**
-     Notifies the receiver that a fetched object has been changed due to an add, remove, move, or update. The fetched results controller reports changes to its section before changes to the fetch result objects.
-     - parameter controller:   The fetched results controller that sent the message.
-     - parameter anObject:     The object that was changed
-     - parameter indexPath:    at which indexPath
-     - parameter type:         what happened
-     - parameter newIndexPath: The destination path for the object for insertions or moves (this value is nil for a deletion).
-     */
-    func controller(_ controller: RealmResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: RealmResultsChangeType, newIndexPath: IndexPath?) {
-        switch (type) {
-        case NSFetchedResultsChangeType.insert:
-            tableView.insertRows(at: [indexPath!], with: .fade)
-            break
-        case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .left)
-            break
-        case .update:
-            configureCell(tableView.cellForRow(at: indexPath!) as! HistoryCell, indexPath: indexPath!)
-            break
-        case .move:
-            tableView.deleteRows(at: [indexPath!], with: .left)
-            tableView.insertRows(at: [newIndexPath!], with: .fade)
+    func didChangeSection(controller: AnyObject, section: RealmSection<Any>, index: Int, changeType: RealmResultsChangeType) {
+        switch changeType {
+        case .Delete:
+            tableView.deleteSections(NSIndexSet(index: index) as IndexSet, with: UITableViewRowAnimation.automatic)
+        case .Insert:
+            tableView.insertSections(NSIndexSet(index: index) as IndexSet, with: UITableViewRowAnimation.automatic)
+        default:
             break
         }
     }
-    
-    /**
-     Notifies the receiver of the addition or removal of a section. The fetched results controller reports changes to its section before changes to the fetched result objects.
-     - parameter controller:   The fetched results controller that sent the message.
-     - parameter sectionInfo:  section that was changed
-     - parameter sectionIndex: the index of the section
-     - parameter type:         what happened
-     */
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        switch(type)
-        {
-        case .insert:
-            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-            break
-        case .delete:
-            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .left)
-            break
-        case .update:
-            break
-        default:
-            break
+    func didChangeObject(controller: AnyObject, oldIndexPath: NSIndexPath, newIndexPath: NSIndexPath, changeType: RealmResultsChangeType) {
+        switch changeType {
+        case .Delete:
+            tableView.deleteRows(at: [newIndexPath as IndexPath], with: UITableViewRowAnimation.automatic)
+        case .Insert:
+            tableView.insertRows(at: [newIndexPath as IndexPath], with: UITableViewRowAnimation.automatic)
+        case .Move:
+            tableView.deleteRows(at: [oldIndexPath as IndexPath], with: UITableViewRowAnimation.automatic)
+            tableView.insertRows(at: [newIndexPath as IndexPath], with: UITableViewRowAnimation.automatic)
+        case .Update:
+            tableView.reloadRows(at: [newIndexPath as IndexPath], with: UITableViewRowAnimation.automatic)
         }
     }
     
@@ -201,7 +175,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      Notifies the receiver that the fetched results controller has completed processing of one or more changes due to an add, remove, move, or update.
      - parameter controller: The fetched results controller that sent the message.
      */
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    func controllerDidChangeContent(_ controller: RealmResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
     
@@ -222,49 +196,31 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - returns: number of rows
      */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let sections = fetchController.sections {
-            let sectionInfo = sections[section]
+        let sections = fetchController.numberOfSections
+        return sections
+        /*
+        if sections{
+        let sectionInfo = sections[section]
             return sectionInfo.numberOfObjects
         } else {
             return 0
         }
+ */
     }
     
-    /**
-     Returns the number of sections to display
-     - parameter tableView: tableView
-     - returns: number of sections to display
-     */
     func numberOfSections(in tableView: UITableView) -> Int {
-        if let sections = fetchController.sections {
-            return sections.count
-        } else {
-            return 0
-        }
+        return fetchController.numberOfSections
     }
     
-    /**
-     Asks the delegate for the height to use for the header of a particular section.
-     - parameter tableView: tableView
-     - parameter section:   section
-     - returns: height of a header
-     */
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
     
-    /**
-     Title for the header in a given section
-     - parameter tableView: tableView
-     - parameter section:   section
-     - returns: title of the header
-     */
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let sections = fetchController.sections {
-            return sections[section].name
-        } else {
-            return ""
-        }
+        let sections = fetchController.sections
+        return sections[section].name
+    
     }
     
     /**
