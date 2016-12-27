@@ -12,13 +12,16 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noItemsLabel: UILabel!
     
- 
     
     lazy var todayDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm"
         return dateFormatter
     }()
+    
+    var sectionNames: [String] {
+        return Set(History.value(forKeyPath: "saveTime") as! [String]).sorted()
+    }
     
     lazy var fetchController: RealmResultsController<History, History> = {
         let predicate = NSPredicate(format: "saveTime > 0")
@@ -112,7 +115,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             let selectedIndexPaths = tableView.indexPathsForSelectedRows
             for indexPath in selectedIndexPaths! {
                 let history = fetchController.object(at: indexPath)
-                objectsToDelete.append(history as! History)
+                objectsToDelete.append(history)
             }
             checkToShowEmptyLabel()
             updateDeleteButtonTitle()
@@ -172,12 +175,13 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     /**
-     Notifies the receiver that the fetched results controller has completed processing of one or more changes due to an add, remove, move, or update.
-     - parameter controller: The fetched results controller that sent the message.
-     */
+   //  Notifies the receiver that the fetched results controller has completed processing of one or more changes due to an add, remove, move, or update.
+    // - parameter controller: The fetched results controller that sent the message.
+ 
     func controllerDidChangeContent(_ controller: RealmResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
+   */
     
     /**
      Returns the height value for the given indexPath
@@ -189,12 +193,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         return 72
     }
     
-    /**
-     Return the number of rows to display at a given section
-     - parameter tableView: tableView
-     - parameter section:   at which section
-     - returns: number of rows
-     */
+    // Return the number of rows to display at a given section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sections = fetchController.numberOfSections
         return sections
@@ -208,27 +207,33 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
  */
     }
     
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return fetchController.numberOfSections
     }
     
+    //Height of section header
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
     
-
+    // Title for the header in a given section
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+       /*
         let sections = fetchController.sections
-        return sections[section].name
-    
+        return sections.name
+         TODO: ascending: false
+ 
+        let realm = try! Realm()
+        let section = realm.objects(History.self).filter("saveTime > 0").sorted(byProperty: "name", ascending: false)
+        return section.name
+ */
+        let items = try! Realm().objects(History.self).sorted(byProperty: "name", ascending: false)
+        return sectionNames[section]
     }
     
-    /**
-     Returns a custom header view to be displayed at a section
-     - parameter tableView: tableView
-     - parameter section:   section
-     - returns: headerView
-     */
+    
+    //Returns a custom header view to be displayed at a section
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let title = self.tableView(tableView, titleForHeaderInSection: section)
         let heightForView = self.tableView(tableView, heightForHeaderInSection: section)
@@ -257,8 +262,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      */
     
     func configureCell(_ cell: HistoryCell, indexPath: IndexPath) -> History {
-        let history = fetchController.object(at: indexPath) as! History
-        if let str = history.name {
+        let history = fetchController.object(at: indexPath) 
+        if history.name != nil {
             cell.nameLabel.text = history.name
         }
         cell.backgroundColor = UIColor.white
@@ -286,7 +291,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      */
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let historyToSubtract = fetchController.object(at: indexPath) as! History
+            let historyToSubtract = fetchController.object(at: indexPath) 
            MainViewController().calculateDeletedDurationForToday(historyToSubtract)
            
             
@@ -366,7 +371,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             let selectedCell = tableView.cellForRow(at: indexPath!)
             nextView.PassCell = selectedCell
             nextView.PassPath = indexPath
-            nextView.PassHistory = fetchController.object(at: indexPath!) as! History
+            nextView.PassHistory = fetchController.object(at: indexPath!) 
             nextView.tableView = tableView
             nextView.startDate = history.startDate
             nextView.endDate = history.endDate

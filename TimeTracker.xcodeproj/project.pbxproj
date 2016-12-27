@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27C0BEE2132CFA54043F60CF /* Pods_TimeTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048ADA0531FA87B71BD57F23 /* Pods_TimeTracker.framework */; };
 		56A6DA801BCF655B00A80680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DA7F1BCF655B00A80680 /* AppDelegate.swift */; };
 		56A6DA8A1BCF655B00A80680 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A6DA881BCF655B00A80680 /* LaunchScreen.storyboard */; };
 		56A6DA9F1BCF691300A80680 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DA9B1BCF691300A80680 /* Activity.swift */; };
@@ -23,9 +24,15 @@
 		56A6DAB81BCF8B3700A80680 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DAB71BCF8B3700A80680 /* MainViewController.swift */; };
 		56A6DABA1BCF8BD000A80680 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A6DAB91BCF8BD000A80680 /* Images.xcassets */; };
 		56A6DABF1BCFDE2C00A80680 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A6DABE1BCFDE2C00A80680 /* HistoryViewController.swift */; };
+		95178CC21E11F01B00EE9ADA /* ChartsRealm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959448631E11E47200FCB1E4 /* ChartsRealm.framework */; };
+		95178CC41E11F01B00EE9ADA /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95178CC31E11F01B00EE9ADA /* Realm.framework */; };
+		95178CD01E11F04E00EE9ADA /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95178CC31E11F01B00EE9ADA /* Realm.framework */; };
+		95178CD11E11F04E00EE9ADA /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 95178CC31E11F01B00EE9ADA /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		95178CED1E11F35A00EE9ADA /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959448611E11E47200FCB1E4 /* Charts.framework */; };
+		95178CEE1E11F35A00EE9ADA /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 959448611E11E47200FCB1E4 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		95178CF41E11F36000EE9ADA /* ChartsRealm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 959448631E11E47200FCB1E4 /* ChartsRealm.framework */; };
+		95178CF51E11F36000EE9ADA /* ChartsRealm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 959448631E11E47200FCB1E4 /* ChartsRealm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		955118FE1CEFE334009E004D /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955118FD1CEFE334009E004D /* EditViewController.swift */; };
-		95738D001D3DE2F800EAB881 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9556520F1D3BEE1300C063FB /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		95738D031D3DE2F800EAB881 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9556520F1D3BEE1300C063FB /* Charts.framework */; };
 		958012C11D165EF9000946F6 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958012C01D165EF9000946F6 /* ProgressViewController.swift */; };
 		9594484B1E0EFD2300FCB1E4 /* ObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9594483E1E0EFD2300FCB1E4 /* ObjectExtension.swift */; };
 		9594484C1E0EFD2300FCB1E4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 9594483F1E0EFD2300FCB1E4 /* README.md */; };
@@ -43,55 +50,77 @@
 		95B56B891CE37D3800D6B89E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B56B881CE37D3800D6B89E /* HeaderView.swift */; };
 		95D666211E08E8C600F9D288 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D666201E08E8C600F9D288 /* DataHandler.swift */; };
 		95ED46031D33178E00F9F1EA /* ProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ED46021D33178E00F9F1EA /* ProgressCell.swift */; };
-		F8B9AC41A37A2A483973191A /* Pods_TimeTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07C7D2D8F4C9FC3CDBB3104 /* Pods_TimeTracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9556520E1D3BEE1300C063FB /* PBXContainerItemProxy */ = {
+		95178CE21E11F2F800EE9ADA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 955652071D3BEE1200C063FB /* Charts.xcodeproj */;
+			containerPortal = 95178CDC1E11F2F800EE9ADA /* Charts.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
-			remoteInfo = "Charts-iOS";
+			remoteGlobalIDString = 06165F241D8110E600722320;
+			remoteInfo = Charts;
 		};
-		955652101D3BEE1300C063FB /* PBXContainerItemProxy */ = {
+		95178CE41E11F2F800EE9ADA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 955652071D3BEE1200C063FB /* Charts.xcodeproj */;
+			containerPortal = 95178CDC1E11F2F800EE9ADA /* Charts.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = A52C5C371BAC5CA400594CDD;
-			remoteInfo = "Charts-TV";
+			remoteGlobalIDString = 06B120D51D811E6200D14B02;
+			remoteInfo = ChartsRealm;
 		};
-		955652121D3BEE1300C063FB /* PBXContainerItemProxy */ = {
+		95178CE61E11F2F800EE9ADA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 955652071D3BEE1200C063FB /* Charts.xcodeproj */;
+			containerPortal = 95178CDC1E11F2F800EE9ADA /* Charts.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 65B3F5BF1C7370BE000983D0;
-			remoteInfo = "Charts-OSX";
-		};
-		955652141D3BEE1300C063FB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 955652071D3BEE1200C063FB /* Charts.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 06AEE7A21BDC3F8B009875AE;
+			remoteGlobalIDString = 06165F2E1D8110E600722320;
 			remoteInfo = ChartsTests;
 		};
-		95738D051D3DE2F800EAB881 /* PBXContainerItemProxy */ = {
+		95178CEF1E11F35A00EE9ADA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 955652071D3BEE1200C063FB /* Charts.xcodeproj */;
+			containerPortal = 9594485A1E11E47200FCB1E4 /* Charts.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
-			remoteInfo = "Charts-iOS";
+			remoteGlobalIDString = 06165F231D8110E600722320;
+			remoteInfo = Charts;
+		};
+		95178CF61E11F36000EE9ADA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9594485A1E11E47200FCB1E4 /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 06B120D41D811E6200D14B02;
+			remoteInfo = ChartsRealm;
+		};
+		959448601E11E47200FCB1E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9594485A1E11E47200FCB1E4 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06165F241D8110E600722320;
+			remoteInfo = Charts;
+		};
+		959448621E11E47200FCB1E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9594485A1E11E47200FCB1E4 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06B120D51D811E6200D14B02;
+			remoteInfo = ChartsRealm;
+		};
+		959448641E11E47200FCB1E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9594485A1E11E47200FCB1E4 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06165F2E1D8110E600722320;
+			remoteInfo = ChartsTests;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		95738D071D3DE2F900EAB881 /* Embed Frameworks */ = {
+		95178CD51E11F04E00EE9ADA /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				95738D001D3DE2F800EAB881 /* Charts.framework in Embed Frameworks */,
+				95178CD11E11F04E00EE9ADA /* Realm.framework in Embed Frameworks */,
+				95178CEE1E11F35A00EE9ADA /* Charts.framework in Embed Frameworks */,
+				95178CF51E11F36000EE9ADA /* ChartsRealm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,7 +128,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5676927F1BD0E40C00FEA04F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		048ADA0531FA87B71BD57F23 /* Pods_TimeTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A6DA7C1BCF655B00A80680 /* TimeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A6DA7F1BCF655B00A80680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56A6DA891BCF655B00A80680 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -119,8 +148,10 @@
 		56A6DAB91BCF8BD000A80680 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		56A6DABE1BCFDE2C00A80680 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		8C938704749F7896FCFC334A /* Pods-TimeTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TimeTracker/Pods-TimeTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		95178CC31E11F01B00EE9ADA /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/TimeTracker-fruxtqhwluvgtrbdjseouxdmanlc/Build/Products/Debug-iphonesimulator/Realm/Realm.framework"; sourceTree = "<group>"; };
+		95178CDC1E11F2F800EE9ADA /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../../../Downloads/Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
+		95178CF81E11F36600EE9ADA /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		955118FD1CEFE334009E004D /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
-		955652071D3BEE1200C063FB /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../../../Downloads/Charts-master-4/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 		958012C01D165EF9000946F6 /* ProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		9594483E1E0EFD2300FCB1E4 /* ObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectExtension.swift; sourceTree = "<group>"; };
 		9594483F1E0EFD2300FCB1E4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -135,11 +166,11 @@
 		959448481E0EFD2300FCB1E4 /* RealmSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmSection.swift; sourceTree = "<group>"; };
 		959448491E0EFD2300FCB1E4 /* RealmThreadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmThreadHelper.swift; sourceTree = "<group>"; };
 		9594484A1E0EFD2300FCB1E4 /* RRCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RRCError.swift; sourceTree = "<group>"; };
+		9594485A1E11E47200FCB1E4 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../../../Downloads/Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
 		95B56B881CE37D3800D6B89E /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderView.swift; path = ../viewcontrollers/HeaderView.swift; sourceTree = "<group>"; };
 		95C1C3151D342014003AD1F9 /* TimeTracker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TimeTracker-Bridging-Header.h"; sourceTree = "<group>"; };
 		95D666201E08E8C600F9D288 /* DataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
 		95ED46021D33178E00F9F1EA /* ProgressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCell.swift; sourceTree = "<group>"; };
-		A07C7D2D8F4C9FC3CDBB3104 /* Pods_TimeTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB0801D41FDA0FC437A9F377 /* Pods-TimeTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-TimeTracker/Pods-TimeTracker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,8 +179,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95738D031D3DE2F800EAB881 /* Charts.framework in Frameworks */,
-				F8B9AC41A37A2A483973191A /* Pods_TimeTracker.framework in Frameworks */,
+				95178CC41E11F01B00EE9ADA /* Realm.framework in Frameworks */,
+				95178CC21E11F01B00EE9ADA /* ChartsRealm.framework in Frameworks */,
+				95178CED1E11F35A00EE9ADA /* Charts.framework in Frameworks */,
+				95178CF41E11F36000EE9ADA /* ChartsRealm.framework in Frameworks */,
+				95178CD01E11F04E00EE9ADA /* Realm.framework in Frameworks */,
+				27C0BEE2132CFA54043F60CF /* Pods_TimeTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,8 +194,9 @@
 		567692811BD0E41000FEA04F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5676927F1BD0E40C00FEA04F /* CoreData.framework */,
-				A07C7D2D8F4C9FC3CDBB3104 /* Pods_TimeTracker.framework */,
+				95178CC31E11F01B00EE9ADA /* Realm.framework */,
+				9594485A1E11E47200FCB1E4 /* Charts.xcodeproj */,
+				048ADA0531FA87B71BD57F23 /* Pods_TimeTracker.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -168,10 +204,11 @@
 		56A6DA731BCF655B00A80680 = {
 			isa = PBXGroup;
 			children = (
+				95178CF81E11F36600EE9ADA /* Charts.framework */,
+				95178CDC1E11F2F800EE9ADA /* Charts.xcodeproj */,
 				9594483D1E0EFD2300FCB1E4 /* RealmResultsSource */,
 				56A6DA7E1BCF655B00A80680 /* TimeTracker */,
 				567692811BD0E41000FEA04F /* Frameworks */,
-				955652071D3BEE1200C063FB /* Charts.xcodeproj */,
 				56A6DA7D1BCF655B00A80680 /* Products */,
 				6065572DB981679FA686C358 /* Pods */,
 			);
@@ -267,13 +304,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		955652081D3BEE1200C063FB /* Products */ = {
+		95178CDD1E11F2F800EE9ADA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9556520F1D3BEE1300C063FB /* Charts.framework */,
-				955652111D3BEE1300C063FB /* Charts.framework */,
-				955652131D3BEE1300C063FB /* Charts.framework */,
-				955652151D3BEE1300C063FB /* ChartsTests.xctest */,
+				95178CE31E11F2F800EE9ADA /* Charts.framework */,
+				95178CE51E11F2F800EE9ADA /* ChartsRealm.framework */,
+				95178CE71E11F2F800EE9ADA /* ChartsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -299,6 +335,16 @@
 			path = "../../../../../Downloads/RealmResultsController-master/Source";
 			sourceTree = "<group>";
 		};
+		9594485B1E11E47200FCB1E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				959448611E11E47200FCB1E4 /* Charts.framework */,
+				959448631E11E47200FCB1E4 /* ChartsRealm.framework */,
+				959448651E11E47200FCB1E4 /* ChartsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -312,12 +358,13 @@
 				56A6DA7A1BCF655B00A80680 /* Resources */,
 				596BF9399D694A979182DCFE /* [CP] Embed Pods Frameworks */,
 				FA5E7CB3C6E51ABC40B8B07E /* [CP] Copy Pods Resources */,
-				95738D071D3DE2F900EAB881 /* Embed Frameworks */,
+				95178CD51E11F04E00EE9ADA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				95738D061D3DE2F800EAB881 /* PBXTargetDependency */,
+				95178CF01E11F35A00EE9ADA /* PBXTargetDependency */,
+				95178CF71E11F36000EE9ADA /* PBXTargetDependency */,
 			);
 			name = TimeTracker;
 			productName = TimeTracker;
@@ -359,8 +406,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 955652081D3BEE1200C063FB /* Products */;
-					ProjectRef = 955652071D3BEE1200C063FB /* Charts.xcodeproj */;
+					ProductGroup = 9594485B1E11E47200FCB1E4 /* Products */;
+					ProjectRef = 9594485A1E11E47200FCB1E4 /* Charts.xcodeproj */;
+				},
+				{
+					ProductGroup = 95178CDD1E11F2F800EE9ADA /* Products */;
+					ProjectRef = 95178CDC1E11F2F800EE9ADA /* Charts.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -371,32 +422,46 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9556520F1D3BEE1300C063FB /* Charts.framework */ = {
+		95178CE31E11F2F800EE9ADA /* Charts.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Charts.framework;
-			remoteRef = 9556520E1D3BEE1300C063FB /* PBXContainerItemProxy */;
+			remoteRef = 95178CE21E11F2F800EE9ADA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		955652111D3BEE1300C063FB /* Charts.framework */ = {
+		95178CE51E11F2F800EE9ADA /* ChartsRealm.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = Charts.framework;
-			remoteRef = 955652101D3BEE1300C063FB /* PBXContainerItemProxy */;
+			path = ChartsRealm.framework;
+			remoteRef = 95178CE41E11F2F800EE9ADA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		955652131D3BEE1300C063FB /* Charts.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Charts.framework;
-			remoteRef = 955652121D3BEE1300C063FB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		955652151D3BEE1300C063FB /* ChartsTests.xctest */ = {
+		95178CE71E11F2F800EE9ADA /* ChartsTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ChartsTests.xctest;
-			remoteRef = 955652141D3BEE1300C063FB /* PBXContainerItemProxy */;
+			remoteRef = 95178CE61E11F2F800EE9ADA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		959448611E11E47200FCB1E4 /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 959448601E11E47200FCB1E4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		959448631E11E47200FCB1E4 /* ChartsRealm.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ChartsRealm.framework;
+			remoteRef = 959448621E11E47200FCB1E4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		959448651E11E47200FCB1E4 /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = 959448641E11E47200FCB1E4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -504,10 +569,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		95738D061D3DE2F800EAB881 /* PBXTargetDependency */ = {
+		95178CF01E11F35A00EE9ADA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "Charts-iOS";
-			targetProxy = 95738D051D3DE2F800EAB881 /* PBXContainerItemProxy */;
+			name = Charts;
+			targetProxy = 95178CEF1E11F35A00EE9ADA /* PBXContainerItemProxy */;
+		};
+		95178CF71E11F36000EE9ADA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ChartsRealm;
+			targetProxy = 95178CF61E11F36000EE9ADA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -666,7 +736,7 @@
 				56A6DA8D1BCF655B00A80680 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		56A6DA8E1BCF655B00A80680 /* Build configuration list for PBXNativeTarget "TimeTracker" */ = {
 			isa = XCConfigurationList;
@@ -675,7 +745,7 @@
 				56A6DA901BCF655B00A80680 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
