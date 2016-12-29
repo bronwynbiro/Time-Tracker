@@ -52,7 +52,6 @@ class NewActivityView: UIView, UITextFieldDelegate {
                 alertView.show()
             } else {
                 DataHandler.sharedInstance.addNewActivityName(name: activityName!)
-
                 textField.text = ""
                 slideViewUp()
                 delegate?.slideActivityViewUp()

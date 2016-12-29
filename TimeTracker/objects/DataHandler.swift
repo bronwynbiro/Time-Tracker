@@ -15,18 +15,24 @@ class DataHandler: Object {
    static let sharedInstance: DataHandler = { DataHandler() }()
     
     func isDuplicate(activityName: String) -> Bool {
-        var objects = realm!.objects(Activity.self).filter("name = %@", activityName)
-        return objects.count != 0
+        do {
+            let realm = try! Realm()
+            let objects = realm.objects(Activity.self).filter("name = %@", activityName)
+            print("objects", objects)
+            return objects.count != 0
+        } catch {
+            return false
+        }
     }
 
+    
     func addNewActivityName(name: String) {
+        let realm = try! Realm()
         let newActivity = Activity()
         newActivity.name = "\(name)"
-    
-        try! realm!.write {
-            realm!.add(newActivity)
+        try! realm.write {
+            realm.add(newActivity)
         }
-        newActivity.name = name
     }
     
     /**
