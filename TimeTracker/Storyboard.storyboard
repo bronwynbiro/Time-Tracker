@@ -428,7 +428,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OBw-bS-S88" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="P60-5H-jlZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1682" y="-243"/>
+            <point key="canvasLocation" x="1680.8" y="-243.32833583208398"/>
         </scene>
         <!--History View Controller-->
         <scene sceneID="PVc-Ia-p4u">
@@ -663,6 +663,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="4ji-3K-meo" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="KHU-ri-cTk">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>

@@ -19,49 +19,43 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         return dateFormatter
     }()
     
+
+    let items = try! Realm().objects(History.self).sorted(byProperty: "saveTime", ascending: false)
     var sectionNames: [String] {
-        return Set(History.value(forKeyPath: "saveTime") as! [String]).sorted()
+        return Set(items.value(forKeyPath: "saveTime") as! [String]).sorted()
     }
     
+    /*
+    
     lazy var fetchController: RealmResultsController<History, History> = {
-        let predicate = NSPredicate(format: "saveTime > 0")
+       // let predicate = NSPredicate(format: "name")
         let nameDescriptor = [SortDescriptor(property: "name"), SortDescriptor(property: "ascending: false")]
         let fetchRequest = RealmRequest<History>(predicate: predicate, realm: realm, sortDescriptors: nameDescriptor)
         let fetchedController = try! RealmResultsController<History, History>(request: fetchRequest, sectionKeyPath: "saveTime")
-       // fetchedController.delegate = self
         return fetchedController
     }()
     
+ */
     
-    // MARK: view methods
-    /**
-     Called after the view was loaded, do some initial setup and refresh the view
-     */
     override func viewDidLoad() {
         title = "History"
-        
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.separatorColor = color.pink()
         tableView.backgroundColor = UIColor.white
-        //  suvar.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         refreshView()
         loadNormalState()
     }
     
-    /**
-     Load the normal state of the navigation bar
-     */
+
     func loadNormalState() {
         navigationItem.leftBarButtonItem = nil
         navigationItem.backBarButtonItem?.action = #selector(HistoryViewController.backButtonPressed)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(HistoryViewController.editButtonPressed))
     }
     
-    /**
-     Load the editing state of the navigation bar
-     */
+
     func loadEditState() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(HistoryViewController.deleteButtonPressed))
         
@@ -71,18 +65,14 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(HistoryViewController.doneButtonPressed))
     }
     
-    /**
-     Refresh the view, reload the tableView and check if it's needed to show the empty view.
-     */
+
     func refreshView() {
-        //loadDataEntities()
         checkToShowEmptyLabel()
     }
     
-    /**
-     Checks for the available Activities, if YES show the empty view
-     */
+
     func checkToShowEmptyLabel() {
+        let realm = try! Realm()
         let allActivities = realm.objects(Activity.self)
         noItemsLabel.isHidden = allActivities.count != 0
         tableView.reloadData()
@@ -121,25 +111,19 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             updateDeleteButtonTitle()
             
            // if fetchController.fetchedObjects?.count == 0 {
-            let rrc = fetchController
-            if rrc.numberOfSections == 0 {
+            if fetchController.numberOfSections == 0 {
                 loadNormalState()
-               // loadDataEntities()
             }
         }
     }
     
-    /**
-     Stop editing of the tableView, and load the normal state
-     */
+
     func doneButtonPressed() {
         tableView.setEditing(false, animated: true)
         loadNormalState()
     }
     
-    /**
-     Pop the viewController
-     */
+
     func backButtonPressed() {
         navigationController?.popViewController(animated: true)
     }
@@ -196,6 +180,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     // Return the number of rows to display at a given section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sections = fetchController.numberOfSections
+        print("SECTIONS:", sections)
         return sections
         /*
         if sections{
@@ -228,7 +213,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         let section = realm.objects(History.self).filter("saveTime > 0").sorted(byProperty: "name", ascending: false)
         return section.name
  */
-        let items = try! Realm().objects(History.self).sorted(byProperty: "name", ascending: false)
         return sectionNames[section]
     }
     
@@ -267,12 +251,10 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.nameLabel.text = history.name
         }
         cell.backgroundColor = UIColor.white
-       // cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date)) - \(todayDateFormatter.string(from: history.endDate! as Date))"
-       // cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration))
+        cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date)) - \(todayDateFormatter.string(from: history.endDate! as Date))"
+        cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration))
         
-        cell.timeLabel.text = "test"
-        cell.durationLabel.text = "test"
-       // print (todayDateFormatter.string(from: history.startDate! as Date))
+        print (todayDateFormatter.string(from: history.startDate! as Date))
         return history
     }
     
