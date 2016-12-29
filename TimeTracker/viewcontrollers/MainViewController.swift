@@ -1,7 +1,6 @@
 import UIKit
 import RealmSwift
 
-let data = dataHandler()
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var choosenActivity: Activity?
@@ -197,7 +196,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     func calculateDeletedDurationForToday(_ historyToSubtract: History?) -> Double {
-        let todaysActivitiesArray = data.fetchDataForTodayActivities()
+        let todaysActivitiesArray = DataHandler.sharedInstance.fetchDataForTodayActivities()
         var totalDuration = calculateTotalDurationForToday()
         if todaysActivitiesArray.count < 1 {
             totalDuration = 0
@@ -291,7 +290,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      */
     func loadCoreDataEntities() {
         var todaysActivitiesArray: Results <History>
-        todaysActivitiesArray = data.fetchDataForTodayActivities()
+        todaysActivitiesArray = DataHandler.sharedInstance.fetchDataForTodayActivities()
         if todaysActivitiesArray.count > 0 {
             totalduration = NSInteger(calculateTotalDurationForToday())
         }

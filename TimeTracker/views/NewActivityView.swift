@@ -6,9 +6,6 @@ protocol NewActivityDelegate {
     func slideActivityViewUp()
 }
 
-let DataHandler = dataHandler()
-
-
 class NewActivityView: UIView, UITextFieldDelegate {
 
     var textField: ActivityTextfield = ActivityTextfield()
@@ -50,11 +47,11 @@ class NewActivityView: UIView, UITextFieldDelegate {
             textField.text = ""
             slideViewUp()
         } else {
-            if DataHandler.isDuplicate(activityName: activityName!) == true {
+            if DataHandler.sharedInstance.isDuplicate(activityName: activityName!) == true {
                 let alertView = UIAlertView(title: "Duplicate", message: "This activity is already in your activity list.", delegate: nil, cancelButtonTitle: "Ok")
                 alertView.show()
             } else {
-                DataHandler.addNewActivityName(name: activityName!)
+                DataHandler.sharedInstance.addNewActivityName(name: activityName!)
 
                 textField.text = ""
                 slideViewUp()

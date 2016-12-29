@@ -10,7 +10,9 @@ var dateFormatter: DateFormatter = {
     return dateFormatter
 }()
 
-class dataHandler: Object {
+class DataHandler: Object {
+    
+   static let sharedInstance: DataHandler = { DataHandler() }()
     
     func isDuplicate(activityName: String) -> Bool {
         var objects = realm!.objects(Activity.self).filter("name = %@", activityName)
@@ -90,8 +92,9 @@ class dataHandler: Object {
     func fetchDataForTodayActivities() -> Results<History>{
         let startDate = Date.dateByMovingToBeginningOfDay()
         let endDate = Date.dateByMovingToEndOfDay()
-        let todayActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
-        return todayActivities!
+        let realm = try! Realm()
+        let todayActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
+        return todayActivities
     }
     
     

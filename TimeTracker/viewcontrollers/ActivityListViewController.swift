@@ -45,7 +45,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     
     func reloadDataEntities() {
         var activitiesArray : Results<Activity>
-        activitiesArray = data.fetchDataAllActivities()
+        activitiesArray = DataHandler.sharedInstance.fetchDataAllActivities()
         refreshView()
     }
 
@@ -127,7 +127,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let activity = activitiesArray[indexPath.row]
-            data.deleteObject(objectToDelete: activity)
+            DataHandler.sharedInstance.deleteObject(objectToDelete: activity)
             reloadDataEntities()
         }
     }
