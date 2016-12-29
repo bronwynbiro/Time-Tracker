@@ -83,13 +83,13 @@ class DataHandler: Object {
     }
     
     
-    func allHistoryItems() -> Results<History>? {
-        let allHistory = realm?.objects(History.self).sorted(byProperty: "startDate")
-        return allHistory!
+    func allHistoryItems() -> Results<History> {
+        let allHistory = realm!.objects(History.self).sorted(byProperty: "startDate")
+        return allHistory
     }
     
     
-    func fetchDataForTodayActivities() -> Results<History>{
+    func fetchDataForTodayActivities() -> Results<History> {
         let startDate = Date.dateByMovingToBeginningOfDay()
         let endDate = Date.dateByMovingToEndOfDay()
         let realm = try! Realm()
@@ -101,44 +101,50 @@ class DataHandler: Object {
     func fetchDataForWeekActivities() -> Results<History> {
         let startDate = Date.dateSevenDaysAgo()
         let endDate = Date.dateByMovingToEndOfDay()
-        let weekActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
-        return weekActivities!
+        let realm = try! Realm()
+        let weekActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
+        return weekActivities
     }
     
     func fetchDataForMonthActivities() -> Results<History> {
         let startDate = Date.dateMonthAgo()
         let endDate = Date.dateByMovingToEndOfDay()
-        let monthActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
-        return monthActivities!
+        let realm = try! Realm()
+        let monthActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@)", startDate, endDate).sorted(byProperty: "startDate")
+        return monthActivities
     }
     
 
-    func fetchDataAllActivities() -> Results<Activity> {
-        let allActivities = realm?.objects(Activity.self).sorted(byProperty: "name", ascending: true)
-        return allActivities!
+    func fetchDataAllActivities() -> Results<Activity>? {
+        let realm = try! Realm()
+        let allActivities = realm.objects(Activity.self).sorted(byProperty: "name", ascending: true)
+        return allActivities
     }
     
 
     func filterResultsMonth(i: String)-> Results<History> {
         let startDate = Date.dateMonthAgo()
         let endDate = Date.dateByMovingToEndOfDay()
-        let monthActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
-        return monthActivities!
+        let realm = try! Realm()
+        let monthActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
+        return monthActivities
        
     }
     
     func filterResultsWeek(i: String)-> Results<History> {
         let startDate = Date.dateSevenDaysAgo()
         let endDate = Date.dateByMovingToEndOfDay()
-        let weekActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
-        return weekActivities!
+        let realm = try! Realm()
+        let weekActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
+        return weekActivities
     }
     
     func filterResultsDay(i: String)-> Results<History> {
         let startDate = Date.dateByMovingToBeginningOfDay()
         let endDate = Date.dateByMovingToEndOfDay()
-        let todayActivities = realm?.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
-        return todayActivities!
+        let realm = try! Realm()
+        let todayActivities = realm.objects(History.self).filter("(startDate >= %@) AND (startDate <= %@ AND (name = %@))", startDate, endDate, i)
+        return todayActivities
     }
 
     func deleteObject(objectToDelete: Object) {

@@ -359,7 +359,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     func selectedActivity() -> Activity {
         let activitiesArray = DataHandler.sharedInstance.fetchDataAllActivities()
         let selectedIndexPath = tableView.indexPathForSelectedRow!
-        return activitiesArray[selectedIndexPath.row]
+        return activitiesArray![selectedIndexPath.row]
     }
     
     

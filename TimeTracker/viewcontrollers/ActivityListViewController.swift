@@ -5,8 +5,9 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noActivitiesLabel: UILabel!
-    var activitiesArray: [Activity] = []
     @IBOutlet weak var addButton: UIButton!
+    
+    var activitiesArray = DataHandler.sharedInstance.fetchDataAllActivities()
 
     // Custom fadeview to make unavailable to hit an activity while adding new one
     lazy var fadeView: UIView = {
@@ -34,7 +35,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
         tableView.separatorColor = UIColor.white
         tableView.backgroundColor = UIColor.white
 
-        reloadDataEntities()
+        refreshView()
     }
 
     func refreshView() {
@@ -42,16 +43,9 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
         checkToShowEmptyView()
     }
 
-    
-    func reloadDataEntities() {
-        var activitiesArray : Results<Activity>
-        activitiesArray = DataHandler.sharedInstance.fetchDataAllActivities()
-        refreshView()
-    }
-
 
     func checkToShowEmptyView() {
-        noActivitiesLabel.isHidden = activitiesArray.count != 0
+        noActivitiesLabel.isHidden = activitiesArray?.count != 0
     }
 
  
@@ -83,7 +77,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     - returns: number of rows
     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return activitiesArray.count
+        return activitiesArray!.count
     }
 
     /**
@@ -97,8 +91,8 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")!
 
-        let activity = activitiesArray[indexPath.row]
-        cell.textLabel?.text = activity.name
+        let activity = activitiesArray?[indexPath.row]
+        cell.textLabel?.text = activity?.name
         cell.textLabel?.textColor = UIColor.black
         cell.backgroundColor = UIColor.white
 
@@ -126,9 +120,9 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     */
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let activity = activitiesArray[indexPath.row]
-            DataHandler.sharedInstance.deleteObject(objectToDelete: activity)
-            reloadDataEntities()
+            let activity = activitiesArray?[indexPath.row]
+            DataHandler.sharedInstance.deleteObject(objectToDelete: activity!)
+            refreshView()
         }
     }
 
@@ -149,7 +143,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     */
     func selectedActivity() -> Activity {
         let selectedIndexPath = tableView.indexPathForSelectedRow!
-        return activitiesArray[selectedIndexPath.row]
+        return activitiesArray![selectedIndexPath.row]
     }
 
     /**
@@ -157,7 +151,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
     */
     func slideActivityViewUp() {
         dismissAddview()
-        reloadDataEntities()
+        refreshView()
     }
 
     /**
