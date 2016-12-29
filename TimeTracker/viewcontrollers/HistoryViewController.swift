@@ -267,9 +267,12 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.nameLabel.text = history.name
         }
         cell.backgroundColor = UIColor.white
-        cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date)) - \(todayDateFormatter.string(from: history.endDate! as Date))"
-        cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration))
-        print (todayDateFormatter.string(from: history.startDate! as Date))
+       // cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date)) - \(todayDateFormatter.string(from: history.endDate! as Date))"
+       // cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration))
+        
+        cell.timeLabel.text = "test"
+        cell.durationLabel.text = "test"
+       // print (todayDateFormatter.string(from: history.startDate! as Date))
         return history
     }
     
@@ -364,9 +367,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     //MARK: segue for editview
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let nextView = (segue.destination as! EditViewController)
-        // Get the cell that generated this segue.
         let indexPath = tableView.indexPathForSelectedRow
-        if let currentCell = tableView.cellForRow(at: indexPath!) as! HistoryCell! {
+        if (tableView.cellForRow(at: indexPath!) as! HistoryCell!) != nil {
             let history = fetchController.object(at: indexPath!)
             let selectedCell = tableView.cellForRow(at: indexPath!)
             nextView.PassCell = selectedCell

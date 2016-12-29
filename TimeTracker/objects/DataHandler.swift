@@ -4,20 +4,18 @@ import RealmSwift
 
 let realm = try! Realm()
 
+var dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "YYYY-MM-dd"
+    return dateFormatter
+}()
+
 class dataHandler: Object {
     
     func isDuplicate(activityName: String) -> Bool {
         var objects = realm!.objects(Activity.self).filter("name = %@", activityName)
         return objects.count != 0
     }
-    
-
-    lazy var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd"
-        return dateFormatter
-    }()
-    
 
     func addNewActivityName(name: String) {
         let newActivity = Activity()
@@ -65,8 +63,10 @@ class dataHandler: Object {
         //    let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
         var history = PassHistory
         let calendar = NSCalendar.current
+        /*
         let dateMakerFormatter = DateFormatter()
         dateMakerFormatter.dateFormat = "hh:mm a"
+ */
         let timeDifference = calendar.dateComponents([.hour, .minute], from: startDate as Date, to: endDate as Date)
         let durationString = "\(timeDifference)"
         var interval = endDate.timeIntervalSince(startDate as Date)
@@ -81,10 +81,6 @@ class dataHandler: Object {
     }
     
     
-    /**
-     Fetch core data to get all history objects.
-     - returns: array of history objects
-     */
     func allHistoryItems() -> Results<History>? {
         let allHistory = realm?.objects(History.self).sorted(byProperty: "startDate")
         return allHistory!
@@ -115,8 +111,7 @@ class dataHandler: Object {
     
 
     func fetchDataAllActivities() -> Results<Activity> {
-        //TODO ascending = true
-        let allActivities = realm?.objects(Activity.self).sorted(byProperty: "name")
+        let allActivities = realm?.objects(Activity.self).sorted(byProperty: "name", ascending: true)
         return allActivities!
     }
     

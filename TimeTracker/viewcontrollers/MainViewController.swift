@@ -95,13 +95,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         startPauseButton.setTitle("PAUSE", for: UIControlState())
         isActivityRunning = true
         isActivityPaused = false
-        
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy, HH:mm"
-        
         UserDefaults.standard.set(isActivityRunning, forKey:"quitActivityRunning")
-        
         UserDefaults.standard.synchronize()
     }
     
@@ -317,7 +311,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if todaysActivitiesArray.count > 0 {
             let history = todaysActivitiesArray[indexPath.row]
             cell.nameLabel.text = "\(history.name!)"
-            cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date)) - \(todayDateFormatter.string(from: history.endDate! as Date))"
+           // cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date)) - \(todayDateFormatter.string(from: history.endDate! as Date))"
+            cell.timeLabel.text = "testing dateformatter realm issues"
             cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration))
         }
         return cell

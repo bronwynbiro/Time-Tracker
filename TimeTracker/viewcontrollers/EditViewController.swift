@@ -1,5 +1,5 @@
 import UIKit
-import CoreData
+import RealmSwift
 import Foundation
 
 extension Date
@@ -20,7 +20,8 @@ var todayDateFormatter: DateFormatter = {
     return dateFormatter
 }()
 
-class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+//used to be fetchedresults delgate
+class EditViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var EndDatePicker: UIDatePicker!
     @IBOutlet weak var StartDatePicker: UIDatePicker!
     @IBOutlet weak var showButton: UIButton!
@@ -31,8 +32,12 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
     var tableView: UITableView!
     var startDate: Date!
     var endDate: Date!
+    /*
     var PassHistory: History!
     var PassDuration: NSNumber!
+ */
+    var PassHistory = History()
+    var PassDuration: Double!
     var choosenActivity: Activity?
     var passedSeconds: Int = 0
     var startDateYear: Date?
@@ -50,13 +55,18 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
     @IBAction func updateCellTime(_ sender: UIButton) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
         let history = PassHistory
-        //TODO: add to realm
-        history?.startDate = StartDatePicker.date as NSDate?
-        history?.endDate = EndDatePicker.date as NSDate?
-        cell.timeLabel.text = "\(todayDateFormatter.string(from: history!.startDate! as Date )) - \(todayDateFormatter.string(from: history!.endDate! as Date))"
-        let PassDuration = history?.endDate!.timeIntervalSince(history?.startDate! as Date!)
-        cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration)!)
-        data.updateHistory(name: history!.name!, startDate: history!.startDate! as NSDate, endDate: history!.endDate! as NSDate, duration: Int(PassDuration!), PassPath: PassPath as NSIndexPath, PassHistory: PassHistory)
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(history)
+            history.startDate = StartDatePicker.date as NSDate?
+            history.endDate = EndDatePicker.date as NSDate?
+            history.duration = history.endDate!.timeIntervalSince(history.startDate! as Date!)
+        }
+        cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date )) - \(todayDateFormatter.string(from: history.endDate! as Date))"
+        let PassDuration = history.endDate!.timeIntervalSince(history.startDate! as Date!)
+       cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration))
+        //Is this needed?"
+        //data.updateHistory(name: history!.name!, startDate: history!.startDate! as NSDate, endDate: history!.endDate! as NSDate, duration: Int(PassDuration!), PassPath: PassPath as NSIndexPath, PassHistory: PassHistory)
         
         tableView.reloadData()
     }
