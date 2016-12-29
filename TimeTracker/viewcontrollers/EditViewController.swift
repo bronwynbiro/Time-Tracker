@@ -50,9 +50,10 @@ class EditViewController: UIViewController, UITableViewDelegate, NSFetchedResult
     @IBAction func updateCellTime(_ sender: UIButton) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
         let history = PassHistory
-        history?.startDate = StartDatePicker.date
-        history?.endDate = EndDatePicker.date
-        cell.timeLabel.text = "\(todayDateFormatter.string(from: history!.startDate! )) - \(todayDateFormatter.string(from: history!.endDate!))"
+        //TODO: add to realm
+        history?.startDate = StartDatePicker.date as NSDate?
+        history?.endDate = EndDatePicker.date as NSDate?
+        cell.timeLabel.text = "\(todayDateFormatter.string(from: history!.startDate! as Date )) - \(todayDateFormatter.string(from: history!.endDate! as Date))"
         let PassDuration = history?.endDate!.timeIntervalSince(history?.startDate! as Date!)
         cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration)!)
         data.updateHistory(name: history!.name!, startDate: history!.startDate! as NSDate, endDate: history!.endDate! as NSDate, duration: Int(PassDuration!), PassPath: PassPath as NSIndexPath, PassHistory: PassHistory)

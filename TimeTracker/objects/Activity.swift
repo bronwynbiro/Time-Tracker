@@ -2,7 +2,7 @@ import Foundation
 import RealmSwift
 
 class Activity: Object {
-    var startDate: Date?
-    var endDate: Date?
-    var name: String?
+    dynamic var startDate: NSDate? = nil
+    dynamic var endDate: NSDate? = nil
+    dynamic var name: String? = nil
 }

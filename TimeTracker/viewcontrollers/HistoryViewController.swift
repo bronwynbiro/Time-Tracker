@@ -267,9 +267,9 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.nameLabel.text = history.name
         }
         cell.backgroundColor = UIColor.white
-        cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate!)) - \(todayDateFormatter.string(from: history.endDate!))"
-        cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
-        print (todayDateFormatter.string(from: history.startDate!))
+        cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date)) - \(todayDateFormatter.string(from: history.endDate! as Date))"
+        cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration))
+        print (todayDateFormatter.string(from: history.startDate! as Date))
         return history
     }
     
@@ -373,8 +373,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             nextView.PassPath = indexPath
             nextView.PassHistory = fetchController.object(at: indexPath!) 
             nextView.tableView = tableView
-            nextView.startDate = history.startDate
-            nextView.endDate = history.endDate
+            nextView.startDate = history.startDate as Date!
+            nextView.endDate = history.endDate as Date!
             nextView.choosenActivity = selectedActivity()
             
         }

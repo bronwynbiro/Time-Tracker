@@ -6,31 +6,19 @@ let realm = try! Realm()
 
 class dataHandler: Object {
     
-    
-    /**
-     Tells whether the passed in activity's name is already saved or not.
-     - parameter activityName: activityName activity to be saved.
-     - returns: BOOL boolean value determining whether the activity is already in core data or not.
-     */
     func isDuplicate(activityName: String) -> Bool {
-        let objects = realm!.objects(Activity.self).filter("name = %@", activityName)
+        var objects = realm!.objects(Activity.self).filter("name = %@", activityName)
         return objects.count != 0
     }
     
-    /**
-     Creates a NSDateFormatter to format the dates of the Route object
-     - returns: NSDateFormatter the dateFormatter object
-     */
+
     lazy var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
         return dateFormatter
     }()
     
-    /*
-     Adds new activity to core data.
-     - parameter name: name activity name to be saved.
-     */
+
     func addNewActivityName(name: String) {
         let newActivity = Activity()
         newActivity.name = "\(name)"
@@ -75,20 +63,19 @@ class dataHandler: Object {
     
     func updateHistory(name: String, startDate: NSDate, endDate: NSDate, duration: NSInteger, PassPath: NSIndexPath, PassHistory: History) {
         //    let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
-        let history = PassHistory
-        history.name = name
-        history.startDate = startDate as Date
-        history.endDate = endDate as Date
-        
+        var history = PassHistory
         let calendar = NSCalendar.current
         let dateMakerFormatter = DateFormatter()
         dateMakerFormatter.dateFormat = "hh:mm a"
         let timeDifference = calendar.dateComponents([.hour, .minute], from: startDate as Date, to: endDate as Date)
-      //  let durationString = "\(timeDifference)"
-        let interval = endDate.timeIntervalSince(startDate as Date)
+        let durationString = "\(timeDifference)"
+        var interval = endDate.timeIntervalSince(startDate as Date)
         try! realm?.write {
             realm?.add(history)
-            history.duration = interval as NSNumber?
+            history.name = name
+            history.startDate = startDate
+            history.endDate = endDate
+            history.duration = interval as Double
             history.saveTime = dateFormatter.string(from: endDate as Date)
         }
     }

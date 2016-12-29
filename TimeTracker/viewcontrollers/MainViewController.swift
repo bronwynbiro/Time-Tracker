@@ -188,11 +188,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
      Calculate the total duration of activites for today.
      - returns: NSInteger summary value of durations as an integer.
      */
-    func calculateTotalDurationForToday() -> NSInteger {
-        var sumOfDuration = 0
+    func calculateTotalDurationForToday() -> Double {
+        var sumOfDuration: Double = 0
         if todaysActivitiesArray.count > 0 {
             for history in todaysActivitiesArray {
-                sumOfDuration += (history.duration?.intValue)!
+                sumOfDuration += (history.duration)
             }
         }
         else {
@@ -202,14 +202,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    func calculateDeletedDurationForToday(_ historyToSubtract: History?) -> NSInteger {
+    func calculateDeletedDurationForToday(_ historyToSubtract: History?) -> Double {
         let todaysActivitiesArray = data.fetchDataForTodayActivities()
         var totalDuration = calculateTotalDurationForToday()
         if todaysActivitiesArray.count < 1 {
             totalDuration = 0
         }
         else {
-            totalDuration = totalDuration - Int(historyToSubtract!.duration!)
+            totalDuration = totalDuration - historyToSubtract!.duration
         }
         return totalDuration
         
@@ -299,7 +299,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var todaysActivitiesArray: Results <History>
         todaysActivitiesArray = data.fetchDataForTodayActivities()
         if todaysActivitiesArray.count > 0 {
-            totalduration = calculateTotalDurationForToday()
+            totalduration = NSInteger(calculateTotalDurationForToday())
         }
         tableView.reloadData()
     }
@@ -318,7 +318,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let history = todaysActivitiesArray[indexPath.row]
             cell.nameLabel.text = "\(history.name!)"
             cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date)) - \(todayDateFormatter.string(from: history.endDate! as Date))"
-            cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration?.doubleValue)!)
+            cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration))
         }
         return cell
     }

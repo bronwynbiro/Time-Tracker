@@ -41,10 +41,10 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         let todaysActivitiesArray = data.fetchDataForTodayActivities()
         numberOfRows.removeAll()
         self.tableView.reloadData()
-        var sumOfDay = 0
+        var sumOfDay: Double = 0
         if todaysActivitiesArray.count > 0 {
             for history in todaysActivitiesArray {
-                sumOfDay += (history.duration?.intValue)!
+                sumOfDay += (history.duration)
             }
         }
         var namesArray = [String]()
@@ -65,7 +65,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
             for myObj in uniqueActivArr {
                 let testPath = NSIndexPath(row: i, section: 0)
                 let cell = tableView.cellForRow(at: testPath as IndexPath) as! ProgressCell
-                sum += (myObj.duration?.doubleValue)!
+                sum += (myObj.duration)
                 let timeString = "\(NSString.createDurationStringFromDuration(Double(sum)))"
                 percentage = (sum / Double(sumOfDay))*100
                 let percentString = "\(round(percentage))%"
@@ -89,10 +89,10 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         let weekActivitiesArray = DataHandler.fetchDataForWeekActivities()
         numberOfRows.removeAll()
         self.tableView.reloadData()
-        var sumOfWeek = 0
+        var sumOfWeek: Double = 0
         if weekActivitiesArray.count > 0 {
             for history in weekActivitiesArray {
-                sumOfWeek += (history.duration?.intValue)!
+                sumOfWeek += (history.duration)
             }
         }
         var namesArray = [String]()
@@ -115,7 +115,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
                 self.tableView.reloadData()
                 let testPath = NSIndexPath(row: i, section: 0)
                 let cell = tableView.cellForRow(at: testPath as IndexPath) as! ProgressCell
-                sum += (myObj.duration?.doubleValue)!
+                sum += (myObj.duration)
                 let timeString = "\(NSString.createDurationStringFromDuration(Double(sum)))"
                 percentage = (sum / Double(sumOfWeek))*100
                 let percentString = "\(round(percentage))%"
@@ -144,7 +144,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         var sumOfMonth: Double = 0
         if monthActivitiesArray.count > 0 {
             for history in monthActivitiesArray {
-                sumOfMonth += (history.duration?.doubleValue)!
+                sumOfMonth += (history.duration)
             }
             
         }
@@ -168,7 +168,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
                     let testPath = NSIndexPath(row: i, section: 0)
                     self.tableView.reloadData()
                     let cell = tableView.cellForRow(at: testPath as IndexPath) as! ProgressCell
-                    sum += (myObj.duration?.doubleValue)!
+                    sum += (myObj.duration)
                     let timeString = "\(NSString.createDurationStringFromDuration(Double(sum)))"
                     percentage = (sum / Double(sumOfMonth))*100
                     let percentString = "\(round(percentage))%"
