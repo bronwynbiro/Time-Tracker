@@ -11,7 +11,7 @@ extension MainViewController {
 class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noItemsLabel: UILabel!
-    
+    var items = try! Realm().objects(History.self).sorted(byProperty: "saveTime", ascending: false)
     
     lazy var todayDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -19,8 +19,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         return dateFormatter
     }()
     
-
-    let items = try! Realm().objects(History.self).sorted(byProperty: "saveTime", ascending: false)
     var sectionNames: [String] {
         return Set(items.value(forKeyPath: "saveTime") as! [String]).sorted()
     }
@@ -104,14 +102,13 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             var objectsToDelete: [History] = []
             let selectedIndexPaths = tableView.indexPathsForSelectedRows
             for indexPath in selectedIndexPaths! {
-                let history = fetchController.object(at: indexPath)
+                let history = items[Int(indexPath.row)] as History
                 objectsToDelete.append(history)
             }
             checkToShowEmptyLabel()
             updateDeleteButtonTitle()
             
-           // if fetchController.fetchedObjects?.count == 0 {
-            if fetchController.numberOfSections == 0 {
+            if numberOfSections(in: tableView) == 0 {
                 loadNormalState()
             }
         }
@@ -179,22 +176,11 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // Return the number of rows to display at a given section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sections = fetchController.numberOfSections
-        print("SECTIONS:", sections)
-        return sections
-        /*
-        if sections{
-        let sectionInfo = sections[section]
-            return sectionInfo.numberOfObjects
-        } else {
-            return 0
-        }
- */
+        return items.filter("saveTime == %@", sectionNames[section]).count
     }
     
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchController.numberOfSections
+        return sectionNames.count
     }
     
     //Height of section header
@@ -232,10 +218,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      - returns: cell
      */
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryCell
         configureCell(cell, indexPath: indexPath)
-        
         return cell
     }
     
@@ -246,7 +230,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      */
     
     func configureCell(_ cell: HistoryCell, indexPath: IndexPath) -> History {
-        let history = fetchController.object(at: indexPath) 
+        let history = items.filter("saveTime == %@", sectionNames[indexPath.section])[indexPath.row]
         if history.name != nil {
             cell.nameLabel.text = history.name
         }
@@ -276,27 +260,9 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
      */
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let historyToSubtract = fetchController.object(at: indexPath) 
-           MainViewController().calculateDeletedDurationForToday(historyToSubtract)
+            let historyToSubtract = items[indexPath.row]
+            MainViewController().calculateDeletedDurationForToday(historyToSubtract)
            
-            
-            /*
-            var historyToDelete = fetchController.objectAtIndexPath(indexPath)
-            var todaysActivitiesArray = CoreDataHandler.sharedInstance.fetchCoreDataForTodayActivities()
-            var totalDuration = MainViewController().calculateTotalDurationForToday()
-            var historyDel = fetchController.objectAtIndexPath(indexPath) as! History
-            if todaysActivitiesArray.count < 1 {
-                totalDuration = 0
-            }
-            else {
-            totalDuration = totalDuration - Int(historyDel.duration!)
-            }
-            print(todaysActivitiesArray)
-            print(totalDuration)
-            CoreDataHandler.sharedInstance.deleteObject(historyToDelete as! NSManagedObject)
-           // MainViewController.totalDuration = totalDuration
-            CoreDataHandler.sharedInstance.saveContext()
- */
             
         }
     }
@@ -351,11 +317,14 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         let nextView = (segue.destination as! EditViewController)
         let indexPath = tableView.indexPathForSelectedRow
         if (tableView.cellForRow(at: indexPath!) as! HistoryCell!) != nil {
-            let history = fetchController.object(at: indexPath!)
+           // let history = fetchController.object(at: indexPath!)
+            let history = items.filter("saveTime == %@", sectionNames[(indexPath?.section)!])[(indexPath?.row)!]
+           // let history2 = items[(indexPath?.row)!]
             let selectedCell = tableView.cellForRow(at: indexPath!)
             nextView.PassCell = selectedCell
             nextView.PassPath = indexPath
-            nextView.PassHistory = fetchController.object(at: indexPath!) 
+            // nextView.PassHistory = fetchController.object(at: indexPath!)
+            nextView.PassHistory = items[Int((indexPath?.row)!)] as History
             nextView.tableView = tableView
             nextView.startDate = history.startDate as Date!
             nextView.endDate = history.endDate as Date!
