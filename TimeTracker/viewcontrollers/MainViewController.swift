@@ -12,10 +12,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var activityTimer: Timer?
     var totalduration: NSInteger = 0
     let todaysActivitiesArray = DataHandler.sharedInstance.fetchDataForTodayActivities()
+    let realm = try! Realm()
+ 
     
     lazy var todayDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm"
+        return dateFormatter
+    }()
+    
+    lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
         return dateFormatter
     }()
     
@@ -73,12 +81,21 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         hoursLabel.text = "00"
         activityLabel.text = "START"
         startPauseButton.setTitle("START", for: UIControlState())
-        /*
-         //TODO: do we need to save?
+        let activityToSave = History()
         if passedSeconds >= 60 {
-            saveActivityToHistory()
+            activityToSave.name = choosenActivity!.name!
+            activityToSave.startDate = startDate! as NSDate
+            activityToSave.endDate = Date() as NSDate?
+            activityToSave.duration = Double(passedSeconds)
+            activityToSave.saveTime = dateFormatter.string(from: Date())
+            print("savetime", activityToSave.saveTime)
+            try! realm.write {
+                realm.add(activityToSave)
+            }
         }
-         */
+        startDate = nil
+        choosenActivity = nil
+        passedSeconds = 0
         UserDefaults.standard.set(isActivityRunning, forKey:"quitActivityRunning")
         UserDefaults.standard.synchronize()
     }
@@ -177,10 +194,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         hoursLabel.text = NSString.timeStringWithTimeToDisplay(hours)
     }
     
-    /**
-     Calculate the total duration of activites for today.
-     - returns: NSInteger summary value of durations as an integer.
-     */
+
     func calculateTotalDurationForToday() -> Double {
         var sumOfDuration: Double = 0
         if todaysActivitiesArray.count > 0 {
@@ -207,9 +221,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-    /**
-     Called when view has finished loading.
-     */
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "TimeTracker"
@@ -229,46 +240,35 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
          UserDefaults.standard.synchronize()
          
-         var minutes = 0
-         var hours = 0
+        var minutes = 0
+        var hours = 0
         if (passedSec > 0)  {
-            print("reassign minutes hours")
             minutes = (Int(passedSec) / 60) % 60
             hours = (Int(passedSec)) / 3600
         }
          self.minutesLabel.text = NSString.timeStringWithTimeToDisplay(minutes)
          self.hoursLabel.text = NSString.timeStringWithTimeToDisplay(hours)
         
-        //updateLabel()
+        updateLabel()
         UserDefaults.standard.synchronize()
     }
     
-    /**
-     Called when the view appeared. Load the core data entities for today
-     - param: animated YES if animated
-     */
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loadDataEntities()
     }
     
-    /**
-     Opens history view
-     */
+
     func openHistoryView() {
         performSegue(withIdentifier: "showHistory", sender: nil)
     }
     
-    /**
-     Opens Activity view
-     */
+   
     func openActivityView() {
         performSegue(withIdentifier: "showActivities", sender: nil)
     }
     
-    /**
-     Adds observers for the notifications
-     */
+  
     func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.appGoesIntoBackground), name: NSNotification.Name(rawValue: "ApplicationDidEnterBackground"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewController.appLoadedFromBackground), name: NSNotification.Name(rawValue: "ApplicationBecameActive"), object: nil)
@@ -276,17 +276,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    
-    /**
-     Removes notification observer for this class
-     */
     func resetObservers() {
         NotificationCenter.default.removeObserver(self)
     }
-    
-    /**
-     Load history entities from core data.
-     */
+
     func loadDataEntities() {
         if todaysActivitiesArray.count > 0 {
             totalduration = NSInteger(calculateTotalDurationForToday())
@@ -295,17 +288,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    // MARK: tableView methods
-    /**
-     Asks the data source for a cell to insert in a particular location of the table view.
-     - parameter tableView: tableView
-     - parameter indexPath: indexPath
-     - returns: created cell
-     */
+    //Insert cell at certain location
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! HistoryCell
         if todaysActivitiesArray.count > 0 {
             let history = todaysActivitiesArray[indexPath.row]
+            
+            print("today array", todaysActivitiesArray)
+            print("history here", history)
+            
             cell.nameLabel.text = "\(history.name!)"
             cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date)) - \(todayDateFormatter.string(from: history.endDate! as Date))"
             cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration))
@@ -313,43 +304,21 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
-    /**
-     How many rows/cells to display
-     - parameter tableView: tableView
-     - parameter section:   in which section
-     - returns: number of rows
-     */
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todaysActivitiesArray.count
     }
     
-    /**
-     Height for each cell
-     - parameter tableView: tableView
-     - parameter indexPath: at which indexpath
-     - returns: height
-     */
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
     }
     
-    /**
-     Height for the headerview
-     - parameter tableView: tableView
-     - parameter section:   at which section
-     - returns: height
-     */
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
     
-    /**
-     What view to use for each section
-     - parameter tableView: tableView
-     - parameter section:   at which section
-     - returns: headerView
-     */
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let title = self.tableView(tableView, titleForHeaderInSection: section)
         let heightForRow = self.tableView(tableView, heightForHeaderInSection: section)
@@ -357,12 +326,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return headerView
     }
     
-    /**
-     What the title should be
-     - parameter tableView: tableView
-     - parameter section:   at which section
-     - returns: title
-     */
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return String(format: "Total time spent today: \(NSString.createDurationStringFromDuration(Double(totalduration)))")
     }

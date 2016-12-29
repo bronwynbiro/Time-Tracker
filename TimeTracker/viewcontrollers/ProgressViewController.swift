@@ -8,12 +8,12 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var weeklyButton: UIButton!
     @IBOutlet weak var monthlyButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var pieChartView: PieChartView!
+    
     var numberOfRows = ["test1"]
     var percentArray = [Double]()
     var orderedNamesArray = [String]()
-    @IBOutlet weak var pieChartView: PieChartView!
     
-
     
     override func viewDidLoad() {
         title = "Progress"
@@ -61,12 +61,12 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         for i in unique.indices{
             let activArr = DataHandler.sharedInstance.filterResultsDay(i: unique[i])
             let uniqueActivArr = Array(Set(activArr))
-            sum = 0
+            var sum: Double = 0
             for myObj in uniqueActivArr {
                 let testPath = NSIndexPath(row: i, section: 0)
                 let cell = tableView.cellForRow(at: testPath as IndexPath) as! ProgressCell
                 sum += (myObj.duration)
-                let timeString = "\(NSString.createDurationStringFromDuration(Double(sum)))"
+                let timeString = "\(NSString.createDurationStringFromDuration(sum))"
                 percentage = (sum / Double(sumOfDay))*100
                 let percentString = "\(round(percentage))%"
                 nameString = "\(unique[i])"
