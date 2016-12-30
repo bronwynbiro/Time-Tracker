@@ -88,7 +88,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             activityToSave.endDate = Date() as NSDate?
             activityToSave.duration = Double(passedSeconds)
             activityToSave.saveTime = dateFormatter.string(from: Date())
-            print("savetime", activityToSave.saveTime)
             try! realm.write {
                 realm.add(activityToSave)
             }
@@ -293,13 +292,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! HistoryCell
         if todaysActivitiesArray.count > 0 {
             let history = todaysActivitiesArray[indexPath.row]
-            
-            print("today array", todaysActivitiesArray)
-            print("history here", history)
-            
             cell.nameLabel.text = "\(history.name!)"
             cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date)) - \(todayDateFormatter.string(from: history.endDate! as Date))"
             cell.durationLabel.text = NSString.createDurationStringFromDuration((history.duration))
+            //tableView.reloadData()
         }
         return cell
     }

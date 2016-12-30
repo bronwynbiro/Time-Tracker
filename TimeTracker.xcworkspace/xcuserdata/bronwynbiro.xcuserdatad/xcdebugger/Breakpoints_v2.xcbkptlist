@@ -331,13 +331,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TimeTracker/viewcontrollers/MainViewController.swift"
-            timestampString = "504740713.605498"
+            filePath = "TimeTracker/objects/DataHandler.swift"
+            timestampString = "504754572.430743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "stopActivity()"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "filterResultsDay(i:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -347,13 +347,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TimeTracker/viewcontrollers/MainViewController.swift"
-            timestampString = "504740713.605498"
+            filePath = "TimeTracker/objects/DataHandler.swift"
+            timestampString = "504754572.959945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "stopActivity()"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "filterResultsDay(i:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -363,29 +363,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TimeTracker/viewcontrollers/MainViewController.swift"
-            timestampString = "504742503.49991"
+            filePath = "TimeTracker/objects/DataHandler.swift"
+            timestampString = "504754575.362698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "stopActivity()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TimeTracker/viewcontrollers/MainViewController.swift"
-            timestampString = "504742504.285354"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "stopActivity()"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "filterResultsDay(i:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -396,11 +380,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTracker/viewcontrollers/ProgressViewController.swift"
-            timestampString = "504743230.607888"
+            timestampString = "504754600.324102"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "calculateTodaysActivities(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -412,11 +396,79 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTracker/viewcontrollers/ProgressViewController.swift"
-            timestampString = "504743230.607888"
+            timestampString = "504828736.734079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "calculateTodaysActivities(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeTracker/viewcontrollers/ProgressViewController.swift"
+            timestampString = "504828736.734079"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "calculateTodaysActivities(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.AddressBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = "*0x10e955376">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.AddressBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = "*0x10e955387">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeTracker/viewcontrollers/ProgressViewController.swift"
+            timestampString = "504828736.734079"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "calculateTodaysActivities(_:)"
             landmarkType = "7">
          </BreakpointContent>

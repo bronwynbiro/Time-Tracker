@@ -1,8 +1,5 @@
 import Foundation
 
-/**
-    NSString extension to have most used nsstring methods in a separate class
-*/
 
 extension NSString {
 

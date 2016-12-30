@@ -10,7 +10,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pieChartView: PieChartView!
     
-    var numberOfRows = ["test1"]
+    var numberOfRows = [String]()
     var percentArray = [Double]()
     var orderedNamesArray = [String]()
     
@@ -53,24 +53,31 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
         let unique = Array(Set(namesArray))
-        
         var sum: Double = 0
         var percentage: Double = 0
-        var nameString: String = " "
+        var nameString: String = ""
+        var timeString: String = ""
+        var dayString: String = ""
         
-        for i in unique.indices{
-            let activArr = DataHandler.sharedInstance.filterResultsDay(i: unique[i])
+        //TODO: items in  uniqueActivArr (myObj) are nil
+        for index in unique.indices{
+            print("index", index)
+            let activArr = DataHandler.sharedInstance.filterResultsDay(i: unique[index])
             let uniqueActivArr = Array(Set(activArr))
-            var sum: Double = 0
             for myObj in uniqueActivArr {
-                let testPath = NSIndexPath(row: i, section: 0)
+                let testPath = NSIndexPath(row: index, section: 0)
                 let cell = tableView.cellForRow(at: testPath as IndexPath) as! ProgressCell
+                //let cell = tableView.dequeueReusableCell(withIdentifier: "ProgressCell", for: testPath as IndexPath) as! ProgressCell
+                print("cell", cell)
                 sum += (myObj.duration)
-                let timeString = "\(NSString.createDurationStringFromDuration(sum))"
+                timeString = "dingus"
+               // let timeString = "\(NSString.createDurationStringFromDuration(sum))"
                 percentage = (sum / Double(sumOfDay))*100
-                let percentString = "\(round(percentage))%"
-                nameString = "\(unique[i])"
-                cell.percentLabel.text = "\(round(percentage))%"
+                
+                let percentString = "dingus"
+               // let percentString = "\(round(percentage))%"
+                nameString = "\(unique[index])"
+                cell.percentLabel.text = "\(percentString))%"
                 configureCell(cell , percentage: percentString, time: timeString, name: nameString)
             }
             percentArray.insert(percentage, at: 0)
@@ -78,7 +85,8 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         self.tableView.reloadData()
         setChart(orderedNamesArray, values: percentArray)
-        let dayString = "\(NSString.createDurationStringFromDuration(Double(sumOfDay)))"
+        dayString = "test"
+        //let dayString = "\(NSString.createDurationStringFromDuration(Double(sumOfDay)))"
         pieChartView.centerText = ("Total time: \(dayString)")
     }
  
@@ -105,7 +113,8 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         var sum: Double = 0
         var percentage: Double = 0
         var nameString: String = ""
-        //TODO: modify below for different 
+        var timeString: String = ""
+        
         if unique.count > 0 {
             for i in unique.indices{
                 let activArr = DataHandler.sharedInstance.filterResultsWeek(i: unique[i])
@@ -116,7 +125,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
                 let testPath = NSIndexPath(row: i, section: 0)
                 let cell = tableView.cellForRow(at: testPath as IndexPath) as! ProgressCell
                 sum += (myObj.duration)
-                let timeString = "\(NSString.createDurationStringFromDuration(Double(sum)))"
+                timeString = "\(NSString.createDurationStringFromDuration(Double(sum)))"
                 percentage = (sum / Double(sumOfWeek))*100
                 let percentString = "\(round(percentage))%"
                 nameString = "\(unique[i])"
