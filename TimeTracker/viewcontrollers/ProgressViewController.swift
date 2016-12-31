@@ -59,16 +59,16 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         var timeString: String = ""
         var dayString: String = ""
         
-        //TODO: items in  uniqueActivArr (myObj) are nil
         for index in unique.indices{
-            print("index", index)
             let activArr = DataHandler.sharedInstance.filterResultsDay(i: unique[index])
+            print("activarr", activArr)
             let uniqueActivArr = Array(Set(activArr))
+            print("uniqueActivArr", uniqueActivArr)
             for myObj in uniqueActivArr {
                 let testPath = NSIndexPath(row: index, section: 0)
-                let cell = tableView.cellForRow(at: testPath as IndexPath) as! ProgressCell
-                //let cell = tableView.dequeueReusableCell(withIdentifier: "ProgressCell", for: testPath as IndexPath) as! ProgressCell
-                print("cell", cell)
+               // let cell = tableView.cellForRow(at: testPath as IndexPath) as! ProgressCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ProgressCell", for: testPath as IndexPath) as! ProgressCell
+               // print("cell", cell)
                 sum += (myObj.duration)
                 timeString = "dingus"
                // let timeString = "\(NSString.createDurationStringFromDuration(sum))"
@@ -77,7 +77,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
                 let percentString = "dingus"
                // let percentString = "\(round(percentage))%"
                 nameString = "\(unique[index])"
-                cell.percentLabel.text = "\(percentString))%"
+               // cell.percentLabel.text = "\(percentString))%"
                 configureCell(cell , percentage: percentString, time: timeString, name: nameString)
             }
             percentArray.insert(percentage, at: 0)
@@ -86,7 +86,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.reloadData()
         setChart(orderedNamesArray, values: percentArray)
         dayString = "test"
-        //let dayString = "\(NSString.createDurationStringFromDuration(Double(sumOfDay)))"
+        //dayString = "\(NSString.createDurationStringFromDuration(Double(sumOfDay)))"
         pieChartView.centerText = ("Total time: \(dayString)")
     }
  

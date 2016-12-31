@@ -97,6 +97,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         passedSeconds = 0
         UserDefaults.standard.set(isActivityRunning, forKey:"quitActivityRunning")
         UserDefaults.standard.synchronize()
+        tableView.reloadData()
     }
     
     /**
