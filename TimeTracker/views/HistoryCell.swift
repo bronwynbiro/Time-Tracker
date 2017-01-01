@@ -1,16 +1,10 @@
 import UIKit
 
-/**
-    Custom cell to display History objects' properties.
-*/
 
 class HistoryCell: UITableViewCell {
 
-    /// display the name of the history item
     @IBOutlet weak var nameLabel: UILabel!
-    /// display the duration of the history item
     @IBOutlet weak var durationLabel: UILabel!
-    /// display the end date of the history item
     @IBOutlet weak var timeLabel: UILabel!
 
     

@@ -20,7 +20,7 @@ var todayDateFormatter: DateFormatter = {
     return dateFormatter
 }()
 
-//used to be fetchedresults delgate
+
 class EditViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var EndDatePicker: UIDatePicker!
     @IBOutlet weak var StartDatePicker: UIDatePicker!
