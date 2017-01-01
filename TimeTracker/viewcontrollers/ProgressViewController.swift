@@ -10,7 +10,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pieChartView: PieChartView!
     
-    var numberOfRows = [String]()
+    var numberOfRows = ["test"]
     var percentArray = [Double]()
     var orderedNamesArray = [String]()
     
@@ -165,11 +165,11 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         var nameString: String = ""
         
         for i in unique.indices{
+            numberOfRows.insert("test", at: 0)
             let activArr = DataHandler.sharedInstance.filterResultsMonth(i: unique[i])
             let uniqueActivArr = Array(Set(activArr))
             sum = 0
             for myObj in uniqueActivArr {
-                numberOfRows.insert("test", at: 0)
                     //let testPath = NSIndexPath(row: i, section: 0)
                     self.tableView.reloadData()
                    // let cell = tableView.cellForRow(at: testPath as IndexPath) as! ProgressCell
@@ -192,18 +192,21 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         pieChartView.centerText = ("Total time: \(monthString)")
         }
     
+    
     func calculateRows(_ activitiesArray: [History]) -> Int {
         for item in activitiesArray{
             numberOfRows.insert(item.name!, at: 0)
         }
 
         let unique = Array(Set(numberOfRows))
+        print("number of rows:", unique.count)
         return unique.count
     }
     
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let unique = Array(Set(numberOfRows))
+        print("rows per section:", unique.count)
         return unique.count
     }
     
@@ -228,13 +231,20 @@ func setChart(_ dataPoints: [String], values: [Double]) {
         
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
-            let dataEntry = ChartDataEntry(x: values[i], y: Double(i))
+           // let dataEntry = ChartDataEntry(x: values[i], y: Double(i))
+            let dataEntry = ChartDataEntry(x: Double(i), y: values[i])
             dataEntries.append(dataEntry)
         }
         
         let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "")
-        let pieChartData = PieChartData(dataSet: pieChartDataSet)
-        pieChartView.data = pieChartData
+       // let pieChartData = PieChartData(values: dataPoints, dataSet: pieChartDataSet)
+    
+
+        let chartData = PieChartData()
+        chartData.addDataSet(pieChartDataSet)
+        pieChartView.data = chartData
+
+      //  pieChartView.data = pieChartData
         pieChartView.legend.enabled = false
         pieChartView.chartDescription?.text = ""
     
