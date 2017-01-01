@@ -23,17 +23,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         return Set(items.value(forKeyPath: "saveTime") as! [String]).sorted()
     }
     
-    /*
-    
-    lazy var fetchController: RealmResultsController<History, History> = {
-       // let predicate = NSPredicate(format: "name")
-        let nameDescriptor = [SortDescriptor(property: "name"), SortDescriptor(property: "ascending: false")]
-        let fetchRequest = RealmRequest<History>(predicate: predicate, realm: realm, sortDescriptors: nameDescriptor)
-        let fetchedController = try! RealmResultsController<History, History>(request: fetchRequest, sectionKeyPath: "saveTime")
-        return fetchedController
-    }()
-    
- */
     
     override func viewDidLoad() {
         title = "History"
@@ -42,6 +31,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.backgroundColor = UIColor.white
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        tableView.reloadData()
         refreshView()
         loadNormalState()
     }
@@ -129,7 +119,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
-    */
+ 
     
     func didChangeSection(controller: AnyObject, section: RealmSection<Any>, index: Int, changeType: RealmResultsChangeType) {
         switch changeType {
@@ -154,6 +144,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             tableView.reloadRows(at: [newIndexPath as IndexPath], with: UITableViewRowAnimation.automatic)
         }
     }
+ 
+ */
     
     /**
    //  Notifies the receiver that the fetched results controller has completed processing of one or more changes due to an add, remove, move, or update.
