@@ -2,9 +2,7 @@ import UIKit
 import RealmSwift
 import Foundation
 
-extension Date
-{
-    
+extension Date {
     init(dateString:String) {
         let dateStringFormatter = DateFormatter()
         dateStringFormatter.dateFormat = "hh:mm"
@@ -32,10 +30,6 @@ class EditViewController: UIViewController, UITableViewDelegate {
     var tableView: UITableView!
     var startDate: Date!
     var endDate: Date!
-    /*
-    var PassHistory: History!
-    var PassDuration: NSNumber!
- */
     var PassHistory = History()
     var PassDuration: Double!
     var choosenActivity: Activity?
@@ -49,7 +43,6 @@ class EditViewController: UIViewController, UITableViewDelegate {
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func updateCellTime(_ sender: UIButton) {
@@ -64,10 +57,8 @@ class EditViewController: UIViewController, UITableViewDelegate {
         }
         cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date )) - \(todayDateFormatter.string(from: history.endDate! as Date))"
         let PassDuration = history.endDate!.timeIntervalSince(history.startDate! as Date!)
-       cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration))
-        //Is this needed?"
-        //data.updateHistory(name: history!.name!, startDate: history!.startDate! as NSDate, endDate: history!.endDate! as NSDate, duration: Int(PassDuration!), PassPath: PassPath as NSIndexPath, PassHistory: PassHistory)
-        
+        cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration))
+        DataHandler.sharedInstance.updateHistory(name: history.name!, startDate: history.startDate! as NSDate, endDate: history.endDate! as NSDate, duration: Int(PassDuration), PassPath: PassPath as NSIndexPath, PassHistory: PassHistory)
         tableView.reloadData()
     }
 }

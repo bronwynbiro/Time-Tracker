@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FCAlertView-FCAlertView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FCAlertView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-TimeTracker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,17 +42,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>84ABF8CD7CFBA38A4FD08D1817DDB172</key>
+		<key>07E280B8695CB344913111EB32ED7FC1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B549CA9BB8CFA9DE69C6A41BDF52826C</key>
+		<key>6E4272678EBD08F5CF0E9F94C75F5577</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B8E11DEF3D3595EDE13C9F078A2B29FA</key>
+		<key>B8A6CAE125EF3991C059A61C4B9CCEC2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DD0460046ACF8A381F75D6015478752E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E4A183B710C3B852DF70AB2469C283E6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

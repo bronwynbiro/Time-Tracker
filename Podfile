@@ -4,6 +4,7 @@ target ’TimeTracker’ do
 	use_frameworks!
 	pod 'RealmSwift', '~> 2.0.2'
     pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :branch => 'master'
+    pod 'FCAlertView'
     
     
 end

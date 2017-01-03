@@ -73,9 +73,9 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
                     percentage = (sum / Double(sumOfDay))*100
                     let percentString = "\(round(percentage))%"
                     nameString = "\(unique[i])"
-                    cell.percentLabel.text = "\(round(percentage))%"
                     self.tableView.reloadData()
                     configureCell(cell , percentage: percentString, time: timeString, name: nameString)
+                    self.tableView.reloadData()
                 }
                 percentArray.insert(percentage, at: 0)
                 orderedNamesArray.insert(nameString, at: 0)
@@ -130,6 +130,7 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
                 cell.percentLabel.text = "\(round(percentage))%"
                 self.tableView.reloadData()
                 configureCell(cell , percentage: percentString, time: timeString, name: nameString)
+                self.tableView.reloadData()
                 }
             percentArray.insert(percentage, at: 0)
             orderedNamesArray.insert(nameString, at: 0)
@@ -220,15 +221,16 @@ class progressViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
+ 
     
     func configureCell(_ cell: ProgressCell, percentage: String!, time: String!, name: String!)  {
         cell.backgroundColor = UIColor.white
-        cell.nameLabel.text = "\(name)"
-        cell.percentLabel.text = "\(percentage)"
-        cell.timeLabel.text = "\(time)"
+        cell.nameLabel!.text = "\(name)"
+        cell.percentLabel!.text = "\(percentage)"
+        cell.timeLabel!.text = "\(time)"
     }
     
 func setChart(_ dataPoints: [String], values: [Double]) {
@@ -238,7 +240,7 @@ func setChart(_ dataPoints: [String], values: [Double]) {
         dataEntries.append(dataEntry1)
     }
         let pieChartDataSet = PieChartDataSet(values: dataEntries, label: "test")
-        let pieChartData = PieChartData(xVals: dataPoints, dataSet: pieChartDataSet)
+        let pieChartData = PieChartData(dataSet: pieChartDataSet)
         pieChartView.data = pieChartData
         pieChartView.legend.enabled = true
         pieChartView.chartDescription?.text = ""

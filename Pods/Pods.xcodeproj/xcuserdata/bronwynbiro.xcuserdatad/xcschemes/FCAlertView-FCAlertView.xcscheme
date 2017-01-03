@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '6E4272678EBD08F5CF0E9F94C75F5577'
-               BlueprintName = 'RealmSwift'
+               BlueprintIdentifier = 'E4A183B710C3B852DF70AB2469C283E6'
+               BlueprintName = 'FCAlertView-FCAlertView'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'RealmSwift.framework'>
+               BuildableName = 'FCAlertView.bundle'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

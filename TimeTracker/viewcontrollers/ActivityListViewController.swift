@@ -1,5 +1,6 @@
 import UIKit
 import RealmSwift
+import FCAlertView
 
 class ActivityListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NewActivityDelegate {
 
@@ -64,7 +65,7 @@ class ActivityListViewController: UIViewController, UITableViewDataSource, UITab
         newActivityView.slideViewDown()
         view.insertSubview(fadeView, belowSubview: newActivityView)
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(ActivityListViewController.dismissAddview))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self.newActivityView, action: Selector("saveItem"))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self.newActivityView, action: Selector(("saveItem")))
     }
 
     // MARK: tableView methods

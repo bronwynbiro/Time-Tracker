@@ -74,17 +74,20 @@ class DataHandler: Object {
         /*
         let dateMakerFormatter = DateFormatter()
         dateMakerFormatter.dateFormat = "hh:mm a"
- */
+         */
         let timeDifference = calendar.dateComponents([.hour, .minute], from: startDate as Date, to: endDate as Date)
         let durationString = "\(timeDifference)"
         var interval = endDate.timeIntervalSince(startDate as Date)
-        try! realm?.write {
-            realm?.add(history)
-            history.name = name
-            history.startDate = startDate
-            history.endDate = endDate
-            history.duration = interval as Double
-            history.saveTime = dateFormatter.string(from: endDate as Date)
+        
+        history.name = name
+        history.startDate = startDate
+        history.endDate = endDate
+        history.duration = interval as Double
+        history.saveTime = dateFormatter.string(from: endDate as Date)
+
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(history, update: true)
         }
     }
     
