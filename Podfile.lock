@@ -2,7 +2,6 @@ PODS:
   - Charts (3.0.1):
     - Charts/Core (= 3.0.1)
   - Charts/Core (3.0.1)
-  - FCAlertView (1.2.3)
   - Realm (2.0.3):
     - Realm/Headers (= 2.0.3)
   - Realm/Headers (2.0.3)
@@ -11,7 +10,6 @@ PODS:
 
 DEPENDENCIES:
   - Charts (from `https://github.com/danielgindi/Charts.git`, branch `master`)
-  - FCAlertView
   - RealmSwift (~> 2.0.2)
 
 EXTERNAL SOURCES:
@@ -26,10 +24,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Charts: e1c22ca0f52867fadf8ee16ff723dfb0b464eb91
-  FCAlertView: fe0e44bbafb56985ed0a892f884b15fd3a231dbc
   Realm: 5f008bfe3c8c47142eddfc30b8c1584cde22db24
   RealmSwift: 5afb451f65b682242f272dbb52d5c6f6e343c980
 
-PODFILE CHECKSUM: 718517d79312c6101984d4ef94ec67d043ee831c
+PODFILE CHECKSUM: 1bb2c77c07bfbc85fc4d2f1e5e753daf8302705d
 
 COCOAPODS: 1.0.1
