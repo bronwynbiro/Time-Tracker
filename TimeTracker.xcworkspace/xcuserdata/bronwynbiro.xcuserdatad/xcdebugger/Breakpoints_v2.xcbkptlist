@@ -384,7 +384,7 @@
                   moduleName = "TimeTracker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bronwynbiro/Desktop/School/cmpt/Time-Tracker/Time-Tracker/TimeTracker/viewcontrollers/ProgressViewController.swift"
-                  timestampString = "505025630.524275"
+                  timestampString = "505113989.034613"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "8"
@@ -399,7 +399,7 @@
                   moduleName = "TimeTracker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bronwynbiro/Desktop/School/cmpt/Time-Tracker/Time-Tracker/TimeTracker/viewcontrollers/ProgressViewController.swift"
-                  timestampString = "505025630.52737"
+                  timestampString = "505113989.038289"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "8"
@@ -414,7 +414,7 @@
                   moduleName = "TimeTracker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bronwynbiro/Desktop/School/cmpt/Time-Tracker/Time-Tracker/TimeTracker/viewcontrollers/ProgressViewController.swift"
-                  timestampString = "505025630.530127"
+                  timestampString = "505113989.041323"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "8"
@@ -429,7 +429,7 @@
                   moduleName = "TimeTracker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bronwynbiro/Desktop/School/cmpt/Time-Tracker/Time-Tracker/TimeTracker/viewcontrollers/ProgressViewController.swift"
-                  timestampString = "505025630.532046"
+                  timestampString = "505113989.043722"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "8"
@@ -437,6 +437,22 @@
                   offsetFromSymbolStart = "88">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeTracker/viewcontrollers/EditViewController.swift"
+            timestampString = "505114507.173492"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -18,11 +18,17 @@ var todayDateFormatter: DateFormatter = {
     return dateFormatter
 }()
 
+let allActivitiesArray = DataHandler.sharedInstance.fetchDataAllActivities()
+let activities = Array(allActivitiesArray!)
+var pickerDataSource = activities
 
-class EditViewController: UIViewController, UITableViewDelegate {
+
+class EditViewController: UIViewController, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+
     @IBOutlet weak var EndDatePicker: UIDatePicker!
     @IBOutlet weak var StartDatePicker: UIDatePicker!
-    @IBOutlet weak var showButton: UIButton!
+    @IBOutlet weak var pickerView: UIPickerView!
+   // @IBOutlet weak var showButton: UIButton!
     @IBOutlet weak var labelDisplay: UITextField!
     
     var PassCell: UITableViewCell!
@@ -40,10 +46,32 @@ class EditViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         StartDatePicker.date = PassHistory.startDate! as Date
         EndDatePicker.date =  PassHistory.endDate! as Date
+        self.pickerView.dataSource = self;
+        self.pickerView.delegate = self;
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerDataSource.count;
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        //return pickerDataSource[row]
+        return "nugger"
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        labelDisplay.text = "test"
+            //pickerDataSource[row]
+    }
+    
     
     @IBAction func updateCellTime(_ sender: UIButton) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell

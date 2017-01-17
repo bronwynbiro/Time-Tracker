@@ -68,16 +68,11 @@ class DataHandler: Object {
      */
     
     func updateHistory(name: String, startDate: NSDate, endDate: NSDate, duration: NSInteger, PassPath: NSIndexPath, PassHistory: History) {
-        //    let history: History = NSEntityDescription.insertNewObjectForEntityForName("History", inManagedObjectContext: self.backgroundManagedObjectContext) as! History
-        var history = PassHistory
+        let history = PassHistory
         let calendar = NSCalendar.current
-        /*
-        let dateMakerFormatter = DateFormatter()
-        dateMakerFormatter.dateFormat = "hh:mm a"
-         */
         let timeDifference = calendar.dateComponents([.hour, .minute], from: startDate as Date, to: endDate as Date)
         let durationString = "\(timeDifference)"
-        var interval = endDate.timeIntervalSince(startDate as Date)
+        let interval = endDate.timeIntervalSince(startDate as Date)
         
         history.name = name
         history.startDate = startDate

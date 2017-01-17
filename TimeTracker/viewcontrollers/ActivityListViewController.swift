@@ -1,6 +1,5 @@
 import UIKit
 import RealmSwift
-import FCAlertView
 
 class ActivityListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NewActivityDelegate {
 

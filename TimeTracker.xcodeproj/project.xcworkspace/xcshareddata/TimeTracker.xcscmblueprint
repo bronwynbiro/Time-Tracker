@@ -1,14 +1,16 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D9F81C85F2F8551107F5BB74ED038A0DC11B0121",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3" : 9223372036854775807,
     "D9F81C85F2F8551107F5BB74ED038A0DC11B0121" : 0,
     "E394F946930110230A9C45C12E9DBDFEB2DC7E51" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "55E6DF71-37E6-4584-9808-29AAF08297DF",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3" : "..",
     "D9F81C85F2F8551107F5BB74ED038A0DC11B0121" : "Time-Tracker\/",
     "E394F946930110230A9C45C12E9DBDFEB2DC7E51" : ""
   },
@@ -16,6 +18,11 @@
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "TimeTracker.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:bronwynbiro\/Time-Tracker.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:bronwynbiro\/Time-Tracker2.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",

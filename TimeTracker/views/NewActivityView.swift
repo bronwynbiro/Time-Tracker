@@ -46,7 +46,7 @@ class NewActivityView: UIView, UITextFieldDelegate {
         if activityName?.characters.count == 0 {
             textField.text = ""
             slideViewUp()
-            delegate?.slideActivityViewUp()
+            //delegate?.slideActivityViewUp()
         } else {
             if DataHandler.sharedInstance.isDuplicate(activityName: activityName!) == true {
                 let alertView = UIAlertView(title: "Duplicate", message: "This activity is already in your activity list.", delegate: nil, cancelButtonTitle: "Ok")

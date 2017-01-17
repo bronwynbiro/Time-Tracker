@@ -2,25 +2,11 @@ import UIKit
 
 class ActivityTextfield: UITextField {
 
-    /**
-    Init method
-
-    - parameter frame: frame to set
-
-    - returns: self
-    */
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
     }
 
-    /**
-    Init method
-
-    - parameter aDecoder: decoder
-
-    - returns: self
-    */
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()

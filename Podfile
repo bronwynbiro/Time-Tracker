@@ -5,7 +5,6 @@ target ’TimeTracker’ do
 	pod 'RealmSwift', '~> 2.0.2'
     pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :branch => 'master'
     
-    
 end
 
 post_install do |installer|
