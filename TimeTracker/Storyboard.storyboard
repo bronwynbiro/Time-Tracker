@@ -223,101 +223,6 @@
             </objects>
             <point key="canvasLocation" x="974" y="-47"/>
         </scene>
-        <!--Edit View Controller-->
-        <scene sceneID="sJH-HO-wXb">
-            <objects>
-                <viewController id="JgR-CG-CGu" customClass="EditViewController" customModule="TimeTracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="D8n-Hg-7t0"/>
-                        <viewControllerLayoutGuide type="bottom" id="QmC-eV-aFj"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="pq6-ep-KC6">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Oval 105" translatesAutoresizingMaskIntoConstraints="NO" id="YoF-aL-wi3">
-                                <rect key="frame" x="156" y="76" width="104" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="edit" translatesAutoresizingMaskIntoConstraints="NO" id="Qyo-K7-ZBT">
-                                <rect key="frame" x="177" y="98" width="63" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EDIT ACTIVITY " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oma-1I-TwS">
-                                <rect key="frame" x="1" y="263" width="414" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.94117647059999998" green="0.59607843140000005" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="28"/>
-                                <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="End Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OH-2B-rfh">
-                                <rect key="frame" x="8" y="414" width="69" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qlG-fk-hFD">
-                                <rect key="frame" x="-2" y="560" width="415" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.74509803919999995" green="0.50196078430000002" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <gestureRecognizers/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
-                                <state key="normal" title="DONE">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="updateCellTime:" destination="JgR-CG-CGu" eventType="touchUpInside" id="EJE-B2-u0X"/>
-                                    <segue destination="4ji-3K-meo" kind="show" id="EtS-mZ-df1"/>
-                                </connections>
-                            </button>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Screen Shot 2016-05-08 at 4.19.26 PM" translatesAutoresizingMaskIntoConstraints="NO" id="ayr-fo-Cc1">
-                                <rect key="frame" x="-2" y="-6" width="426" height="269"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Oval 105" translatesAutoresizingMaskIntoConstraints="NO" id="Vu6-Qd-k5X">
-                                <rect key="frame" x="159" y="76" width="104" height="106"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="edit" translatesAutoresizingMaskIntoConstraints="NO" id="hrj-Jv-CKn">
-                                <rect key="frame" x="180" y="98" width="63" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dbk-QO-GTN" userLabel="StartDatePicker">
-                                <rect key="frame" x="-2" y="346" width="414" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <date key="date" timeIntervalSinceReferenceDate="484675064.58569598">
-                                    <!--2016-05-11 15:57:44 +0000-->
-                                </date>
-                            </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1l9-2g-umd">
-                                <rect key="frame" x="8" y="316" width="74" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dQg-Y8-Nve" userLabel="EndDatePicker">
-                                <rect key="frame" x="-2" y="444" width="414" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <date key="date" timeIntervalSinceReferenceDate="484675064.58569598">
-                                    <!--2016-05-11 15:57:44 +0000-->
-                                </date>
-                            </datePicker>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="T3X-pT-HRz"/>
-                    <connections>
-                        <outlet property="EndDatePicker" destination="dQg-Y8-Nve" id="kfL-B8-Wle"/>
-                        <outlet property="StartDatePicker" destination="dbk-QO-GTN" id="LQX-hc-nmo"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yTC-tx-5Vl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2242.5" y="355.98591549295776"/>
-        </scene>
         <!--Activities-->
         <scene sceneID="BMx-ZK-fHn">
             <objects>
@@ -495,7 +400,6 @@
                                             <outlet property="durationLabel" destination="Ntj-h9-RPd" id="Xyz-CO-Cif"/>
                                             <outlet property="nameLabel" destination="fWv-wU-aDT" id="X0P-JZ-hOO"/>
                                             <outlet property="timeLabel" destination="Zb1-r2-S4U" id="u7u-4b-zlc"/>
-                                            <segue destination="JgR-CG-CGu" kind="show" id="tBn-8V-Mgq"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -706,10 +610,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Oval 105" width="104" height="106"/>
         <image name="Screen Shot 2016-05-08 at 4.19.26 PM" width="660" height="415"/>
         <image name="addicon" width="160" height="136"/>
-        <image name="edit" width="63" height="62"/>
         <image name="history_icon" width="20" height="20"/>
         <image name="list_icon" width="18" height="12"/>
         <image name="logo" width="145" height="146"/>

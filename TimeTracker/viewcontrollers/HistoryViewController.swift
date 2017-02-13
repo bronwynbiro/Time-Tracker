@@ -306,13 +306,13 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     
     //MARK: segue for editview
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let nextView = (segue.destination as! EditViewController)
+       // let nextView = (segue.destination as! EditViewController)
         let indexPath = tableView.indexPathForSelectedRow
         if (tableView.cellForRow(at: indexPath!) as! HistoryCell!) != nil {
-           // let history = fetchController.object(at: indexPath!)
             let history = items.filter("saveTime == %@", sectionNames[(indexPath?.section)!])[(indexPath?.row)!]
-           // let history2 = items[(indexPath?.row)!]
             let selectedCell = tableView.cellForRow(at: indexPath!)
+            //TODO: removed because removed editview
+            /*
             nextView.PassCell = selectedCell
             nextView.PassPath = indexPath
             // nextView.PassHistory = fetchController.object(at: indexPath!)
@@ -321,6 +321,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             nextView.startDate = history.startDate as Date!
             nextView.endDate = history.endDate as Date!
             nextView.choosenActivity = selectedActivity()
+ */
             
         }
 }
