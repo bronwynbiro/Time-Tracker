@@ -311,7 +311,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         if (tableView.cellForRow(at: indexPath!) as! HistoryCell!) != nil {
             let history = items.filter("saveTime == %@", sectionNames[(indexPath?.section)!])[(indexPath?.row)!]
             let selectedCell = tableView.cellForRow(at: indexPath!)
-            //TODO: removed because removed editview
             /*
             nextView.PassCell = selectedCell
             nextView.PassPath = indexPath
@@ -321,8 +320,6 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             nextView.startDate = history.startDate as Date!
             nextView.endDate = history.endDate as Date!
             nextView.choosenActivity = selectedActivity()
- */
             
         }
-}
 }
