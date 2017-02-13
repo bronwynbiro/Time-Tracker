@@ -23,13 +23,10 @@ let activities = Array(allActivitiesArray!)
 var pickerDataSource = activities
 
 
-class EditViewController: UIViewController, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class EditViewController: UIViewController, UITableViewDelegate {
 
     @IBOutlet weak var EndDatePicker: UIDatePicker!
     @IBOutlet weak var StartDatePicker: UIDatePicker!
-    @IBOutlet weak var pickerView: UIPickerView!
-   // @IBOutlet weak var showButton: UIButton!
-    @IBOutlet weak var labelDisplay: UITextField!
     
     var PassCell: UITableViewCell!
     var PassPath: IndexPath!
@@ -46,30 +43,9 @@ class EditViewController: UIViewController, UITableViewDelegate, UIPickerViewDat
         super.viewDidLoad()
         StartDatePicker.date = PassHistory.startDate! as Date
         EndDatePicker.date =  PassHistory.endDate! as Date
-        self.pickerView.dataSource = self;
-        self.pickerView.delegate = self;
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerDataSource.count;
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        //return pickerDataSource[row]
-        return "nugger"
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        labelDisplay.text = "test"
-            //pickerDataSource[row]
     }
     
     
@@ -77,12 +53,15 @@ class EditViewController: UIViewController, UITableViewDelegate, UIPickerViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
         let history = PassHistory
         let realm = try! Realm()
-        try! realm.write {
-            realm.add(history)
+        //TODO: issue here w/ updating realm object outside write
+        try! realm.write() {
+              //  realm.add(history)
             history.startDate = StartDatePicker.date as NSDate?
             history.endDate = EndDatePicker.date as NSDate?
             history.duration = history.endDate!.timeIntervalSince(history.startDate! as Date!)
-        }
+            }
+        
+        
         cell.timeLabel.text = "\(todayDateFormatter.string(from: history.startDate! as Date )) - \(todayDateFormatter.string(from: history.endDate! as Date))"
         let PassDuration = history.endDate!.timeIntervalSince(history.startDate! as Date!)
         cell.durationLabel.text = NSString.createDurationStringFromDuration((PassDuration))
